@@ -9,6 +9,7 @@ import com.grimoire.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
+    @Transactional
     public String createUser(UserCreateRequestDto userDTO) {
         if (userRepository.existsByUsername(userDTO.getUsername())) {
             throw new RuntimeException("Username already exists!");
@@ -39,11 +42,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String postUser(UserPostRequestDto request) {
-        return null;
+    @Transactional
+    public String postUser(String userName, UserPostRequestDto userDTO) {
+        UserModel user = userRepository.findByUsername(userName)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + userName));
+        user.setName(userDTO.getName().isBlank() ? user.getUsername() : userDTO.getName());
+        user.setPassword(userDTO.getPassword().isBlank() ? user.getPassword() : passwordEncoder.encode(userDTO.getPassword()));
+        user.setGmail(userDTO.getGmail().isBlank() ? user.getGmail() : userDTO.getGmail());
+        user.setPictureUrl(userDTO.getPictureUrl().isBlank() ? user.getPictureUrl() : userDTO.getPictureUrl());
+
+        userRepository.save(user);
+        return "User updated successfully!";
     }
 
     @Override
+    @Transactional
     public String deleteUser(String username) {
         return null;
     }
