@@ -1,4 +1,4 @@
-package com.grimoire.service;
+package com.grimoire.service.auth;
 
 import com.grimoire.service.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;

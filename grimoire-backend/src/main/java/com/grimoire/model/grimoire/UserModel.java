@@ -15,9 +15,18 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "LOGIN", unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "SENHA", nullable = false)
     private String password;
+
+    @Column(name = "GMAIL", unique = true, nullable = false)
+    private String gmail;
+
+    @Column(name = "NOME", nullable = false)
+    private String name;
+
+    @Column(name = "URL_FOTO")
+    private String pictureUrl;
 }

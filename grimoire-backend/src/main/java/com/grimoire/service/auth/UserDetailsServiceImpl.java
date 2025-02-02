@@ -1,4 +1,4 @@
-package com.grimoire.service;
+package com.grimoire.service.auth;
 
 import com.grimoire.model.user.UserAuthenticated;
 import com.grimoire.repository.UserRepository;
