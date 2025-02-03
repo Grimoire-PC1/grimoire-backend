@@ -28,20 +28,20 @@ public class UserControllerImpl implements UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<String> updateUser(
             @Validated @RequestBody UserPostRequestDto userDto,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.postUser(authentication.getName(), userDto));
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<String> deleteUser(
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(authentication.getName()));
     }
 
-    @PostMapping("/get")
+    @GetMapping("/get")
     public ResponseEntity<UserResponseDto> getUser(
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(authentication.getName()));
