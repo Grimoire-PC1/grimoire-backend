@@ -2,6 +2,7 @@ package com.grimoire.controller.documentation;
 
 import com.grimoire.dto.user.UserCreateRequestDto;
 import com.grimoire.dto.user.UserPostRequestDto;
+import com.grimoire.dto.user.UserResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -19,4 +20,10 @@ public interface UserController {
     ResponseEntity<String> updateUser(
             @Validated @RequestBody() UserPostRequestDto userDto,
             Authentication authentication);
+
+    @Operation(description = "Deletar usuário", summary = "Remover usuário do sistema.")
+    ResponseEntity<String> deleteUser(Authentication authentication);
+
+    @Operation(description = "Ler usuário", summary = "Pegar informações do usuário no sistema.")
+    ResponseEntity<UserResponseDto> getUser(Authentication authentication);
 }

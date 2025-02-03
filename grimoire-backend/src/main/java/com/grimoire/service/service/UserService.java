@@ -8,6 +8,6 @@ public interface UserService {
     String createUser(UserCreateRequestDto userDTO);
     String postUser(String userName, UserPostRequestDto request);
     String deleteUser(String username);
-    UserResponseDto readUser(String username);
+    UserResponseDto getUser(String username);
 
 }

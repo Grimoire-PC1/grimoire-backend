@@ -57,12 +57,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String deleteUser(String username) {
-        return null;
+    public String deleteUser(String userName) {
+        UserModel user = userRepository.findByUsername(userName)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + userName));
+
+        userRepository.delete(user);
+        return "User deleted successfully!";
     }
 
     @Override
-    public UserResponseDto readUser(String username) {
-        return null;
+    public UserResponseDto getUser(String userName) {
+        UserModel user = userRepository.findByUsername(userName)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + userName));
+
+        return user.toDto();
     }
 }

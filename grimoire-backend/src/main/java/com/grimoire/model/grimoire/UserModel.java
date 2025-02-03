@@ -1,5 +1,6 @@
 package com.grimoire.model.grimoire;
 
+import com.grimoire.dto.user.UserResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,4 +30,13 @@ public class UserModel {
 
     @Column(name = "URL_FOTO")
     private String pictureUrl;
+
+    public UserResponseDto toDto() {
+        return UserResponseDto.builder()
+                .username(this.username)
+                .gmail(this.gmail)
+                .name(this.name)
+                .pictureUrl(this.pictureUrl)
+                .build();
+    }
 }

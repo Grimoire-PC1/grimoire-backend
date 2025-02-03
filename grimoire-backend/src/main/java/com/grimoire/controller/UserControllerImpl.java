@@ -3,6 +3,7 @@ package com.grimoire.controller;
 import com.grimoire.controller.documentation.UserController;
 import com.grimoire.dto.user.UserCreateRequestDto;
 import com.grimoire.dto.user.UserPostRequestDto;
+import com.grimoire.dto.user.UserResponseDto;
 import com.grimoire.service.service.AuthService;
 import com.grimoire.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,17 @@ public class UserControllerImpl implements UserController {
             @Validated @RequestBody UserPostRequestDto userDto,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.postUser(authentication.getName(), userDto));
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<String> deleteUser(
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.deleteUser(authentication.getName()));
+    }
+
+    @PostMapping("/get")
+    public ResponseEntity<UserResponseDto> getUser(
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(authentication.getName()));
     }
 }
