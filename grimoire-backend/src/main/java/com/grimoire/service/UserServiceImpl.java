@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         UserModel user = UserModel.builder()
                 .username(userDTO.getUsername())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
-                .gmail(userDTO.getGmail())
+                .email(userDTO.getEmail())
                 .name(userDTO.getName())
                 .pictureUrl(userDTO.getPictureUrl())
                 .build();
@@ -46,9 +46,9 @@ public class UserServiceImpl implements UserService {
     public String postUser(String userName, UserPostRequestDto userDTO) {
         UserModel user = userRepository.findByUsername(userName)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + userName));
-        user.setName(userDTO.getName().isBlank() ? user.getUsername() : userDTO.getName());
+        user.setName(userDTO.getName().isBlank() ? user.getName() : userDTO.getName());
         user.setPassword(userDTO.getPassword().isBlank() ? user.getPassword() : passwordEncoder.encode(userDTO.getPassword()));
-        user.setGmail(userDTO.getGmail().isBlank() ? user.getGmail() : userDTO.getGmail());
+        user.setEmail(userDTO.getEmail().isBlank() ? user.getEmail() : userDTO.getEmail());
         user.setPictureUrl(userDTO.getPictureUrl().isBlank() ? user.getPictureUrl() : userDTO.getPictureUrl());
 
         userRepository.save(user);

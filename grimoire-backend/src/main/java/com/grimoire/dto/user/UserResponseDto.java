@@ -17,8 +17,8 @@ public class UserResponseDto {
     private String username;
 
     @Schema(example = "evaldo.brito.junior@ccc.ufcg.edu.br")
-    @JsonProperty("gmail")
-    private String gmail;
+    @JsonProperty("email")
+    private String email;
 
     @Schema(example = "Evaldo Alves")
     @JsonProperty("nome")

@@ -22,8 +22,8 @@ public class UserModel {
     @Column(name = "SENHA", nullable = false)
     private String password;
 
-    @Column(name = "GMAIL", unique = true, nullable = false)
-    private String gmail;
+    @Column(name = "EMAIL", unique = true, nullable = false)
+    private String email;
 
     @Column(name = "NOME", nullable = false)
     private String name;
@@ -34,7 +34,7 @@ public class UserModel {
     public UserResponseDto toDto() {
         return UserResponseDto.builder()
                 .username(this.username)
-                .gmail(this.gmail)
+                .email(this.email)
                 .name(this.name)
                 .pictureUrl(this.pictureUrl)
                 .build();

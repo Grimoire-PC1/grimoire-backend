@@ -69,7 +69,7 @@ class UserControllerImplTest {
                 .username("username")
                 .password("password")
                 .name("name")
-                .gmail("gmail")
+                .email("email")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -78,12 +78,13 @@ class UserControllerImplTest {
         Mockito.when(userRepository.save(Mockito.any(UserModel.class)))
                 .thenReturn(new UserModel());
 
-        mockMvc.perform(post("/user/register")
+        String responseJsonString = mockMvc.perform(post("/user/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isCreated())
                 .andExpect(content().string("User registered successfully!"))
-                .andDo(print());
+                .andDo(print())
+                .andReturn().getResponse().getContentAsString();
     }
 
     @Test
@@ -92,7 +93,7 @@ class UserControllerImplTest {
         UserPostRequestDto requestDto = UserPostRequestDto.builder()
                 .password("password")
                 .name("name")
-                .gmail("gmail")
+                .email("email")
                 .pictureUrl("")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
@@ -130,7 +131,7 @@ class UserControllerImplTest {
     void getUserSuccessfully() throws Exception {
         UserModel user = UserModel.builder()
                 .username("testuser")
-                .gmail("gmail")
+                .email("email")
                 .name("name")
                 .pictureUrl("url")
                 .build();
