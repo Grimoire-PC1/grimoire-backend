@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 @Builder
 public class EngineCreateRequestDto {
-    @JsonProperty("idUser")
+    @JsonProperty("id_criador")
     @NotBlank
-    private String idUser;
+    private Long idUser;
 
     @JsonProperty("nome")
     @NotBlank

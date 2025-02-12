@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class EngineResponseDto {
     @Schema(example = "424242424242424L")
-    @JsonProperty("nome")
-    private String idUser;
+    @JsonProperty("id_criador")
+    private Long idUser;
 
     @Schema(example = "Dungeons & Dragons")
     @JsonProperty("nome")

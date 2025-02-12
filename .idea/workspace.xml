@@ -38,10 +38,33 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "a6a1b14b7aa90d09c7ddf0f4bc1d7c79",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.grimoire.controller" />
+      <recent name="com.grimoire.controller.documentation" />
+      <recent name="com.grimoire.dto.engine" />
+      <recent name="com.grimoire.service" />
+      <recent name="com.grimoire.service.service" />
+    </key>
+  </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="grimoire-backend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="grimoire-backend" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GrimoireApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="grimoire" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.grimoire.GrimoireApplication" />
@@ -59,6 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739047897632</updated>
       <workItem from="1739047901840" duration="1871000" />
+      <workItem from="1739112432765" duration="7583000" />
     </task>
     <servers />
   </component>

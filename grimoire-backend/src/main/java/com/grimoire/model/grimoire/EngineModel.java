@@ -17,7 +17,7 @@ public class EngineModel {
     private Long id;
 
     @Column(name = "ID_CRIADOR", nullable = false)
-    private String idUser;
+    private Long idUser;
 
     @Column(name = "NOME", nullable = false)
     private String name;
@@ -29,7 +29,7 @@ public class EngineModel {
     private String pictureUrl;
 
     @Column(name = "TIPO_SISTEMA", nullable = false)
-    private String typeSys;
+    private String typeSys; //É para ser Enum
 
     public EngineResponseDto toDto() {
         return EngineResponseDto.builder()
