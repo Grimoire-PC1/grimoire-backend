@@ -40,6 +40,5 @@ public class CampaignModel {
                 .pictureUrl(this.pictureUrl)
                 .build();
     }
-
 }
 
