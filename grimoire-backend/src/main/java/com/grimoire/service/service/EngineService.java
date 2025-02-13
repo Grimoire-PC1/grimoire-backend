@@ -5,9 +5,10 @@ import com.grimoire.dto.engine.EngineEditRequestDto;
 import com.grimoire.dto.engine.EngineResponseDto;
 
 public interface EngineService {
-    String createEngine(EngineCreateRequestDto engineDTO);
-    String editEngine(String name, EngineEditRequestDto request);
-    String deleteEngine(String name);
-    EngineResponseDto getEngine(String name);
+    String createEngine(String idUser, EngineCreateRequestDto engineDTO);
+    String editEngine(Long idSys, Long idUser, EngineEditRequestDto request);
+    String deleteEngine(Long idSys, Long idUser);
+    EngineResponseDto getEngine(Long idSys);
 
 }
+

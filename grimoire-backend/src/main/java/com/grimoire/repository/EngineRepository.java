@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface EngineRepository extends JpaRepository<EngineModel, String> {
 
     Optional<EngineModel> findByName(String name);
+    Optional<EngineModel> findById(long idSys);
     boolean existsByName(String name);
     boolean isPublic(String name);
 }

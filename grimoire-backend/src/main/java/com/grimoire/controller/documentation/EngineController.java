@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Tag(name = "Sistema", description = "Serviço de Sistemas")
 public interface EngineController {
     @Operation(description = "Registrar sistema", summary = "Registrar novo Sistema de RPG no Sistema de Aplicativo")
-    ResponseEntity<String> createEngine(@Validated @RequestBody EngineCreateRequestDto engineDto);
+    ResponseEntity<String> createEngine(
+            @Validated @RequestBody EngineCreateRequestDto engineDto,
+            Authentication authentication);
 
     @Operation(description = "Atualizar sistema", summary = "Atualizar Sistema de RPG no Sistema de Aplicativo. Deixe o campo em branco para mantê-lo.")
     ResponseEntity<String> updateEngine(
             @Validated @RequestBody() EngineEditRequestDto userDto,
-            Authentication authentication);
+            Long idSys, Long idUser);
 
     @Operation(description = "Deletar sistema", summary = "Remover Sistema de RPG no Sistema de Aplicativo.")
-    ResponseEntity<String> deleteEngine(Authentication authentication);
+    ResponseEntity<String> deleteEngine(Long idSys, Long idUser);
 
     @Operation(description = "Ler usuário", summary = "Pegar informações do Sistema de RPG no Sistema de Aplicativo.")
-    ResponseEntity<EngineResponseDto> getEngine(Authentication authentication);
+    ResponseEntity<EngineResponseDto> getEngine(Long idSys);
 }

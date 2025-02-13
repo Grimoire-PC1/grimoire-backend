@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Tag(name = "Sistema", description = "Serviço de Regras de Sistemas")
 public interface EngineRuleController {
     @Operation(description = "Registrar Regras de sistema", summary = "Registrar nova Regra de Sistema de RPG no Sistema de Aplicativo")
-    ResponseEntity<String> createRule(@Validated @RequestBody RuleCreateRequestDto engineDto);
+    ResponseEntity<String> createRule(
+            @Validated @RequestBody RuleCreateRequestDto engineDto,
+            Authentication authentication);
 
     @Operation(description = "Atualizar Regras de sistema", summary = "Atualizar Regras de Sistema de RPG no Sistema de Aplicativo. Deixe o campo em branco para mantê-lo.")
     ResponseEntity<String> updateRule(
             @Validated @RequestBody() RuleEditRequestDto userDto,
-            Authentication authentication);
+            String title, Long idUser);
 
     @Operation(description = "Deletar Regras de sistema", summary = "Remover Regras de Sistema de RPG no Sistema de Aplicativo.")
-    ResponseEntity<String> deleteRule(Authentication authentication);
+    ResponseEntity<String> deleteRule(String title, Long idUser);
 
     @Operation(description = "Ler Regras de usuário", summary = "Pegar informações de Regras de Sistema de RPG no Sistema de Aplicativo.")
-    ResponseEntity<RuleResponseDto> getRule(Authentication authentication);
+    ResponseEntity<RuleResponseDto> getRule(String title, Long idSys);
 }

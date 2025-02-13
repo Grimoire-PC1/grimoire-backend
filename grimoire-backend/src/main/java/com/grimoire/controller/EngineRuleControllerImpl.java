@@ -23,26 +23,28 @@ public class EngineRuleControllerImpl implements EngineRuleController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> createRule(@Validated @RequestBody RuleCreateRequestDto ruleDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(engineRuleService.createRule(ruleDto));
+    public ResponseEntity<String> createRule(
+            @Validated @RequestBody RuleCreateRequestDto ruleDto,
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(engineRuleService.createRule(authentication.getName(), ruleDto));
     }
 
     @PutMapping("/update")
     public ResponseEntity<String> updateRule(
             @Validated @RequestBody RuleEditRequestDto ruleDto,
-            Authentication authentication) {
-        return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.editRule(authentication.getName(), ruleDto));
+            String title, Long idUser) {
+        return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.editRule(title, idUser, ruleDto));
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteRule(
-            Authentication authentication) {
-        return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.deleteRule(authentication.getName()));
+            String title, Long idUser) {
+        return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.deleteRule(title, idUser));
     }
 
     @GetMapping("/get")
     public ResponseEntity<RuleResponseDto> getRule(
-            Authentication authentication) {
-        return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.getRule(authentication.getName()));
+            String title, Long idSys) {
+        return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.getRule(title, idSys));
     }
 }

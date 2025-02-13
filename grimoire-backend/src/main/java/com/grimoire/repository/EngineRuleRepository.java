@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface EngineRuleRepository extends JpaRepository<EngineRuleModel, String> {
 
     Optional<EngineRuleModel> findByName(String name);
+    Optional<EngineRuleModel> findById(Long idRule);
     boolean existsByName(String name);
 }
