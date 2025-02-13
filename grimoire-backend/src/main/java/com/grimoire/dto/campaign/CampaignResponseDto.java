@@ -35,5 +35,4 @@ public class CampaignResponseDto {
     @Schema(example = "https://example.com/images/campaign-dragon-curse.jpg")
     @JsonProperty("foto_url")
     private String pictureUrl;
-
 }
