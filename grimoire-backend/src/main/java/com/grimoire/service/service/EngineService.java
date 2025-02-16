@@ -8,8 +8,8 @@ import com.grimoire.dto.engine.EngineTypeEnum;
 import java.util.Collection;
 
 public interface EngineService {
-    String createEngine(String idUser, EngineCreateRequestDto engineDTO, EngineTypeEnum engineTypeEnum);
-    String editEngine(Long idSys, String username, EngineEditRequestDto request, EngineTypeEnum engineTypeEnum);
+    EngineResponseDto createEngine(String idUser, EngineCreateRequestDto engineDTO, EngineTypeEnum engineTypeEnum);
+    EngineResponseDto editEngine(Long idSys, String username, EngineEditRequestDto request, EngineTypeEnum engineTypeEnum);
     String deleteEngine(Long idSys, String username);
     Collection<EngineResponseDto> getUserEngines(Long idSys, String username);
     Collection<EngineResponseDto> getPublicEngines();

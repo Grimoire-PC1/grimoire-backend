@@ -29,7 +29,7 @@ public class EngineControllerImpl implements EngineController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> createEngine(
+    public ResponseEntity<EngineResponseDto> createEngine(
             @RequestParam(name = "tipo_sistema") EngineTypeEnum engineTypeEnum,
             @RequestBody EngineCreateRequestDto engineDto,
             Authentication authentication) {
@@ -37,7 +37,7 @@ public class EngineControllerImpl implements EngineController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateEngine(
+    public ResponseEntity<EngineResponseDto> updateEngine(
             @RequestParam(name = "id_sistema") Long idSys,
             @RequestParam(name = "tipo_sistema", required = false) EngineTypeEnum engineTypeEnum,
             @RequestBody EngineEditRequestDto engineDto,

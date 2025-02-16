@@ -16,7 +16,7 @@ import java.util.Collection;
 @Tag(name = "Sistema", description = "Serviço de Sistemas")
 public interface EngineController {
     @Operation(description = "Registrar sistema", summary = "Registrar novo Sistema de RPG.")
-    ResponseEntity<String> createEngine(
+    ResponseEntity<EngineResponseDto> createEngine(
             @Parameter(
                     name = "tipo_sistema",
                     description = "Visibilidade do Sistema de RPG.",
@@ -28,7 +28,7 @@ public interface EngineController {
             Authentication authentication);
 
     @Operation(description = "Atualizar sistema", summary = "Atualizar Sistema de RPG. Deixe o campo em branco para mantê-lo.")
-    ResponseEntity<String> updateEngine(
+    ResponseEntity<EngineResponseDto> updateEngine(
             @Parameter(
                     name = "id_sistema",
                     description = "ID do Sistema de RPG.",

@@ -33,7 +33,7 @@ public class EngineServiceImpl implements EngineService {
 
     @Override
     @Transactional
-    public String createEngine(String username, EngineCreateRequestDto engineDTO, EngineTypeEnum engineTypeEnum) {
+    public EngineResponseDto createEngine(String username, EngineCreateRequestDto engineDTO, EngineTypeEnum engineTypeEnum) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
         EngineModel engine = EngineModel.builder()
@@ -45,12 +45,12 @@ public class EngineServiceImpl implements EngineService {
                 .build();
 
         engineRepository.save(engine);
-        return "System registered successfully!";
+        return engine.toDto();
     }
 
     @Override
     @Transactional
-    public String editEngine(
+    public EngineResponseDto editEngine(
             Long idSys, String username, EngineEditRequestDto engineDTO, EngineTypeEnum engineTypeEnum
     ) {
         EngineModel engine = checkAccess(idSys, username);
@@ -61,7 +61,7 @@ public class EngineServiceImpl implements EngineService {
         engine.setPictureUrl(engineDTO.getPictureUrl().isBlank() ? engine.getPictureUrl() : engineDTO.getPictureUrl());
 
         engineRepository.save(engine);
-        return "System updated successfully!";
+        return engine.toDto();
     }
 
     @Override
