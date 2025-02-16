@@ -16,9 +16,9 @@ public class UserCreateRequestDto {
     @NotBlank
     private String password;
 
-    @JsonProperty("gmail")
+    @JsonProperty("email")
     @NotBlank
-    private String gmail;
+    private String email;
 
     @JsonProperty("nome")
     @NotBlank

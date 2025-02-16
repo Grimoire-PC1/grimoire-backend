@@ -14,10 +14,10 @@ public class UserPostRequestDto {
     @NotNull
     private String password;
 
-    @Schema(defaultValue = "gmail")
-    @JsonProperty("novo_gmail")
+    @Schema(defaultValue = "email")
+    @JsonProperty("novo_email")
     @NotNull
-    private String gmail;
+    private String email;
 
     @Schema(defaultValue = "nome")
     @JsonProperty("novo_nome")
