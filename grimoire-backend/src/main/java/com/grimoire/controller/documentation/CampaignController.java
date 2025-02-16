@@ -26,3 +26,4 @@ public interface CampaignController {
     @Operation(description = "Ler campanha", summary = "Pegar informações da campanha no sistema.")
     ResponseEntity<CampaignResponseDto> getCampaign(Authentication authentication);
 }
+
