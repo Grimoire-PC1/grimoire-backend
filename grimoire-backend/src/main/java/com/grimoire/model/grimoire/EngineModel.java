@@ -36,6 +36,7 @@ public class EngineModel {
 
     public EngineResponseDto toDto() {
         return EngineResponseDto.builder()
+                .id(this.id)
                 .idUser(this.creator.getId())
                 .name(this.name)
                 .description(this.description)

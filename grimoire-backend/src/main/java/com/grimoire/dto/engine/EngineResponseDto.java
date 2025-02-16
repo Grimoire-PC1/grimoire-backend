@@ -12,8 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class EngineResponseDto {
-    @Schema(example = "424242424242424L")
-    @JsonProperty("usuario")
+    @Schema(example = "42L")
+    @JsonProperty("id")
+    private Long id;
+
+    @Schema(example = "42424L")
+    @JsonProperty("id_criador")
     private Long idUser;
 
     @Schema(example = "Dungeons & Dragons")
@@ -28,7 +32,7 @@ public class EngineResponseDto {
     @JsonProperty("foto_url")
     private String pictureUrl;
 
-    @Schema(example = "Público")
+    @Schema(example = "PUBLICO")
     @JsonProperty("tipo_sistema")
     private String typeSys;
 }
