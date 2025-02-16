@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CampaignRepository extends JpaRepository<CampaignModel, String> {
 
-    Optional<CampaignModel> findByCampaignName(String campaignTitle);
-    boolean existsByCampaignName(String campaignTitle);
+    Optional<CampaignModel> findByTitle(String title);
+    boolean existsByTitle(String campaignTitle);
 }

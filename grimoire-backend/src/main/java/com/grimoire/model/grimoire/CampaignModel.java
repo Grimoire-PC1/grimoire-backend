@@ -16,16 +16,16 @@ public class CampaignModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ID_MESTRE", unique = true, nullable = false)
+    @Column(name = "ID_MESTRE", unique = true, nullable = false) // id_criador
     private Long idMaster;
 
-    @Column(name = "TITULO", nullable = false)
+    @Column(name = "TITULO", nullable = false) // não é mais obrigatório
     private String title;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO", nullable = false) // não é mais obrigatório
     private String description;
 
-    @Column(name = "ID_SISTEMA", unique = true, nullable = false)
+    @Column(name = "ID_SISTEMA", unique = true, nullable = false) // não é mais obrigatório
     private Long idSystem;
 
     @Column(name = "URL_FOTO")

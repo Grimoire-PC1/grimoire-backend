@@ -23,7 +23,7 @@ public class CampaignServiceImpl implements CampaignService {
     @Override
     @Transactional
     public String createCampaign(CampaignCreateRequestDto campaignDTO) {
-        if (campaignRepository.existsByCampaignName(campaignDTO.getTitle())) {
+        if (campaignRepository.existsByTitle(campaignDTO.getTitle())) {
             throw new RuntimeException("Campaign title already exists!");
         }
         CampaignModel campaign = CampaignModel.builder()
@@ -35,13 +35,13 @@ public class CampaignServiceImpl implements CampaignService {
                 .build();
 
         campaignRepository.save(campaign);
-        return "User registered successfully!";
+        return "Campaign registered successfully!";
     }
 
     @Override
     @Transactional
     public String postCampaign(String campaignName, CampaignPostRequestDto campaignDTO) {
-        CampaignModel campaign = campaignRepository.findByCampaignName(campaignName)
+        CampaignModel campaign = campaignRepository.findByTitle(campaignName)
                 .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignName));
         campaign.setIdMaster(campaignDTO.getIdMaster() == 0 ? campaign.getIdMaster() : campaignDTO.getIdMaster());
         campaign.setTitle(campaignDTO.getTitle().isBlank() ? campaign.getTitle() : campaignDTO.getTitle());
@@ -56,7 +56,7 @@ public class CampaignServiceImpl implements CampaignService {
     @Override
     @Transactional
     public String deleteCampaign(String campaignName) {
-        CampaignModel campaign = campaignRepository.findByCampaignName(campaignName)
+        CampaignModel campaign = campaignRepository.findByTitle(campaignName)
                 .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignName));
 
         campaignRepository.delete(campaign);
@@ -66,7 +66,7 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Override
     public CampaignResponseDto getCampaign(String campaignName) {
-        CampaignModel campaign = campaignRepository.findByCampaignName(campaignName)
+        CampaignModel campaign = campaignRepository.findByTitle(campaignName)
                 .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignName));
 
         return campaign.toDto();

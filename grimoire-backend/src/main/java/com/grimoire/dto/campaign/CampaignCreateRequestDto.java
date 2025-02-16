@@ -3,6 +3,7 @@ package com.grimoire.dto.campaign;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import lombok.Data;
 @Builder
 public class CampaignCreateRequestDto {
     @JsonProperty("idMestre")
-    @NotBlank
+    @NotNull
     private Long idMaster;
 
     @JsonProperty("titulo")
@@ -22,10 +23,9 @@ public class CampaignCreateRequestDto {
     private String description;
 
     @JsonProperty("idSistema")
-    @NotBlank
+    @NotNull
     private Long idSystem;
 
     @JsonProperty("foto_url")
-    @NotBlank
     private String pictureUrl;
 }

@@ -68,6 +68,7 @@ public class CampaignControllerImplTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"USER"})
     void createCampaignSuccessfully() throws Exception {
         CampaignCreateRequestDto requestDto = CampaignCreateRequestDto.builder()
                 .idMaster(2147483647L)
@@ -77,7 +78,7 @@ public class CampaignControllerImplTest {
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
-        Mockito.when(campaignRepository.existsByCampaignName(Mockito.any(String.class)))
+        Mockito.when(campaignRepository.existsByTitle(Mockito.any(String.class)))
                 .thenReturn(false);
         Mockito.when(campaignRepository.save(Mockito.any(CampaignModel.class)))
                 .thenReturn(new CampaignModel());
@@ -92,17 +93,18 @@ public class CampaignControllerImplTest {
     }
 
     @Test
-    // @WithMockUser(username = "testuser", roles = {""}) Não sei manipular isso, Evaldo, me ajuda
+    @WithMockUser(username = "testUser", roles = {"USER"})
     void updateCampaignSuccessfully() throws Exception {
         CampaignCreateRequestDto requestDto = CampaignCreateRequestDto.builder()
                 .idMaster(2147483647L)
                 .title("title")
                 .description("description")
                 .idSystem(1024L)
+                .pictureUrl("")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
-        Mockito.when(campaignRepository.findByCampaignName(Mockito.any(String.class)))
+        Mockito.when(campaignRepository.findByTitle(Mockito.any(String.class)))
                 .thenReturn(Optional.of(new CampaignModel()));
         Mockito.when(campaignRepository.save(Mockito.any(CampaignModel.class)))
                 .thenReturn(new CampaignModel());
@@ -117,21 +119,21 @@ public class CampaignControllerImplTest {
     }
 
     @Test
-    // @WithMockUser(username = "testuser", roles = {""})
+    @WithMockUser(username = "testUser", roles = {"USER"})
     void deleteCampaignSuccessfully() throws Exception {
-        Mockito.when(campaignRepository.findByCampaignName(Mockito.any(String.class)))
+        Mockito.when(campaignRepository.findByTitle(Mockito.any(String.class)))
                 .thenReturn(Optional.of(new CampaignModel()));
         Mockito.doNothing().when(campaignRepository).delete(Mockito.any(CampaignModel.class));
 
-        mockMvc.perform(delete("/user/delete")
+        mockMvc.perform(delete("/campaign/delete")
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().string("User deleted successfully!"))
+                .andExpect(content().string("Campaign deleted successfully!"))
                 .andDo(print());
     }
 
     @Test
-    // @WithMockUser(username = "testuser", roles = {""})
+    @WithMockUser(username = "testUser", roles = {"USER"})
     void getCampaignSuccessfully() throws Exception {
         CampaignModel campaign = CampaignModel.builder()
                 .idMaster(2147483647L)
@@ -143,7 +145,7 @@ public class CampaignControllerImplTest {
         CampaignResponseDto responseDto = campaign.toDto();
         String responseBody = new ObjectMapper().writeValueAsString(responseDto);
 
-        Mockito.when(campaignRepository.findByCampaignName(Mockito.any(String.class)))
+        Mockito.when(campaignRepository.findByTitle(Mockito.any(String.class)))
                 .thenReturn(Optional.of(campaign));
 
         mockMvc.perform(get("/campaign/get")
