@@ -6,6 +6,7 @@ import com.grimoire.dto.engineRule.RuleCreateRequestDto;
 import com.grimoire.dto.engineRule.RuleEditRequestDto;
 import com.grimoire.service.service.AuthService;
 import com.grimoire.service.service.EngineRuleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/engine")
+@RequestMapping("/engine-rule")
+@Validated
+@CrossOrigin
+@Slf4j
 public class EngineRuleControllerImpl implements EngineRuleController {
     private final EngineRuleService engineRuleService;
     @Autowired
-    public EngineRuleControllerImpl(EngineRuleService engineRuleService, AuthService authService) {
+    public EngineRuleControllerImpl(EngineRuleService engineRuleService) {
         this.engineRuleService = engineRuleService;
     }
 
@@ -38,13 +42,15 @@ public class EngineRuleControllerImpl implements EngineRuleController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteRule(
-            String title, Long idUser) {
+            String title,
+            Long idUser) {
         return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.deleteRule(title, idUser));
     }
 
     @GetMapping("/get")
     public ResponseEntity<RuleResponseDto> getRule(
-            String title, Long idSys) {
+            String title,
+            Long idSys) {
         return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.getRule(title, idSys));
     }
 }

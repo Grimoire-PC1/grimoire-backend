@@ -19,8 +19,4 @@ public class EngineCreateRequestDto {
 
     @JsonProperty("foto_url")
     private String pictureUrl;
-
-    @JsonProperty("tipo_sistema")
-    @NotBlank
-    private String typeSys;
 }

@@ -23,9 +23,4 @@ public class EngineEditRequestDto {
     @JsonProperty("nova_foto_url")
     @NotNull
     private String pictureUrl;
-
-    @Schema(defaultValue = "tipo_sistema")
-    @JsonProperty("novo_tipo")
-    @NotNull
-    private String typeSys;
 }

@@ -10,16 +10,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Tag(name = "Sistema", description = "Serviço de Regras de Sistemas")
+@Tag(name = "Regras de Sistema", description = "Serviço de Regras de Sistemas")
 public interface EngineRuleController {
     @Operation(description = "Registrar Regras de sistema", summary = "Registrar nova Regra de Sistema de RPG no Sistema de Aplicativo")
     ResponseEntity<String> createRule(
-            @Validated @RequestBody RuleCreateRequestDto engineDto,
+            @RequestBody RuleCreateRequestDto engineDto,
             Authentication authentication);
 
     @Operation(description = "Atualizar Regras de sistema", summary = "Atualizar Regras de Sistema de RPG no Sistema de Aplicativo. Deixe o campo em branco para mantê-lo.")
     ResponseEntity<String> updateRule(
-            @Validated @RequestBody() RuleEditRequestDto userDto,
+            @RequestBody() RuleEditRequestDto userDto,
             String title, Long idUser);
 
     @Operation(description = "Deletar Regras de sistema", summary = "Remover Regras de Sistema de RPG no Sistema de Aplicativo.")
