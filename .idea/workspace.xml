@@ -4,7 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9bc502e-bedd-4fd7-9a31-1cb8a1485351" name="Changes" comment="" />
+    <list default="true" id="c9bc502e-bedd-4fd7-9a31-1cb8a1485351" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/GrimoireApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/config/AppConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/config/SwaggerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/AuthControllerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/EngineControllerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/EngineRuleControllerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/UserControllerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/documentation/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/documentation/EngineController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/documentation/EngineRuleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/controller/documentation/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/engine/EngineCreateRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/engine/EngineEditRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/engine/EngineResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/engine/EngineTypeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/engineRule/RuleCreateRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/engineRule/RuleEditRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/engineRule/RuleResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/user/UserCreateRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/user/UserPostRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/dto/user/UserResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/exception/ExceptionResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/exception/GrimoireExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/model/auth/UserAuthenticated.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/model/grimoire/EngineModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/model/grimoire/EngineRuleModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/model/grimoire/UserModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/model/joinTables/EngineTypeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/repository/EngineRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/repository/EngineRuleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/EngineRuleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/EngineServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/auth/AuthServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/auth/JwtServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/auth/UserDetailsServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/service/EngineRuleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/service/EngineService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/service/JwtService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/java/com/grimoire/service/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/main/resources/public.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/test/java/com/grimoire/GrimoireApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grimoire-backend/src/test/java/com/grimoire/controller/UserControllerImplTest.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,32 +75,30 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="2sm5QQxbMRBmC0fagGSsyopWFC9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pingu/Documents/UFCG/PC/grimoire-backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;a6a1b14b7aa90d09c7ddf0f4bc1d7c79&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.UserControllerImplTest.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "gabriel-sprint2Engine-develop-imp",
+    "last_opened_file_path": "C:/Users/pingu/Documents/UFCG/PC/grimoire-backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "a6a1b14b7aa90d09c7ddf0f4bc1d7c79",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.grimoire.dto.engine" />
@@ -64,7 +114,22 @@
       <recent name="com.grimoire.repository" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.UserControllerImplTest">
+    <configuration name="UserControllerImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="grimoire" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.grimoire.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.grimoire.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.grimoire.controller.UserControllerImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="grimoire-backend" />
       <method v="2">
@@ -85,6 +150,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UserControllerImplTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
