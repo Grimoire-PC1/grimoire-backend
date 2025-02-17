@@ -6,6 +6,7 @@ import com.grimoire.dto.user.UserPostRequestDto;
 import com.grimoire.dto.user.UserResponseDto;
 import com.grimoire.service.service.AuthService;
 import com.grimoire.service.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/user")
+@Validated
+@CrossOrigin
+@Slf4j
 public class UserControllerImpl implements UserController {
     private final UserService userService;
     @Autowired
-    public UserControllerImpl(UserService userService, AuthService authService) {
+    public UserControllerImpl(UserService userService) {
         this.userService = userService;
     }
 

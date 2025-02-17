@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Usuário", description = "Serviço de Usuário")
 public interface UserController {
     @Operation(description = "Registrar usuário", summary = "Registrar novo usuário no sistema")
-    ResponseEntity<String> createUser(@Validated @RequestBody UserCreateRequestDto userDto);
+    ResponseEntity<String> createUser(
+            @RequestBody UserCreateRequestDto userDto);
 
     @Operation(description = "Atualizar usuário", summary = "Atualizar usuário no sistema. Deixe o campo em branco para mantê-lo.")
     ResponseEntity<String> updateUser(
-            @Validated @RequestBody() UserPostRequestDto userDto,
+            @RequestBody() UserPostRequestDto userDto,
             Authentication authentication);
 
     @Operation(description = "Deletar usuário", summary = "Remover usuário do sistema.")

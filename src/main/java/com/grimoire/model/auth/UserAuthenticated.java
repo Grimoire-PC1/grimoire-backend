@@ -1,4 +1,4 @@
-package com.grimoire.model.user;
+package com.grimoire.model.auth;
 
 import com.grimoire.model.grimoire.UserModel;
 import org.springframework.security.core.GrantedAuthority;
