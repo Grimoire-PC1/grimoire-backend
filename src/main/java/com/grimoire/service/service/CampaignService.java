@@ -4,10 +4,15 @@ import com.grimoire.dto.campaign.CampaignCreateRequestDto;
 import com.grimoire.dto.campaign.CampaignPostRequestDto;
 import com.grimoire.dto.campaign.CampaignResponseDto;
 
-public interface CampaignService {
-    String createCampaign(CampaignCreateRequestDto campaignDTO);
-    String postCampaign(String campaignName, CampaignPostRequestDto request);
-    String deleteCampaign(String campaignName);
-    CampaignResponseDto getCampaign(String campaignName);
+import java.util.Collection;
 
+public interface CampaignService {
+
+    CampaignResponseDto createCampaign(CampaignCreateRequestDto campaignDto, String username);
+
+    CampaignResponseDto postCampaign(Long idCampaign, CampaignPostRequestDto campaignDto, String username);
+
+    String deleteCampaign(Long idCampaign, String username);
+
+    Collection<CampaignResponseDto> getCampaign(Long idCampaign, String username);
 }

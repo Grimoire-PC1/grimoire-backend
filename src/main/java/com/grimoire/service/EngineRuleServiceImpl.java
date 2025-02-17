@@ -38,7 +38,7 @@ public class EngineRuleServiceImpl implements EngineRuleService {
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
         EngineModel engine = engineRepository.findById(ruleDTO.getIdSys())
                 .orElseThrow(() -> new IllegalArgumentException("System not found: " + ruleDTO.getIdSys()));
-        if (!engine.getCreator().equals(user)) {
+        if (!engine.getOwner().equals(user)) {
             throw new AccessDeniedException("You don't have permission to this System");
         }
         EngineRuleModel rule = EngineRuleModel.builder()
@@ -57,7 +57,7 @@ public class EngineRuleServiceImpl implements EngineRuleService {
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
         EngineRuleModel rule = engineRuleRepository.findById(ruleId)
                 .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + ruleId));
-        if (!rule.getEngine().getCreator().equals(user)) {
+        if (!rule.getEngine().getOwner().equals(user)) {
             throw new AccessDeniedException("You don't have permission to this Rule");
         }
 
@@ -74,7 +74,7 @@ public class EngineRuleServiceImpl implements EngineRuleService {
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
         EngineRuleModel rule = engineRuleRepository.findById(ruleId)
                 .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + ruleId));
-        if (!rule.getEngine().getCreator().equals(user)) {
+        if (!rule.getEngine().getOwner().equals(user)) {
             throw new AccessDeniedException("You don't have permission to this Rule");
         }
         engineRuleRepository.delete(rule);

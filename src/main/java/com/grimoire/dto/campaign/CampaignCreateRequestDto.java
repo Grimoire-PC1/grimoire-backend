@@ -1,31 +1,29 @@
 package com.grimoire.dto.campaign;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CampaignCreateRequestDto {
-    @JsonProperty("idMestre")
-    @NotNull
-    private Long idMaster;
-
     @JsonProperty("titulo")
-    @NotBlank
+    @NotNull
     private String title;
 
     @JsonProperty("descricao")
-    @NotBlank
+    @NotNull
     private String description;
 
-    @JsonProperty("idSistema")
-    @NotNull
+    @JsonProperty("id_sistema")
     private Long idSystem;
 
     @JsonProperty("foto_url")
+    @NotNull
     private String pictureUrl;
 }

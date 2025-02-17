@@ -4,71 +4,104 @@ import com.grimoire.dto.campaign.CampaignCreateRequestDto;
 import com.grimoire.dto.campaign.CampaignPostRequestDto;
 import com.grimoire.dto.campaign.CampaignResponseDto;
 import com.grimoire.model.grimoire.CampaignModel;
+import com.grimoire.model.grimoire.EngineModel;
+import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.repository.CampaignRepository;
+import com.grimoire.repository.EngineRepository;
+import com.grimoire.repository.UserRepository;
 import com.grimoire.service.service.CampaignService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 public class CampaignServiceImpl implements CampaignService {
 
     private final CampaignRepository campaignRepository;
+    private final EngineRepository engineRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CampaignServiceImpl(CampaignRepository campaignRepository) {
+    public CampaignServiceImpl(CampaignRepository campaignRepository, EngineRepository engineRepository, UserRepository userRepository) {
         this.campaignRepository = campaignRepository;
+        this.engineRepository = engineRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional
-    public String createCampaign(CampaignCreateRequestDto campaignDTO) {
-        if (campaignRepository.existsByTitle(campaignDTO.getTitle())) {
-            throw new RuntimeException("Campaign title already exists!");
+    public CampaignResponseDto createCampaign(CampaignCreateRequestDto campaignDto, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        EngineModel engine = null;
+        if (!(campaignDto.getIdSystem() == null)) {
+            engine = engineRepository.findById(campaignDto.getIdSystem())
+                    .orElseThrow(() -> new IllegalArgumentException("System not found: " + campaignDto.getIdSystem()));
+            if (!engine.getOwner().equals(user)) {
+                throw new AccessDeniedException("You don't have permission to this System");
+            }
         }
+
         CampaignModel campaign = CampaignModel.builder()
-                .idMaster(campaignDTO.getIdMaster())
-                .title(campaignDTO.getTitle())
-                .description(campaignDTO.getDescription())
-                .idSystem(campaignDTO.getIdSystem())
-                .pictureUrl(campaignDTO.getPictureUrl())
+                .owner(user)
+                .title(campaignDto.getTitle())
+                .description(campaignDto.getDescription())
+                .engine(engine)
+                .pictureUrl(campaignDto.getPictureUrl())
                 .build();
 
-        campaignRepository.save(campaign);
-        return "Campaign registered successfully!";
+        return campaignRepository.save(campaign).toDto();
     }
 
     @Override
     @Transactional
-    public String postCampaign(String campaignName, CampaignPostRequestDto campaignDTO) {
-        CampaignModel campaign = campaignRepository.findByTitle(campaignName)
-                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignName));
-        campaign.setIdMaster(campaignDTO.getIdMaster() == 0 ? campaign.getIdMaster() : campaignDTO.getIdMaster());
-        campaign.setTitle(campaignDTO.getTitle().isBlank() ? campaign.getTitle() : campaignDTO.getTitle());
-        campaign.setDescription(campaignDTO.getDescription().isBlank() ? campaign.getDescription() : campaignDTO.getDescription());
-        campaign.setIdSystem(campaignDTO.getIdSystem() == 0 ? campaign.getIdSystem() : campaignDTO.getIdSystem());
-        campaign.setPictureUrl(campaignDTO.getPictureUrl().isBlank() ? campaign.getPictureUrl() : campaignDTO.getPictureUrl());
+    public CampaignResponseDto postCampaign(Long idCampaign, CampaignPostRequestDto campaignDto, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        CampaignModel campaign = campaignRepository.findById(idCampaign)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + idCampaign));
+        if (!campaign.getOwner().equals(user)) {
+            throw new AccessDeniedException("You don't have permission to this System");
+        }
+        campaign.setTitle(campaignDto.getTitle().isBlank() ? campaign.getTitle() : campaignDto.getTitle());
+        campaign.setDescription(campaignDto.getDescription().isBlank() ? campaign.getDescription() : campaignDto.getDescription());
+        if (!(campaignDto.getIdSystem() == null)) {
+            EngineModel engine = engineRepository.findById(campaignDto.getIdSystem())
+                    .orElseThrow(() -> new IllegalArgumentException("System not found: " + campaignDto.getIdSystem()));
+            if (!engine.getOwner().equals(user)) {
+                throw new AccessDeniedException("You don't have permission to this System");
+            }
+            campaign.setEngine(engine);
+        }
+        campaign.setPictureUrl(campaignDto.getPictureUrl().isBlank() ? campaign.getPictureUrl() : campaignDto.getPictureUrl());
 
-        campaignRepository.save(campaign);
-        return "Campaign updated successfully!";
+        return campaignRepository.save(campaign).toDto();
     }
 
     @Override
     @Transactional
-    public String deleteCampaign(String campaignName) {
-        CampaignModel campaign = campaignRepository.findByTitle(campaignName)
-                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignName));
+    public String deleteCampaign(Long idCampaign, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        CampaignModel campaign = campaignRepository.findById(idCampaign)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + idCampaign));
+        if (!campaign.getOwner().equals(user)) {
+            throw new AccessDeniedException("You don't have permission to this System");
+        }
 
         campaignRepository.delete(campaign);
         return "Campaign deleted successfully!";
-
     }
 
     @Override
-    public CampaignResponseDto getCampaign(String campaignName) {
-        CampaignModel campaign = campaignRepository.findByTitle(campaignName)
-                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignName));
+    public Collection<CampaignResponseDto> getCampaign(Long idCampaign, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        Collection<CampaignModel> campaigns = campaignRepository.findAllFiltered(idCampaign, user.getId());
 
-        return campaign.toDto();
+        return campaigns.stream().map(CampaignModel::toDto).toList();
     }
 }

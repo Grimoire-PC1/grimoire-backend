@@ -19,7 +19,7 @@ public class EngineModel {
 
     @ManyToOne
     @JoinColumn(name = "ID_CRIADOR", nullable = false)
-    private UserModel creator;
+    private UserModel owner;
 
     @Column(name = "NOME", nullable = false)
     private String name;
@@ -37,7 +37,7 @@ public class EngineModel {
     public EngineResponseDto toDto() {
         return EngineResponseDto.builder()
                 .id(this.id)
-                .idUser(this.creator.getId())
+                .idUser(this.owner.getId())
                 .name(this.name)
                 .description(this.description)
                 .pictureUrl(this.pictureUrl)

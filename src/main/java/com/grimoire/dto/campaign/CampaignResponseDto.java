@@ -16,9 +16,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class CampaignResponseDto {
+    @Schema(example = "214")
+    @JsonProperty("id")
+    private Long id;
+
     @Schema(example = "2147483647")
-    @JsonProperty("idMestre")
-    private long idMaster;
+    @JsonProperty("id_mestre")
+    private Long idMaster;
 
     @Schema(example = "A Maldição do Dragão Sombrio")
     @JsonProperty("titulo")
@@ -29,8 +33,8 @@ public class CampaignResponseDto {
     private String description;
 
     @Schema(example = "1024")
-    @JsonProperty("idSistema")
-    private long idSystem;
+    @JsonProperty("id_sistema")
+    private Long idSystem;
 
     @Schema(example = "https://example.com/images/campaign-dragon-curse.jpg")
     @JsonProperty("foto_url")

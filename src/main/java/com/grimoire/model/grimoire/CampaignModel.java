@@ -16,27 +16,30 @@ public class CampaignModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ID_MESTRE", unique = true, nullable = false) // id_criador
-    private Long idMaster;
+    @ManyToOne
+    @JoinColumn(name = "ID_CRIADOR", nullable = false)
+    private UserModel owner;
 
-    @Column(name = "TITULO", nullable = false) // não é mais obrigatório
+    @Column(name = "TITULO")
     private String title;
 
-    @Column(name = "DESCRICAO", nullable = false) // não é mais obrigatório
+    @Column(name = "DESCRICAO")
     private String description;
 
-    @Column(name = "ID_SISTEMA", unique = true, nullable = false) // não é mais obrigatório
-    private Long idSystem;
+    @ManyToOne
+    @JoinColumn(name = "ID_SISTEMA")
+    private EngineModel engine;
 
     @Column(name = "URL_FOTO")
     private String pictureUrl;
 
     public CampaignResponseDto toDto() {
         return CampaignResponseDto.builder()
-                .idMaster(this.idMaster)
+                .id(this.id)
+                .idMaster(this.owner.getId())
                 .title(this.title)
                 .description(this.description)
-                .idSystem(this.idSystem)
+                .idSystem(this.engine == null ? null : this.engine.getId())
                 .pictureUrl(this.pictureUrl)
                 .build();
     }

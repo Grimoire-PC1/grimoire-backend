@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface EngineRepository extends JpaRepository<EngineModel, Long> {
     Optional<EngineModel> findById(long idSys);
-    Collection<EngineModel> findAllByCreator_Id(Long creatorId);
+    Collection<EngineModel> findAllByOwner_Id(Long creatorId);
     Collection<EngineModel> findAllByEngineType_Id(Long typeId);
 
     @Query(value = """
