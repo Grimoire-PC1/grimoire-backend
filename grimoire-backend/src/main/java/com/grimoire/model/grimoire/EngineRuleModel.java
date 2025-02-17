@@ -33,6 +33,7 @@ public class EngineRuleModel {
     public RuleResponseDto toDto() {
         return RuleResponseDto.builder()
                 .title(this.title)
+                .idSys(this.engine.getId())
                 .description(this.description)
                 .build();
     }

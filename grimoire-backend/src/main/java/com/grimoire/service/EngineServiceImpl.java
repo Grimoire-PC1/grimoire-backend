@@ -96,7 +96,7 @@ public class EngineServiceImpl implements EngineService {
                 .orElseThrow(() -> new IllegalArgumentException("System not found: " + idSys));
 
         if (!engine.getCreator().equals(user)) {
-            throw new AccessDeniedException("You don't have permission to delete System");
+            throw new AccessDeniedException("You don't have permission to this System");
         }
 
         return engine;

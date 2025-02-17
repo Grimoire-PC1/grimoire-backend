@@ -3,76 +3,91 @@ package com.grimoire.service;
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
 import com.grimoire.dto.engineRule.RuleEditRequestDto;
+import com.grimoire.model.grimoire.EngineModel;
 import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.model.grimoire.EngineRuleModel;
+import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.EngineRuleRepository;
 import com.grimoire.repository.UserRepository;
 import com.grimoire.service.service.EngineRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 @Service
 public class EngineRuleServiceImpl implements EngineRuleService {
 
     private final EngineRuleRepository engineRuleRepository;
+    private final EngineRepository engineRepository;
     private final UserRepository userRepository;
 
     @Autowired
-    public EngineRuleServiceImpl(EngineRuleRepository engineRuleRepository, UserRepository userRepository) {
+    public EngineRuleServiceImpl(EngineRuleRepository engineRuleRepository, EngineRepository engineRepository, UserRepository userRepository) {
         this.engineRuleRepository = engineRuleRepository;
+        this.engineRepository = engineRepository;
         this.userRepository = userRepository;
     }
 
     @Override
     @Transactional
-    public String createRule(String username, RuleCreateRequestDto ruleDTO) {
-        if (engineRuleRepository.existsByTitle(ruleDTO.getTitle())) {
-            throw new RuntimeException("Rule already exists!");
-        }
+    public RuleResponseDto createRule(RuleCreateRequestDto ruleDTO, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        EngineModel engine = engineRepository.findById(ruleDTO.getIdSys())
+                .orElseThrow(() -> new IllegalArgumentException("System not found: " + ruleDTO.getIdSys()));
+        if (!engine.getCreator().equals(user)) {
+            throw new AccessDeniedException("You don't have permission to this System");
+        }
         EngineRuleModel rule = EngineRuleModel.builder()
+                .engine(engine)
                 .title(ruleDTO.getTitle())
                 .description(ruleDTO.getDescription())
                 .build();
 
-        engineRuleRepository.save(rule);
-        return "Rule registered successfully!";
+        return engineRuleRepository.save(rule).toDto();
     }
 
     @Override
     @Transactional
-    public String editRule(String title, Long idUser, RuleEditRequestDto ruleDTO) {
-        EngineRuleModel rule = engineRuleRepository.findByTitle(title)
-                .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + title));
-        if (!rule.getEngine().getCreator().getId().equals(idUser)) {
-            throw new IllegalArgumentException("You don't have permission to delete System");
+    public RuleResponseDto editRule(Long ruleId, RuleEditRequestDto ruleDto, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        EngineRuleModel rule = engineRuleRepository.findById(ruleId)
+                .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + ruleId));
+        if (!rule.getEngine().getCreator().equals(user)) {
+            throw new AccessDeniedException("You don't have permission to this Rule");
         }
-        rule.setTitle(ruleDTO.getTitle().isBlank() ? rule.getTitle() : ruleDTO.getTitle());
-        rule.setDescription(ruleDTO.getDescription().isBlank() ? rule.getDescription() : ruleDTO.getDescription());
 
-        engineRuleRepository.save(rule);
-        return "Rule updated successfully!";
+        rule.setTitle(ruleDto.getTitle().isBlank() ? rule.getTitle() : ruleDto.getTitle());
+        rule.setDescription(ruleDto.getDescription().isBlank() ? rule.getDescription() : ruleDto.getDescription());
+
+        return engineRuleRepository.save(rule).toDto();
     }
 
     @Override
     @Transactional
-    public String deleteRule(String title, Long idUser) {
-        EngineRuleModel rule = engineRuleRepository.findByTitle(title)
-                .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + title));
-        if (!rule.getEngine().getCreator().getId().equals(idUser)) {
-            throw new IllegalArgumentException("You don't have permission to delete System");
+    public String deleteRule(Long ruleId, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        EngineRuleModel rule = engineRuleRepository.findById(ruleId)
+                .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + ruleId));
+        if (!rule.getEngine().getCreator().equals(user)) {
+            throw new AccessDeniedException("You don't have permission to this Rule");
         }
         engineRuleRepository.delete(rule);
+
         return "Rule deleted successfully!";
     }
 
     @Override
-    public RuleResponseDto getRule(String title, Long idRule) {
-        EngineRuleModel rule = engineRuleRepository.findById(idRule)
-                .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + title));
+    public Collection<RuleResponseDto> getRules(Long idRule, Long idEngine, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        Collection<EngineRuleModel> rules = engineRuleRepository.findAllFiltered(idRule, idEngine, user.getId());
 
-        return rule.toDto();
+        return rules.stream().map(EngineRuleModel::toDto).toList();
     }
 }

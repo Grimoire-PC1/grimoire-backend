@@ -11,16 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class RuleResponseDto {
-    @Schema(example = "424242424242424L")
-    @JsonProperty("id_usuario")
-    private Long idUser;
-
     @Schema(example = "4242424242424L")
     @JsonProperty("id_sistema")
     private Long idSys;
 
     @Schema(example = "Ability Check")
-    @JsonProperty("title")
+    @JsonProperty("titulo")
     private String title;
 
     @Schema(example = "An ability check tests a " +
@@ -28,9 +24,4 @@ public class RuleResponseDto {
             "talent and training in an effort to overcome a challenge.")
     @JsonProperty("descricao")
     private String description;
-
-
-    @Schema(example = "Público")
-    @JsonProperty("tipo_regra")
-    private String type;
 }

@@ -63,7 +63,7 @@ public interface EngineController {
             Long idSys,
             Authentication authentication);
 
-    @Operation(description = "Pegar sistemas públicos", summary = "Pegar informações dod Sistemad de RPG públicos.")
+    @Operation(description = "Pegar sistemas públicos", summary = "Pegar informações dos Sistemas de RPG públicos.")
     ResponseEntity<Collection<EngineResponseDto>> getPublicEngine(
             Authentication authentication);
 }

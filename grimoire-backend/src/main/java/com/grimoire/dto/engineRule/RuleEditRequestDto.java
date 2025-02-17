@@ -11,19 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class RuleEditRequestDto {
 
-    @Schema(defaultValue = "title")
-    @JsonProperty("title")
+    @Schema(defaultValue = "titulo")
+    @JsonProperty("titulo")
     @NotNull
     private String title;
 
-    @Schema(defaultValue = "description")
+    @Schema(defaultValue = "descricao")
     @JsonProperty("descricao")
     @NotNull
     private String description;
 
-
-    @Schema(defaultValue = "tipo_regra")
-    @JsonProperty("tipo_regra")
-    @NotNull
-    private String type;
 }
