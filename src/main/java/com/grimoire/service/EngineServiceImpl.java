@@ -6,7 +6,7 @@ import com.grimoire.dto.engine.EngineResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.model.grimoire.EngineModel;
 import com.grimoire.model.grimoire.UserModel;
-import com.grimoire.model.joinTables.EngineTypeModel;
+import com.grimoire.model.grimoire.joinTables.EngineTypeModel;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
 import com.grimoire.service.service.EngineService;

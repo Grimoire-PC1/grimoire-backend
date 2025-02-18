@@ -1,7 +1,7 @@
 package com.grimoire.model.grimoire;
 
 import com.grimoire.dto.engine.EngineResponseDto;
-import com.grimoire.model.joinTables.EngineTypeModel;
+import com.grimoire.model.grimoire.joinTables.EngineTypeModel;
 import jakarta.persistence.*;
 import lombok.*;
 

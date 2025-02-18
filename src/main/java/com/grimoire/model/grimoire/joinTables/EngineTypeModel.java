@@ -1,4 +1,4 @@
-package com.grimoire.model.joinTables;
+package com.grimoire.model.grimoire.joinTables;
 
 import com.grimoire.dto.engine.EngineTypeEnum;
 import jakarta.persistence.Column;
