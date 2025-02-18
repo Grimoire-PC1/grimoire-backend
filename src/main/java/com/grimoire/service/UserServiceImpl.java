@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         userRepository.save(user);
-        return "Campaign registered successfully!";
+        return "User registered successfully!";
     }
 
     @Override
