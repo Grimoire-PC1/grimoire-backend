@@ -72,7 +72,7 @@ public class CampaignServiceImpl implements CampaignService {
             EngineModel engine = engineRepository.findById(campaignDto.getIdSystem())
                     .orElseThrow(() -> new IllegalArgumentException("System not found: " + campaignDto.getIdSystem()));
             if (!engine.getOwner().equals(user)) {
-                throw new AccessDeniedException("You don't have permission to this System");
+                throw new AccessDeniedException("You don't have permission to this Campaign");
             }
             campaign.setEngine(engine);
         }
@@ -89,7 +89,7 @@ public class CampaignServiceImpl implements CampaignService {
         CampaignModel campaign = campaignRepository.findById(idCampaign)
                 .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + idCampaign));
         if (!campaign.getOwner().equals(user)) {
-            throw new AccessDeniedException("You don't have permission to this System");
+            throw new AccessDeniedException("You don't have permission to this Campaign");
         }
 
         campaignRepository.delete(campaign);

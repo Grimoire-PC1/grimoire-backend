@@ -47,7 +47,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
-@Import(UserControllerImpl.class)
 class EngineControllerImplTest {
 
     @Autowired
@@ -76,7 +75,7 @@ class EngineControllerImplTest {
                 .build();
         engineModel = EngineModel.builder()
                 .id(1L)
-                .creator(userModel)
+                .owner(userModel)
                 .engineType(new EngineTypeModel(EngineTypeEnum.PUBLICO))
                 .build();
     }
