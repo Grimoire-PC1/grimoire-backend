@@ -68,7 +68,7 @@ public class EngineServiceImpl implements EngineService {
     public String deleteEngine(Long idSys, String username) {
         EngineModel engine = checkAccess(idSys, username);
         engineRepository.delete(engine);
-        return "System deleted successfully!";
+        return "Engine deleted successfully!";
     }
 
     @Override
