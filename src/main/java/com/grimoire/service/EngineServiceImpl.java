@@ -10,7 +10,6 @@ import com.grimoire.model.joinTables.EngineTypeModel;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
 import com.grimoire.service.service.EngineService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +36,7 @@ public class EngineServiceImpl implements EngineService {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
         EngineModel engine = EngineModel.builder()
-                .creator(user)
+                .owner(user)
                 .name(engineDTO.getName())
                 .description(engineDTO.getDescription())
                 .pictureUrl(engineDTO.getPictureUrl())
@@ -95,7 +94,7 @@ public class EngineServiceImpl implements EngineService {
         EngineModel engine = engineRepository.findById(idSys)
                 .orElseThrow(() -> new IllegalArgumentException("System not found: " + idSys));
 
-        if (!engine.getCreator().equals(user)) {
+        if (!engine.getOwner().equals(user)) {
             throw new AccessDeniedException("You don't have permission to this System");
         }
 

@@ -3,16 +3,15 @@ package com.grimoire.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.grimoire.dto.engine.EngineCreateRequestDto;
-import com.grimoire.dto.engine.EngineEditRequestDto;
-import com.grimoire.dto.engine.EngineResponseDto;
+import com.grimoire.dto.campaign.CampaignCreateRequestDto;
+import com.grimoire.dto.campaign.CampaignPostRequestDto;
+import com.grimoire.dto.campaign.CampaignResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
-import com.grimoire.dto.user.UserCreateRequestDto;
-import com.grimoire.dto.user.UserPostRequestDto;
-import com.grimoire.dto.user.UserResponseDto;
+import com.grimoire.model.grimoire.CampaignModel;
 import com.grimoire.model.grimoire.EngineModel;
 import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.model.joinTables.EngineTypeModel;
+import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +24,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -33,21 +31,21 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.RestTemplate;
 
+
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
-class EngineControllerImplTest {
+public class CampaignControllerImplTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -58,6 +56,9 @@ class EngineControllerImplTest {
     @MockitoBean
     private UserRepository userRepository;
 
+    @MockitoBean
+    private CampaignRepository campaignRepository;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -67,6 +68,7 @@ class EngineControllerImplTest {
 
     private static UserModel userModel;
     private static EngineModel engineModel;
+    private static CampaignModel campaignModel;
 
     @BeforeAll
     static void initResources() {
@@ -77,6 +79,12 @@ class EngineControllerImplTest {
                 .id(1L)
                 .owner(userModel)
                 .engineType(new EngineTypeModel(EngineTypeEnum.PUBLICO))
+                .build();
+        campaignModel = CampaignModel.builder()
+                .id(1L)
+                .owner(userModel)
+                .engine(engineModel)
+                .title("Campanha")
                 .build();
     }
 
@@ -93,10 +101,10 @@ class EngineControllerImplTest {
 
     @Test
     @WithMockUser(username = "testuser", roles = {""})
-    void createEngineSuccessfully() throws Exception {
+    void createCampaignSuccessfully() throws Exception {
         //Arrange
-        EngineCreateRequestDto requestDto = EngineCreateRequestDto.builder()
-                .name("sistema")
+        CampaignCreateRequestDto requestDto = CampaignCreateRequestDto.builder()
+                .title("Campanha")
                 .description("descricao")
                 .pictureUrl("url")
                 .build();
@@ -104,61 +112,57 @@ class EngineControllerImplTest {
 
         Mockito.when(userRepository.findByUsername(Mockito.any(String.class)))
                 .thenReturn(Optional.of(userModel));
-        Mockito.when(engineRepository.save(Mockito.any(EngineModel.class)))
-                .thenReturn(engineModel);
+        Mockito.when(campaignRepository.save(Mockito.any(CampaignModel.class)))
+                .thenReturn(campaignModel);
         //Act
-        String responseJsonString = mockMvc.perform(post("/engine/register")
+        String responseJsonString = mockMvc.perform(post("/campaign/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("tipo_sistema", EngineTypeEnum.PUBLICO.name())
                         .content(requestBody))
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andReturn().getResponse().getContentAsString();
 
-        EngineResponseDto result = objectMapper.readValue(responseJsonString, new TypeReference<>(){});
+        CampaignResponseDto result = objectMapper.readValue(responseJsonString, new TypeReference<>(){});
 
         //Assert
         assertAll(
                 () -> assertNotNull(result),
-                () -> assertEquals(requestDto.getName(), result.getName()),
-                () -> assertEquals(EngineTypeEnum.PUBLICO.name(), result.getTypeSys())
+                () -> assertEquals(requestDto.getTitle(), result.getTitle())
         );
     }
 
     @Test
     @WithMockUser(username = "testuser", roles = {""})
-    void updateEngineSuccessfully() throws Exception {
+    void updateCampaignSuccessfully() throws Exception {
         //Arrange
-        EngineEditRequestDto requestDto = EngineEditRequestDto.builder()
-                .name("sistema")
-                .description("descricao")
-                .pictureUrl("url")
+        CampaignPostRequestDto requestDto = CampaignPostRequestDto.builder()
+                .title("")
+                .description("")
+                .pictureUrl("")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
         Mockito.when(userRepository.findByUsername(Mockito.any(String.class)))
                 .thenReturn(Optional.of(userModel));
-        Mockito.when(engineRepository.findById(Mockito.any(Long.class)))
-                .thenReturn(Optional.of(engineModel));
-        Mockito.when(engineRepository.save(Mockito.any(EngineModel.class)))
-                .thenReturn(engineModel);
+        Mockito.when(campaignRepository.findById(Mockito.any(Long.class)))
+                .thenReturn(Optional.of(campaignModel));
+        Mockito.when(campaignRepository.save(Mockito.any(CampaignModel.class)))
+                .thenReturn(campaignModel);
         //Act
-        String responseJsonString = mockMvc.perform(put("/engine/update")
+        String responseJsonString = mockMvc.perform(put("/campaign/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("id_sistema", String.valueOf(1L))
-                        .param("tipo_sistema", EngineTypeEnum.PUBLICO.name())
+                        .param("id_campanha", String.valueOf(1L))
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn().getResponse().getContentAsString();
 
-        EngineResponseDto result = objectMapper.readValue(responseJsonString, new TypeReference<>(){});
+        CampaignResponseDto result = objectMapper.readValue(responseJsonString, new TypeReference<>(){});
 
         //Assert
         assertAll(
                 () -> assertNotNull(result),
-                () -> assertEquals(requestDto.getName(), result.getName()),
-                () -> assertEquals(EngineTypeEnum.PUBLICO.name(), result.getTypeSys())
+                () -> assertEquals(campaignModel.getTitle(), result.getTitle())
         );
     }
 
@@ -168,16 +172,16 @@ class EngineControllerImplTest {
         //Arrange
         Mockito.when(userRepository.findByUsername(Mockito.any(String.class)))
                 .thenReturn(Optional.of(userModel));
-        Mockito.when(engineRepository.findById(Mockito.any(Long.class)))
-                .thenReturn(Optional.of(engineModel));
-        Mockito.doNothing().when(engineRepository).delete(Mockito.any(EngineModel.class));
+        Mockito.when(campaignRepository.findById(Mockito.any(Long.class)))
+                .thenReturn(Optional.of(campaignModel));
+        Mockito.doNothing().when(campaignRepository).delete(Mockito.any(CampaignModel.class));
         //Act
-        mockMvc.perform(delete("/engine/delete")
+        mockMvc.perform(delete("/campaign/delete")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("id_sistema", String.valueOf(1L))
+                        .param("id_campanha", String.valueOf(1L))
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().string("Engine deleted successfully!"))
+                .andExpect(content().string("Campaign deleted successfully!"))
                 .andDo(print());
     }
 
@@ -187,16 +191,16 @@ class EngineControllerImplTest {
         //Arrange
         Mockito.when(userRepository.findByUsername(Mockito.any(String.class)))
                 .thenReturn(Optional.of(userModel));
-        Mockito.when(engineRepository.findAllFiltered(null, 1L))
-                .thenReturn(List.of(engineModel));
+        Mockito.when(campaignRepository.findAllFiltered(null, 1L))
+                .thenReturn(List.of(campaignModel));
         //Act
-        String responseJsonString = mockMvc.perform(get("/engine/get")
+        String responseJsonString = mockMvc.perform(get("/campaign/get")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn().getResponse().getContentAsString();
 
-        List<EngineResponseDto> result = objectMapper.readValue(responseJsonString, new TypeReference<>(){});
+        List<CampaignResponseDto> result = objectMapper.readValue(responseJsonString, new TypeReference<>(){});
 
         //Assert
         assertAll(
@@ -204,24 +208,4 @@ class EngineControllerImplTest {
         );
     }
 
-    @Test
-    @WithMockUser(username = "testuser", roles = {""})
-    void getPublicEngineSuccessfully() throws Exception {
-        //Arrange
-        Mockito.when(engineRepository.findAllByEngineType_Id(EngineTypeEnum.PUBLICO.getId()))
-                .thenReturn(List.of(engineModel));
-        //Act
-        String responseJsonString = mockMvc.perform(get("/engine/get-public")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andReturn().getResponse().getContentAsString();
-
-        List<EngineResponseDto> result = objectMapper.readValue(responseJsonString, new TypeReference<>(){});
-
-        //Assert
-        assertAll(
-                () -> assertNotNull(result)
-        );
-    }
 }

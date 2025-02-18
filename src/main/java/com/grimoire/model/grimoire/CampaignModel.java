@@ -1,7 +1,6 @@
 package com.grimoire.model.grimoire;
 
-import com.grimoire.dto.engine.EngineResponseDto;
-import com.grimoire.model.joinTables.EngineTypeModel;
+import com.grimoire.dto.campaign.CampaignResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,9 +9,9 @@ import lombok.*;
 @Builder
 @Entity
 @Data
-@Table(name = "SISTEMAS")
+@Table(name = "CAMPANHAS")
 @EqualsAndHashCode
-public class EngineModel {
+public class CampaignModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,27 +20,28 @@ public class EngineModel {
     @JoinColumn(name = "ID_CRIADOR", nullable = false)
     private UserModel owner;
 
-    @Column(name = "NOME", nullable = false)
-    private String name;
+    @Column(name = "TITULO")
+    private String title;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO")
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_SISTEMA")
+    private EngineModel engine;
 
     @Column(name = "URL_FOTO")
     private String pictureUrl;
 
-    @ManyToOne
-    @JoinColumn(name="ID_TIPO_SISTEMA")
-    private EngineTypeModel engineType;
-
-    public EngineResponseDto toDto() {
-        return EngineResponseDto.builder()
+    public CampaignResponseDto toDto() {
+        return CampaignResponseDto.builder()
                 .id(this.id)
-                .idUser(this.owner.getId())
-                .name(this.name)
+                .idMaster(this.owner.getId())
+                .title(this.title)
                 .description(this.description)
+                .idSystem(this.engine == null ? null : this.engine.getId())
                 .pictureUrl(this.pictureUrl)
-                .typeSys(this.engineType.getDescription())
                 .build();
     }
 }
+
