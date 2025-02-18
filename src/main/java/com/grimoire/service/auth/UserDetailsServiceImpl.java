@@ -1,6 +1,6 @@
 package com.grimoire.service.auth;
 
-import com.grimoire.model.user.UserAuthenticated;
+import com.grimoire.model.auth.UserAuthenticated;
 import com.grimoire.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
