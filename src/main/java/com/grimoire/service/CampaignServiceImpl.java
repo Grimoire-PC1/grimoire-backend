@@ -104,4 +104,13 @@ public class CampaignServiceImpl implements CampaignService {
 
         return campaigns.stream().map(CampaignModel::toDto).toList();
     }
+
+    @Override
+    public Collection<CampaignResponseDto> getParticipatingCampaigns(String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        Collection<CampaignModel> campaigns = campaignRepository.findAllParticipating(user.getId());
+
+        return campaigns.stream().map(CampaignModel::toDto).toList();
+    }
 }

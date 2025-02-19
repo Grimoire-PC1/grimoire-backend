@@ -56,4 +56,10 @@ public class CampaignControllerImpl implements CampaignController {
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(campaignService.getCampaign(idCampaign, authentication.getName()));
     }
+
+    @GetMapping("/get-participating")
+    public ResponseEntity<Collection<CampaignResponseDto>> getUserParticipatingCampaigns(
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(campaignService.getParticipatingCampaigns(authentication.getName()));
+    }
 }
