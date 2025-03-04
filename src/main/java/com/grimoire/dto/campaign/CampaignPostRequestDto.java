@@ -29,7 +29,7 @@ public class CampaignPostRequestDto {
     private Long idSystem;
 
     @Schema(defaultValue = "url")
-    @JsonProperty("nova_foto_url")
+    @JsonProperty("id_nova_foto")
     @NotNull
-    private String pictureUrl;
+    private String idPicture;
 }

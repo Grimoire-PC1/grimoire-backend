@@ -30,8 +30,8 @@ public class CampaignModel {
     @JoinColumn(name = "ID_SISTEMA")
     private EngineModel engine;
 
-    @Column(name = "URL_FOTO")
-    private String pictureUrl;
+    @Column(name = "ID_FOTO")
+    private String idPicture;
 
     public CampaignResponseDto toDto() {
         return CampaignResponseDto.builder()
@@ -40,7 +40,7 @@ public class CampaignModel {
                 .title(this.title)
                 .description(this.description)
                 .idSystem(this.engine == null ? null : this.engine.getId())
-                .pictureUrl(this.pictureUrl)
+                .idPicture(this.idPicture)
                 .build();
     }
 }

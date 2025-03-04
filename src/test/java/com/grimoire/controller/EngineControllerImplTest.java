@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.grimoire.dto.engine.EngineCreateRequestDto;
-import com.grimoire.dto.engine.EngineEditRequestDto;
+import com.grimoire.dto.engine.EnginePostRequestDto;
 import com.grimoire.dto.engine.EngineResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.model.grimoire.EngineModel;
@@ -94,7 +94,7 @@ class EngineControllerImplTest {
         EngineCreateRequestDto requestDto = EngineCreateRequestDto.builder()
                 .name("sistema")
                 .description("descricao")
-                .pictureUrl("url")
+                .pictureId("url")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -125,10 +125,10 @@ class EngineControllerImplTest {
     @WithMockUser(username = "testuser", roles = {""})
     void updateEngineSuccessfully() throws Exception {
         //Arrange
-        EngineEditRequestDto requestDto = EngineEditRequestDto.builder()
+        EnginePostRequestDto requestDto = EnginePostRequestDto.builder()
                 .name("sistema")
                 .description("descricao")
-                .pictureUrl("url")
+                .pictureId("url")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 

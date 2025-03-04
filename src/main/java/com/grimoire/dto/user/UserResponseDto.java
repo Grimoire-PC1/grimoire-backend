@@ -25,6 +25,6 @@ public class UserResponseDto {
     private String name;
 
     @Schema(example = "url")
-    @JsonProperty("foto_url")
-    private String pictureUrl;
+    @JsonProperty("id_foto")
+    private String pictureID;
 }

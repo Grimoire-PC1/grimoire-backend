@@ -1,7 +1,7 @@
 package com.grimoire.service;
 
 import com.grimoire.dto.engine.EngineCreateRequestDto;
-import com.grimoire.dto.engine.EngineEditRequestDto;
+import com.grimoire.dto.engine.EnginePostRequestDto;
 import com.grimoire.dto.engine.EngineResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.model.grimoire.EngineModel;
@@ -39,7 +39,7 @@ public class EngineServiceImpl implements EngineService {
                 .owner(user)
                 .name(engineDTO.getName())
                 .description(engineDTO.getDescription())
-                .pictureUrl(engineDTO.getPictureUrl())
+                .pictureId(engineDTO.getPictureId())
                 .engineType(new EngineTypeModel(engineTypeEnum))
                 .build();
 
@@ -50,14 +50,14 @@ public class EngineServiceImpl implements EngineService {
     @Override
     @Transactional
     public EngineResponseDto editEngine(
-            Long idSys, String username, EngineEditRequestDto engineDTO, EngineTypeEnum engineTypeEnum
+            Long idSys, String username, EnginePostRequestDto engineDTO, EngineTypeEnum engineTypeEnum
     ) {
         EngineModel engine = checkAccess(idSys, username);
 
         engine.setName(engineDTO.getName().isBlank() ? engine.getName() : engineDTO.getName());
         engine.setEngineType(engineTypeEnum == null ? engine.getEngineType() : new EngineTypeModel(engineTypeEnum));
         engine.setDescription(engineDTO.getDescription().isBlank() ? engine.getDescription() : engineDTO.getDescription());
-        engine.setPictureUrl(engineDTO.getPictureUrl().isBlank() ? engine.getPictureUrl() : engineDTO.getPictureUrl());
+        engine.setPictureId(engineDTO.getPictureId().isBlank() ? engine.getPictureId() : engineDTO.getPictureId());
 
         engineRepository.save(engine);
         return engine.toDto();

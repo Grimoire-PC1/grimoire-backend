@@ -50,7 +50,7 @@ public class CampaignServiceImpl implements CampaignService {
                 .title(campaignDto.getTitle())
                 .description(campaignDto.getDescription())
                 .engine(engine)
-                .pictureUrl(campaignDto.getPictureUrl())
+                .idPicture(campaignDto.getIdPicture())
                 .build();
 
         return campaignRepository.save(campaign).toDto();
@@ -76,7 +76,7 @@ public class CampaignServiceImpl implements CampaignService {
             }
             campaign.setEngine(engine);
         }
-        campaign.setPictureUrl(campaignDto.getPictureUrl().isBlank() ? campaign.getPictureUrl() : campaignDto.getPictureUrl());
+        campaign.setIdPicture(campaignDto.getIdPicture().isBlank() ? campaign.getIdPicture() : campaignDto.getIdPicture());
 
         return campaignRepository.save(campaign).toDto();
     }

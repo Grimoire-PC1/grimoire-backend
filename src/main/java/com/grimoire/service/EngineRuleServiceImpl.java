@@ -2,7 +2,7 @@ package com.grimoire.service;
 
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
-import com.grimoire.dto.engineRule.RuleEditRequestDto;
+import com.grimoire.dto.engineRule.RulePostRequestDto;
 import com.grimoire.model.grimoire.EngineModel;
 import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.model.grimoire.EngineRuleModel;
@@ -52,7 +52,7 @@ public class EngineRuleServiceImpl implements EngineRuleService {
 
     @Override
     @Transactional
-    public RuleResponseDto editRule(Long ruleId, RuleEditRequestDto ruleDto, String username) {
+    public RuleResponseDto editRule(Long ruleId, RulePostRequestDto ruleDto, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
         EngineRuleModel rule = engineRuleRepository.findById(ruleId)

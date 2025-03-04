@@ -106,7 +106,7 @@ public class CampaignControllerImplTest {
         CampaignCreateRequestDto requestDto = CampaignCreateRequestDto.builder()
                 .title("Campanha")
                 .description("descricao")
-                .pictureUrl("url")
+                .idPicture("url")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -138,7 +138,7 @@ public class CampaignControllerImplTest {
         CampaignPostRequestDto requestDto = CampaignPostRequestDto.builder()
                 .title("")
                 .description("")
-                .pictureUrl("")
+                .idPicture("")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 

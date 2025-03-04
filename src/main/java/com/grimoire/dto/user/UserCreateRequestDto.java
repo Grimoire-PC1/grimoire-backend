@@ -28,6 +28,6 @@ public class UserCreateRequestDto {
     @NotBlank
     private String name;
 
-    @JsonProperty("foto_url")
-    private String pictureUrl;
+    @JsonProperty("id_foto")
+    private String pictureID;
 }

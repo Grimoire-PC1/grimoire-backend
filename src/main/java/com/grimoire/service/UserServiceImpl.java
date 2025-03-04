@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .email(userDTO.getEmail())
                 .name(userDTO.getName())
-                .pictureUrl(userDTO.getPictureUrl())
+                .pictureID(userDTO.getPictureID())
                 .build();
 
         userRepository.save(user);
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userDTO.getName().isBlank() ? user.getName() : userDTO.getName());
         user.setPassword(userDTO.getPassword().isBlank() ? user.getPassword() : passwordEncoder.encode(userDTO.getPassword()));
         user.setEmail(userDTO.getEmail().isBlank() ? user.getEmail() : userDTO.getEmail());
-        user.setPictureUrl(userDTO.getPictureUrl().isBlank() ? user.getPictureUrl() : userDTO.getPictureUrl());
+        user.setPictureID(userDTO.getPictureID().isBlank() ? user.getPictureID() : userDTO.getPictureID());
 
         userRepository.save(user);
         return "User updated successfully!";

@@ -21,6 +21,6 @@ public class EngineCreateRequestDto {
     @NotBlank
     private String description;
 
-    @JsonProperty("foto_url")
-    private String pictureUrl;
+    @JsonProperty("id_foto")
+    private String pictureId;
 }

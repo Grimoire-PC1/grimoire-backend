@@ -22,7 +22,7 @@ public class ParticipantModel {
                 .idUser(this.modelId.getUserModel().getId())
                 .idCampaign(this.modelId.getCampaignModel().getId())
                 .userName(this.modelId.getUserModel().getName())
-                .userPictureUrl(this.modelId.getUserModel().getPictureUrl())
+                .userPictureId(this.modelId.getUserModel().getPictureID())
                 .build();
     }
 }

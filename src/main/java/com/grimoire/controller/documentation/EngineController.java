@@ -1,7 +1,7 @@
 package com.grimoire.controller.documentation;
 
 import com.grimoire.dto.engine.EngineResponseDto;
-import com.grimoire.dto.engine.EngineEditRequestDto;
+import com.grimoire.dto.engine.EnginePostRequestDto;
 import com.grimoire.dto.engine.EngineCreateRequestDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,7 +41,7 @@ public interface EngineController {
             )
             EngineTypeEnum engineTypeEnum,
             @RequestBody
-            EngineEditRequestDto engineDto,
+            EnginePostRequestDto engineDto,
             Authentication authentication);
 
     @Operation(description = "Deletar sistema", summary = "Remover Sistema de RPG.")
