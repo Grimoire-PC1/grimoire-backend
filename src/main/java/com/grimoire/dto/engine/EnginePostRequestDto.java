@@ -1,4 +1,4 @@
-package com.grimoire.dto.engineRule;
+package com.grimoire.dto.engine;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,18 +7,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Builder
-@Data
-public class RuleEditRequestDto {
 
-    @Schema(defaultValue = "titulo")
-    @JsonProperty("titulo")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class EnginePostRequestDto {
+    @Schema(defaultValue = "nome")
+    @JsonProperty("novo_nome")
     @NotNull
-    private String title;
+    private String name;
 
     @Schema(defaultValue = "descricao")
-    @JsonProperty("descricao")
+    @JsonProperty("nova_descricao")
     @NotNull
     private String description;
 
+    @Schema(defaultValue = "url")
+    @JsonProperty("id_nova_foto")
+    @NotNull
+    private String pictureId;
 }

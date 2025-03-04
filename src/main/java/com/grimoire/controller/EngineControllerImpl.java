@@ -2,7 +2,7 @@ package com.grimoire.controller;
 
 import com.grimoire.controller.documentation.EngineController;
 import com.grimoire.dto.engine.EngineCreateRequestDto;
-import com.grimoire.dto.engine.EngineEditRequestDto;
+import com.grimoire.dto.engine.EnginePostRequestDto;
 import com.grimoire.dto.engine.EngineResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.service.service.EngineService;
@@ -40,7 +40,7 @@ public class EngineControllerImpl implements EngineController {
     public ResponseEntity<EngineResponseDto> updateEngine(
             @RequestParam(name = "id_sistema") Long idSys,
             @RequestParam(name = "tipo_sistema", required = false) EngineTypeEnum engineTypeEnum,
-            @RequestBody EngineEditRequestDto engineDto,
+            @RequestBody EnginePostRequestDto engineDto,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(engineService.editEngine(idSys, authentication.getName(), engineDto, engineTypeEnum));
     }

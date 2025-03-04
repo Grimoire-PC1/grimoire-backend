@@ -28,4 +28,13 @@ public interface CampaignRepository extends JpaRepository<CampaignModel, Long> {
             @Param("idCampaign") Long idCampaign,
             @Param("creatorId") Long creatorId);
 
+    @Query(value = """
+            SELECT c.*
+            FROM CAMPANHAS c
+            JOIN PARTICIPANTES p ON p.ID_CAMPANHA = c.ID
+            WHERE p.ID_USUARIO = :idUser
+            """,
+            nativeQuery = true)
+    Collection<CampaignModel> findAllParticipating(
+            @Param("idUser") Long idUser);
 }

@@ -3,11 +3,15 @@ package com.grimoire.dto.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserPostRequestDto {
     @Schema(defaultValue = "senha")
     @JsonProperty("nova_senha")
@@ -25,7 +29,7 @@ public class UserPostRequestDto {
     private String name;
 
     @Schema(defaultValue = "url")
-    @JsonProperty("nova_foto_url")
+    @JsonProperty("id_nova_foto")
     @NotNull
-    private String pictureUrl;
+    private String pictureID;
 }

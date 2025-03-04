@@ -49,5 +49,9 @@ public interface CampaignController {
             )
             Long idCampaign,
             Authentication authentication);
+
+    @Operation(description = "Pegar campanhas que o usuário participa", summary = "Pegar informações das campanhas que o usuário participa no sistema.")
+    ResponseEntity<Collection<CampaignResponseDto>> getUserParticipatingCampaigns(
+            Authentication authentication);
 }
 

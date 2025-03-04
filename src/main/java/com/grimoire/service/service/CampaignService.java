@@ -15,4 +15,6 @@ public interface CampaignService {
     String deleteCampaign(Long idCampaign, String username);
 
     Collection<CampaignResponseDto> getCampaign(Long idCampaign, String username);
+
+    Collection<CampaignResponseDto> getParticipatingCampaigns(String name);
 }

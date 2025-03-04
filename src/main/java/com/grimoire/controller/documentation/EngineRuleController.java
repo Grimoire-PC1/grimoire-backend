@@ -2,7 +2,7 @@ package com.grimoire.controller.documentation;
 
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
-import com.grimoire.dto.engineRule.RuleEditRequestDto;
+import com.grimoire.dto.engineRule.RulePostRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,7 +29,7 @@ public interface EngineRuleController {
             )
             Long ruleId,
             @RequestBody()
-            RuleEditRequestDto userDto,
+            RulePostRequestDto userDto,
             Authentication authentication);
 
     @Operation(description = "Deletar Regras de sistema", summary = "Remover Regras de Sistema de RPG no Grimoire.")
