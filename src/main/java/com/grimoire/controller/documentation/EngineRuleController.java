@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-@Tag(name = "Regras de Sistema", description = "Serviço de Regras de Sistemas")
+@Tag(name = "Regra de Sistema", description = "Serviço de Regras de Sistemas")
 public interface EngineRuleController {
     @Operation(description = "Registrar Regras de sistema", summary = "Registrar nova Regra de Sistema de RPG no Grimoire")
     ResponseEntity<RuleResponseDto> createRule(

@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 
 import java.util.Collection;
 
-@Tag(name = "Participantes", description = "Serviço de Participantes de Campanha")
+@Tag(name = "Participante", description = "Serviço de Participantes de Campanha")
 public interface ParticipantController {
 
     @Operation(description = "Registrar Participante de Campanha", summary = "Registrar novo Participante de Campanha de RPG no Grimoire")
