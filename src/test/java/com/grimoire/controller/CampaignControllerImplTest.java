@@ -106,7 +106,7 @@ public class CampaignControllerImplTest {
         CampaignCreateRequestDto requestDto = CampaignCreateRequestDto.builder()
                 .title("Campanha")
                 .description("descricao")
-                .idPicture("url")
+                .idPicture(1L)
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -136,9 +136,9 @@ public class CampaignControllerImplTest {
     void updateCampaignSuccessfully() throws Exception {
         //Arrange
         CampaignPostRequestDto requestDto = CampaignPostRequestDto.builder()
-                .title("")
-                .description("")
-                .idPicture("")
+                .title(null)
+                .description(null)
+                .idPicture(null)
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 

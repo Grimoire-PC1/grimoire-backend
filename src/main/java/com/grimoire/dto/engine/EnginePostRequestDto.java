@@ -15,16 +15,13 @@ import lombok.NoArgsConstructor;
 public class EnginePostRequestDto {
     @Schema(defaultValue = "nome")
     @JsonProperty("novo_nome")
-    @NotNull
     private String name;
 
     @Schema(defaultValue = "descricao")
     @JsonProperty("nova_descricao")
-    @NotNull
     private String description;
 
     @Schema(defaultValue = "url")
     @JsonProperty("id_nova_foto")
-    @NotNull
-    private String pictureId;
+    private Long pictureId;
 }

@@ -12,12 +12,10 @@ public class RulePostRequestDto {
 
     @Schema(defaultValue = "titulo")
     @JsonProperty("titulo")
-    @NotNull
     private String title;
 
     @Schema(defaultValue = "descricao")
     @JsonProperty("descricao")
-    @NotNull
     private String description;
 
 }

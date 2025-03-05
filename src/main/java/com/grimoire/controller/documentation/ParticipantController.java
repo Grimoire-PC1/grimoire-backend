@@ -22,7 +22,7 @@ public interface ParticipantController {
             Long campaignId,
             Authentication authentication);
 
-    @Operation(description = "Registrar Participante de Campanha", summary = "Remover Participante de Campanha de RPG no Grimoire.")
+    @Operation(description = "Remover Participante de Campanha", summary = "Remover Participante de Campanha de RPG no Grimoire.")
     ResponseEntity<String> delete(
             @Parameter(
                     name = "id_campanha",
@@ -32,7 +32,7 @@ public interface ParticipantController {
             Long campaignId,
             Authentication authentication);
 
-    @Operation(description = "Registrar Participante de Campanha", summary = "Pegar informações de Participantes de Campanha de RPG no Grimoire.")
+    @Operation(description = "Pegar Participante de Campanha", summary = "Pegar informações de Participantes de Campanha de RPG no Grimoire.")
     ResponseEntity<Collection<ParticipantResponseDto>> get(
             @Parameter(
                     name = "id_campanha",

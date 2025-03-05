@@ -46,10 +46,10 @@ public class UserServiceImpl implements UserService {
     public String postUser(String userName, UserPostRequestDto userDTO) {
         UserModel user = userRepository.findByUsername(userName)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + userName));
-        user.setName(userDTO.getName().isBlank() ? user.getName() : userDTO.getName());
-        user.setPassword(userDTO.getPassword().isBlank() ? user.getPassword() : passwordEncoder.encode(userDTO.getPassword()));
-        user.setEmail(userDTO.getEmail().isBlank() ? user.getEmail() : userDTO.getEmail());
-        user.setPictureID(userDTO.getPictureID().isBlank() ? user.getPictureID() : userDTO.getPictureID());
+        user.setName(userDTO.getName() == null ? user.getName() : userDTO.getName());
+        user.setPassword(userDTO.getPassword() == null ? user.getPassword() : passwordEncoder.encode(userDTO.getPassword()));
+        user.setEmail(userDTO.getEmail() == null ? user.getEmail() : userDTO.getEmail());
+        user.setPictureID(userDTO.getPictureID() == null ? user.getPictureID() : userDTO.getPictureID());
 
         userRepository.save(user);
         return "User updated successfully!";

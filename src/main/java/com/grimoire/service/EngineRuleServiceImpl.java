@@ -61,8 +61,8 @@ public class EngineRuleServiceImpl implements EngineRuleService {
             throw new AccessDeniedException("You don't have permission to this Rule");
         }
 
-        rule.setTitle(ruleDto.getTitle().isBlank() ? rule.getTitle() : ruleDto.getTitle());
-        rule.setDescription(ruleDto.getDescription().isBlank() ? rule.getDescription() : ruleDto.getDescription());
+        rule.setTitle(ruleDto.getTitle() == null ? rule.getTitle() : ruleDto.getTitle());
+        rule.setDescription(ruleDto.getDescription() == null ? rule.getDescription() : ruleDto.getDescription());
 
         return engineRuleRepository.save(rule).toDto();
     }

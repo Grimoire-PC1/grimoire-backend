@@ -28,7 +28,7 @@ public class EngineModel {
     private String description;
 
     @Column(name = "ID_FOTO")
-    private String pictureId;
+    private Long pictureId;
 
     @ManyToOne
     @JoinColumn(name="ID_TIPO_SISTEMA")

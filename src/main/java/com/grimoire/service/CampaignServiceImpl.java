@@ -66,8 +66,9 @@ public class CampaignServiceImpl implements CampaignService {
         if (!campaign.getOwner().equals(user)) {
             throw new AccessDeniedException("You don't have permission to this System");
         }
-        campaign.setTitle(campaignDto.getTitle().isBlank() ? campaign.getTitle() : campaignDto.getTitle());
-        campaign.setDescription(campaignDto.getDescription().isBlank() ? campaign.getDescription() : campaignDto.getDescription());
+        campaign.setTitle(campaignDto.getTitle() == null ? campaign.getTitle() : campaignDto.getTitle());
+        campaign.setDescription(campaignDto.getDescription() == null ? campaign.getDescription() : campaignDto.getDescription());
+        campaign.setIdPicture(campaignDto.getIdPicture() == null ? campaign.getIdPicture() : campaignDto.getIdPicture());
         if (!(campaignDto.getIdSystem() == null)) {
             EngineModel engine = engineRepository.findById(campaignDto.getIdSystem())
                     .orElseThrow(() -> new IllegalArgumentException("System not found: " + campaignDto.getIdSystem()));
@@ -76,7 +77,6 @@ public class CampaignServiceImpl implements CampaignService {
             }
             campaign.setEngine(engine);
         }
-        campaign.setIdPicture(campaignDto.getIdPicture().isBlank() ? campaign.getIdPicture() : campaignDto.getIdPicture());
 
         return campaignRepository.save(campaign).toDto();
     }

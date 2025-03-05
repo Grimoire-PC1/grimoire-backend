@@ -1,4 +1,4 @@
-package com.grimoire.dto.user;
+package com.grimoire.dto.character;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,22 +10,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserPostRequestDto {
-    @Schema(defaultValue = "senha")
-    @JsonProperty("nova_senha")
-    private String password;
-
-    @Schema(defaultValue = "email")
-    @JsonProperty("novo_email")
-    private String email;
-
-    @Schema(defaultValue = "nome")
+@NoArgsConstructor
+public class CharacterPostRequestDto {
     @JsonProperty("novo_nome")
     private String name;
 
-    @Schema(defaultValue = "url")
     @JsonProperty("id_nova_foto")
-    private Long pictureID;
+    private Long idPicture;
 }

@@ -1,26 +1,21 @@
-package com.grimoire.dto.engine;
+package com.grimoire.dto.character;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-public class EngineCreateRequestDto {
-
+@NoArgsConstructor
+public class CharacterCreateRequestDto {
     @JsonProperty("nome")
-    @NotBlank
     private String name;
 
-    @JsonProperty("descricao")
-    @NotBlank
-    private String description;
-
     @JsonProperty("id_foto")
-    private Long pictureId;
+    @NotNull
+    private Long idPicture;
 }

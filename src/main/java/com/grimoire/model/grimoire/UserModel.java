@@ -29,7 +29,7 @@ public class UserModel {
     private String name;
 
     @Column(name = "ID_FOTO")
-    private String pictureID;
+    private Long pictureID;
 
     public UserResponseDto toDto() {
         return UserResponseDto.builder()

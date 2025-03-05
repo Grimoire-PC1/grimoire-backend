@@ -54,10 +54,10 @@ public class EngineServiceImpl implements EngineService {
     ) {
         EngineModel engine = checkAccess(idSys, username);
 
-        engine.setName(engineDTO.getName().isBlank() ? engine.getName() : engineDTO.getName());
+        engine.setName(engineDTO.getName() == null ? engine.getName() : engineDTO.getName());
         engine.setEngineType(engineTypeEnum == null ? engine.getEngineType() : new EngineTypeModel(engineTypeEnum));
-        engine.setDescription(engineDTO.getDescription().isBlank() ? engine.getDescription() : engineDTO.getDescription());
-        engine.setPictureId(engineDTO.getPictureId().isBlank() ? engine.getPictureId() : engineDTO.getPictureId());
+        engine.setDescription(engineDTO.getDescription() == null ? engine.getDescription() : engineDTO.getDescription());
+        engine.setPictureId(engineDTO.getPictureId() == null ? engine.getPictureId() : engineDTO.getPictureId());
 
         engineRepository.save(engine);
         return engine.toDto();

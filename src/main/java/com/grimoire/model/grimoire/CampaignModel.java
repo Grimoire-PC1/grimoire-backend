@@ -31,7 +31,7 @@ public class CampaignModel {
     private EngineModel engine;
 
     @Column(name = "ID_FOTO")
-    private String idPicture;
+    private Long idPicture;
 
     public CampaignResponseDto toDto() {
         return CampaignResponseDto.builder()

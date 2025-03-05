@@ -19,4 +19,17 @@ public interface ParticipantRepository extends JpaRepository<ParticipantModel, P
     List<ParticipantModel> findAllByCampaign(
             @Param("idCampaign") Long idCampaign
     );
+
+    @Query(value = """
+        SELECT EXISTS(
+            SELECT p.* FROM PARTICIPANTES p
+            WHERE p.ID_CAMPANHA = :idCampaign
+            AND p.ID_USUARIO = :idUser
+    )
+    """,
+            nativeQuery = true)
+    Boolean exists(
+            @Param("idUser") Long idUser,
+            @Param("idCampaign") Long idCampaign
+    );
 }
