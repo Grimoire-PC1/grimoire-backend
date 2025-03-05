@@ -21,17 +21,17 @@ public class EngineModel {
     @JoinColumn(name = "ID_CRIADOR", nullable = false)
     private UserModel owner;
 
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "NOME")
     private String name;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO")
     private String description;
 
     @Column(name = "ID_FOTO")
     private Long pictureId;
 
     @ManyToOne
-    @JoinColumn(name="ID_TIPO_SISTEMA")
+    @JoinColumn(name="ID_TIPO_SISTEMA", nullable = false)
     private EngineTypeModel engineType;
 
     public EngineResponseDto toDto() {

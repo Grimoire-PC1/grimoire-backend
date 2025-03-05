@@ -20,7 +20,7 @@ public interface CampaignController {
             @Validated @RequestBody CampaignCreateRequestDto campaignDto,
             Authentication authentication);
 
-    @Operation(description = "Atualizar campanha", summary = "Atualizar campanha no sistema. Deixe o campo em branco para mantê-lo.")
+    @Operation(description = "Atualizar campanha", summary = "Atualizar campanha no sistema. Deixe o campo vazio para mantê-lo.")
     ResponseEntity<CampaignResponseDto> updateCampaign(
             @Parameter(
                     name = "id_campanha",

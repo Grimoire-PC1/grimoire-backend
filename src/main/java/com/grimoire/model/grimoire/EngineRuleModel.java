@@ -21,14 +21,15 @@ public class EngineRuleModel {
     @JoinColumn(name="ID_SISTEMA")
     private EngineModel engine;
 
-    @Column(name = "TITULO", nullable = false)
+    @Column(name = "TITULO")
     private String title;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO")
     private String description;
 
     public RuleResponseDto toDto() {
         return RuleResponseDto.builder()
+                .id(this.id)
                 .title(this.title)
                 .idSys(this.engine.getId())
                 .description(this.description)

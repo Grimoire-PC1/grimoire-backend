@@ -30,7 +30,7 @@ public interface CharacterController {
     ResponseEntity<CharacterResponseDto> update(
             @Parameter(
                     name = "id_personagem",
-                    description = "ID da Campanha de RPG.",
+                    description = "ID do Personagem de RPG.",
                     required = true
             )
             Long characterId,
@@ -41,7 +41,7 @@ public interface CharacterController {
     ResponseEntity<String> delete(
             @Parameter(
                     name = "id_personagem",
-                    description = "ID da Campanha de RPG.",
+                    description = "ID do Personagem de RPG.",
                     required = true
             )
             Long characterId,

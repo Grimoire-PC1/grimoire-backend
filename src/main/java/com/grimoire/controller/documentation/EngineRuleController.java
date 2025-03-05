@@ -20,7 +20,7 @@ public interface EngineRuleController {
             RuleCreateRequestDto engineDto,
             Authentication authentication);
 
-    @Operation(description = "Atualizar Regras de sistema", summary = "Atualizar Regras de Sistema de RPG no Grimoire. Deixe o campo em branco para mantê-lo.")
+    @Operation(description = "Atualizar Regras de sistema", summary = "Atualizar Regras de Sistema de RPG no Grimoire. Deixe o campo vazio para mantê-lo.")
     ResponseEntity<RuleResponseDto> updateRule(
             @Parameter(
                     name = "id_regra",

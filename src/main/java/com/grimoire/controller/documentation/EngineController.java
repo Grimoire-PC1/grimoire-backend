@@ -27,7 +27,7 @@ public interface EngineController {
             EngineCreateRequestDto engineDto,
             Authentication authentication);
 
-    @Operation(description = "Atualizar sistema", summary = "Atualizar Sistema de RPG. Deixe o campo em branco para mantê-lo.")
+    @Operation(description = "Atualizar sistema", summary = "Atualizar Sistema de RPG. Deixe o campo vazio para mantê-lo.")
     ResponseEntity<EngineResponseDto> updateEngine(
             @Parameter(
                     name = "id_sistema",
