@@ -73,20 +73,44 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public String delete(Long characterId, String name) {
+    public String delete(Long characterId, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
 
-        return null;
+        CharacterModel character = characterRepository.findById(characterId)
+                .orElseThrow(() -> new IllegalArgumentException("Character not found: " + characterId));
+
+        if (!character.getUser().equals(user) && !character.getCampaign().getOwner().equals(user)) {
+            throw new IllegalArgumentException("You don't have permission to this Character");
+        }
+
+        characterRepository.delete(character);
+        return "Character deleted successfully!";
     }
 
     @Override
     public Collection<CharacterResponseDto> getByUser(String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        Collection<CharacterModel> characters = characterRepository.findAllFiltered(user.getId(), null);
 
-        return null;
+        return characters.stream().map(CharacterModel::toDto).toList();
     }
 
     @Override
     public Collection<CharacterResponseDto> getByCampaign(Long campaignId, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
 
-        return null;
+        CampaignModel campaignModel = campaignRepository.findById(campaignId)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignId));
+
+        if (!campaignModel.getOwner().equals(user) && !participantRepository.exists(user.getId(), campaignModel.getId())) {
+            throw new IllegalArgumentException("You are not part of this Campaign");
+        }
+
+        Collection<CharacterModel> characters = characterRepository.findAllFiltered(null, campaignId);
+
+        return characters.stream().map(CharacterModel::toDto).toList();
     }
 }

@@ -11,4 +11,13 @@ import java.util.Optional;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<CharacterModel, Long> {
+
+    @Query(value = """
+            SELECT p.*
+            FROM PERSONAGENS p
+            WHERE (:idUser IS NULL OR p.ID_USUARIO = :idUser)
+            AND (:idCampaign IS NULL OR p.ID_CAMPANHA = :idCampaign)
+            """,
+            nativeQuery = true)
+    Collection<CharacterModel> findAllFiltered(Long idUser, Long idCampaign);
 }
