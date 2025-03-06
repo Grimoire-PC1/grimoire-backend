@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-@Tag(name = "Mecânicas", description = "Serviço de Mecânicas de Sistema")
+@Tag(name = "Mecânica", description = "Serviço de Mecânicas de Sistema")
 public interface MechanicController {
 
     @Operation(description = "Registrar Mecânica", summary = "Registrar nova Mecânica de Sistema de RPG no Grimoire")

@@ -14,15 +14,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MechanicPostRequestDto {
-    @JsonProperty("nome")
+    @JsonProperty("novo_nome")
     private String name;
 
-    @JsonProperty("descricao")
+    @JsonProperty("nova_descricao")
     private String description;
 
-    @JsonProperty("acoes")
+    @JsonProperty("novas_acoes")
     private List<String> actions;
 
-    @JsonProperty("efeitos")
+    @JsonProperty("novos_efeitos")
     private List<String> effects;
 }
