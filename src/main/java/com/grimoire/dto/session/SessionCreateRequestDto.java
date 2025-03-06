@@ -14,6 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SessionCreateRequestDto {
     @Schema(example = "")
+    @JsonProperty("titulo")
+    private String title;
+
+    @Schema(example = "")
     @JsonProperty("data")
     private String date;
 
@@ -23,5 +27,5 @@ public class SessionCreateRequestDto {
 
     @Schema(example = "true")
     @JsonProperty("fixada")
-    private boolean fixed;
+    private Boolean fixed;
 }

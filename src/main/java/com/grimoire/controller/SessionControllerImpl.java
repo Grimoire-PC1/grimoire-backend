@@ -35,21 +35,21 @@ public class SessionControllerImpl implements SessionController {
     public ResponseEntity<SessionResponseDto> create(
             @RequestParam(name = "id_campanha") Long campaignId,
             @RequestParam(name = "tipo_sessao") SessionTypeEnum sessionTypeEnum,
-            @Validated @RequestBody SessionCreateRequestDto characterDto,
+            @Validated @RequestBody SessionCreateRequestDto sessionDto,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                sessionService.create(campaignId, sessionTypeEnum, authentication.getName()));
+                sessionService.create(campaignId, sessionTypeEnum, sessionDto, authentication.getName()));
     }
 
     @Override
     @PutMapping("/update")
     public ResponseEntity<SessionResponseDto> update(
             @RequestParam(name = "id_sessao") Long sessionId,
-            @RequestParam(name = "novo_tipo_sessao") SessionTypeEnum sessionTypeEnum,
-            @Validated @RequestBody SessionPostRequestDto characterDto,
+            @RequestParam(name = "novo_tipo_sessao", required = false) SessionTypeEnum sessionTypeEnum,
+            @Validated @RequestBody SessionPostRequestDto sessionDto,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                sessionService.update(sessionId, sessionTypeEnum, authentication.getName()));
+                sessionService.update(sessionId, sessionTypeEnum, sessionDto, authentication.getName()));
     }
 
     @Override
@@ -62,11 +62,11 @@ public class SessionControllerImpl implements SessionController {
     }
 
     @Override
-    @GetMapping("/get")
-    public ResponseEntity<Collection<SessionResponseDto>> get(
-            @RequestParam(name = "id_campanha", required = false) Long campaignId,
+    @GetMapping("/get/campaign")
+    public ResponseEntity<Collection<SessionResponseDto>> getByCampaign(
+            @RequestParam(name = "id_campanha") Long campaignId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                sessionService.get(campaignId, authentication.getName()));
+                sessionService.getByCampaign(campaignId, authentication.getName()));
     }
 }

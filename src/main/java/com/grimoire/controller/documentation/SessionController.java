@@ -30,7 +30,7 @@ public interface SessionController {
                     required = true
             )
             SessionTypeEnum sessionTypeEnum,
-            @Validated @RequestBody SessionCreateRequestDto characterDto,
+            @Validated @RequestBody SessionCreateRequestDto sessionDto,
             Authentication authentication);
 
     @Operation(description = "Atualizar Sessão", summary = "Atualizar Sessão de Campanha de RPG no Grimoire")
@@ -47,7 +47,7 @@ public interface SessionController {
                     required = false
             )
             SessionTypeEnum sessionTypeEnum,
-            @Validated @RequestBody SessionPostRequestDto characterDto,
+            @Validated @RequestBody SessionPostRequestDto sessionDto,
             Authentication authentication);
 
     @Operation(description = "Remover Sessão", summary = "Remover Sessão de Campanha de RPG no Grimoire.")
@@ -61,11 +61,11 @@ public interface SessionController {
             Authentication authentication);
 
     @Operation(description = "Pegar Sessões", summary = "Pegar informações de Sessões de Campanha de RPG no Grimoire.")
-    ResponseEntity<Collection<SessionResponseDto>> get(
+    ResponseEntity<Collection<SessionResponseDto>> getByCampaign(
             @Parameter(
                     name = "id_campanha",
                     description = "ID da Campanha de RPG.",
-                    required = false
+                    required = true
             )
             Long campaignId,
             Authentication authentication);

@@ -25,6 +25,10 @@ public class SessionResponseDto {
     private Long idCampaignMaster;
 
     @Schema(example = "")
+    @JsonProperty("titulo")
+    private String title;
+
+    @Schema(example = "")
     @JsonProperty("data")
     private String date;
 
@@ -38,5 +42,5 @@ public class SessionResponseDto {
 
     @Schema(example = "true")
     @JsonProperty("fixada")
-    private boolean fixed;
+    private Boolean fixed;
 }
