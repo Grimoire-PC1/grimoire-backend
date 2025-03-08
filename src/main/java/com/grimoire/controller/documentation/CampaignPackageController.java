@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
@@ -27,6 +29,17 @@ public interface CampaignPackageController {
                     required = true
             )
             Boolean isPublic,
+            @Validated @RequestBody CampaignPackageCreateRequestDto campaignPackageDto,
+            Authentication authentication);
+
+    @Operation(description = "Registrar Pacote para Personagem", summary = "Registrar novo Pacote com Personagem de Campanha de RPG no Grimoire")
+    ResponseEntity<CampaignPackageResponseDto> createByCharacter(
+            @Parameter(
+                    name = "id_personagem",
+                    description = "ID do Personagem de RPG.",
+                    required = true
+            )
+            Long characterId,
             @Validated @RequestBody CampaignPackageCreateRequestDto campaignPackageDto,
             Authentication authentication);
 
@@ -69,12 +82,6 @@ public interface CampaignPackageController {
 
     @Operation(description = "Registrar Arquivo", summary = "Registrar novo Arquivo de Campanha de RPG no Grimoire")
     ResponseEntity<CampaignFileResponseDto> createFile(
-            @Parameter(
-                    name = "id_campanha",
-                    description = "ID da Campanha de RPG.",
-                    required = true
-            )
-            Long campaignId,
             @Parameter(
                     name = "id_pacote",
                     description = "ID do Pacote de RPG.",

@@ -129,6 +129,7 @@ class UserControllerImplTest {
     @WithMockUser(username = "testuser", roles = {""})
     void getUserSuccessfully() throws Exception {
         UserModel user = UserModel.builder()
+                .id(1L)
                 .username("testuser")
                 .email("email")
                 .name("name")

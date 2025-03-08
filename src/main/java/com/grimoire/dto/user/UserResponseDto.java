@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class UserResponseDto {
+    @Schema(example = "214")
+    @JsonProperty("id")
+    private Long id;
+
     @Schema(example = "Holux")
     @JsonProperty("login")
     private String username;
