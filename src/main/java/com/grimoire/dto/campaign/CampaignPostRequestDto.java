@@ -28,5 +28,5 @@ public class CampaignPostRequestDto {
 
     @Schema(defaultValue = "url")
     @JsonProperty("id_nova_foto")
-    private Long idPicture;
+    private String idPicture;
 }

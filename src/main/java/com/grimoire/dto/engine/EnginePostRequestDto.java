@@ -23,5 +23,5 @@ public class EnginePostRequestDto {
 
     @Schema(defaultValue = "url")
     @JsonProperty("id_nova_foto")
-    private Long pictureId;
+    private String pictureId;
 }

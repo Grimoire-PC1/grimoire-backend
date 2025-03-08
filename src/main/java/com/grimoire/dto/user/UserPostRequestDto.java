@@ -27,5 +27,5 @@ public class UserPostRequestDto {
 
     @Schema(defaultValue = "1")
     @JsonProperty("id_nova_foto")
-    private Long pictureID;
+    private String pictureID;
 }

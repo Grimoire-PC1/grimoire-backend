@@ -30,7 +30,7 @@ public class EngineResponseDto {
 
     @Schema(example = "url")
     @JsonProperty("id_foto")
-    private Long pictureId;
+    private String pictureId;
 
     @Schema(example = "PUBLICO")
     @JsonProperty("tipo_sistema")

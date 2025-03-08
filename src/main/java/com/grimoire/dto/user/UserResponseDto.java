@@ -26,5 +26,5 @@ public class UserResponseDto {
 
     @Schema(example = "url")
     @JsonProperty("id_foto")
-    private Long pictureID;
+    private String pictureID;
 }

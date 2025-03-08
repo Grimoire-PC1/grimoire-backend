@@ -94,7 +94,7 @@ class EngineControllerImplTest {
         EngineCreateRequestDto requestDto = EngineCreateRequestDto.builder()
                 .name("sistema")
                 .description("descricao")
-                .pictureId(1L)
+                .pictureId("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -128,7 +128,7 @@ class EngineControllerImplTest {
         EnginePostRequestDto requestDto = EnginePostRequestDto.builder()
                 .name("sistema")
                 .description("descricao")
-                .pictureId(1L)
+                .pictureId("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 

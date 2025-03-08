@@ -29,5 +29,5 @@ public class UserCreateRequestDto {
     private String name;
 
     @JsonProperty("id_foto")
-    private Long pictureID;
+    private String pictureID;
 }
