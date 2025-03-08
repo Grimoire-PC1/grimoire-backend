@@ -28,7 +28,7 @@ public class EngineResponseDto {
     @JsonProperty("descricao")
     private String description;
 
-    @Schema(example = "url")
+    @Schema(example = "67caef63dd0a8f4d0c0ad837")
     @JsonProperty("id_foto")
     private String pictureId;
 

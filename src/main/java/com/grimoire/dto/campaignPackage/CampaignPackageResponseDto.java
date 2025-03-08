@@ -1,4 +1,4 @@
-package com.grimoire.dto.character;
+package com.grimoire.dto.campaignPackage;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,28 +11,32 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class CharacterResponseDto {
+public class CampaignPackageResponseDto {
     @Schema(example = "214")
     @JsonProperty("id")
     private Long id;
 
-    @Schema(example = "214")
+    @Schema(example = "2141")
     @JsonProperty("id_usuario")
-    private Long idUser;
+    private Long idOwner;
 
-    @Schema(example = "214")
+    @Schema(example = "2142")
     @JsonProperty("id_campanha")
     private Long idCampaign;
 
-    @Schema(example = "214")
+    @Schema(example = "2143")
     @JsonProperty("id_campanha_mestre")
     private Long idCampaignMaster;
 
-    @Schema(example = "nome")
+    @Schema(example = "2144")
+    @JsonProperty("id_pacote_pai")
+    private Long idParentPackage;
+
+    @Schema(example = "Pacote")
     @JsonProperty("nome")
     private String name;
 
-    @Schema(example = "67caef63dd0a8f4d0c0ad837")
-    @JsonProperty("id_foto")
-    private String idPicture;
+    @Schema(example = "true")
+    @JsonProperty("publica")
+    private Boolean isPublic;
 }

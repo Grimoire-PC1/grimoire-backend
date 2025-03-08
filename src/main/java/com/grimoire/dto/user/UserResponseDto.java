@@ -24,7 +24,7 @@ public class UserResponseDto {
     @JsonProperty("nome")
     private String name;
 
-    @Schema(example = "url")
+    @Schema(example = "67caef63dd0a8f4d0c0ad837")
     @JsonProperty("id_foto")
     private String pictureID;
 }

@@ -14,11 +14,9 @@ import lombok.NoArgsConstructor;
 public class EngineCreateRequestDto {
 
     @JsonProperty("nome")
-    @NotBlank
     private String name;
 
     @JsonProperty("descricao")
-    @NotBlank
     private String description;
 
     @JsonProperty("id_foto")

@@ -36,7 +36,7 @@ public class CampaignResponseDto {
     @JsonProperty("id_sistema")
     private Long idSystem;
 
-    @Schema(example = "https://example.com/images/campaign-dragon-curse.jpg")
+    @Schema(example = "67caef63dd0a8f4d0c0ad837")
     @JsonProperty("id_foto")
     private String idPicture;
 }
