@@ -32,7 +32,7 @@ public interface CampaignPackageController {
             @Validated @RequestBody CampaignPackageCreateRequestDto campaignPackageDto,
             Authentication authentication);
 
-    @Operation(description = "Registrar Pacote para Personagem", summary = "Registrar novo Pacote com Personagem de Campanha de RPG no Grimoire")
+    @Operation(description = "Registrar Pacote para Personagem", summary = "Registrar novo Pacote com Arquivo de Personagem no Grimoire")
     ResponseEntity<CampaignPackageResponseDto> createByCharacter(
             @Parameter(
                     name = "id_personagem",

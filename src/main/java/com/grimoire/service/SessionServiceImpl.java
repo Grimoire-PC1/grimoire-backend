@@ -7,7 +7,7 @@ import com.grimoire.dto.session.SessionTypeEnum;
 import com.grimoire.model.grimoire.CampaignModel;
 import com.grimoire.model.grimoire.SessionModel;
 import com.grimoire.model.grimoire.UserModel;
-import com.grimoire.model.grimoire.joinTables.SessionTypeModel;
+import com.grimoire.model.grimoire.typeTables.SessionTypeModel;
 import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.ParticipantRepository;
 import com.grimoire.repository.SessionRepository;

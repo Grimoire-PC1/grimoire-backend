@@ -1,6 +1,6 @@
-package com.grimoire.model.grimoire.joinTables;
+package com.grimoire.model.grimoire.typeTables;
 
-import com.grimoire.dto.engine.EngineTypeEnum;
+import com.grimoire.dto.session.SessionTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,16 +12,16 @@ import lombok.*;
 @Builder
 @Entity
 @Data
-@Table(name = "TIPO_SISTEMA")
+@Table(name = "TIPO_SESSAO")
 @EqualsAndHashCode
-public class EngineTypeModel {
+public class SessionTypeModel {
     @Id
     private Long id;
 
     @Column(name = "DESCRICAO")
     private String description;
 
-    public EngineTypeModel(EngineTypeEnum typeEnum) {
+    public SessionTypeModel(SessionTypeEnum typeEnum) {
         this.id = typeEnum.getId();
         this.description = typeEnum.getDescription();
     }

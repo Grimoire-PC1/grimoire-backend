@@ -1,8 +1,7 @@
 package com.grimoire.model.grimoire;
 
 import com.grimoire.dto.session.SessionResponseDto;
-import com.grimoire.model.grimoire.joinTables.EngineTypeModel;
-import com.grimoire.model.grimoire.joinTables.SessionTypeModel;
+import com.grimoire.model.grimoire.typeTables.SessionTypeModel;
 import jakarta.persistence.*;
 import lombok.*;
 
