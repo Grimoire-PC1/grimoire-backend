@@ -19,15 +19,17 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
     private final CampaignRepository campaignRepository;
     private final ParticipantRepository participantRepository;
     private final UserRepository userRepository;
+    private final ItemRepository itemRepository;
 
     @Autowired
-    public CampaignPackageServiceImpl(CampaignPackageRepository campaignPackageRepository, CampaignFileRepository campaignFileRepository, CharacterRepository characterRepository, CampaignRepository campaignRepository, ParticipantRepository participantRepository, UserRepository userRepository) {
+    public CampaignPackageServiceImpl(CampaignPackageRepository campaignPackageRepository, CampaignFileRepository campaignFileRepository, CharacterRepository characterRepository, CampaignRepository campaignRepository, ParticipantRepository participantRepository, UserRepository userRepository, ItemRepository itemRepository) {
         this.campaignPackageRepository = campaignPackageRepository;
         this.campaignFileRepository = campaignFileRepository;
         this.characterRepository = characterRepository;
         this.campaignRepository = campaignRepository;
         this.participantRepository = participantRepository;
         this.userRepository = userRepository;
+        this.itemRepository = itemRepository;
     }
 
     @Override
@@ -144,7 +146,12 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
             case CampaignFileTypeEnum.IMAGEM:
                 model.setIdPicture(campaignFileDto.getContent());
             case CampaignFileTypeEnum.ITEM:
-                ;
+                ItemModel item = itemRepository.findById(Long.valueOf(campaignFileDto.getContent()))
+                        .orElseThrow(() -> new IllegalArgumentException("Item not found: " + Long.valueOf(campaignFileDto.getContent())));
+                if (!item.getCampaign().getOwner().equals(user)) {
+                    throw new IllegalArgumentException("You don't have permission to this Item");
+                }
+                model.setItem(item);
             case CampaignFileTypeEnum.PERSONAGEM:
                 CharacterModel character = characterRepository.findById(Long.valueOf(campaignFileDto.getContent()))
                         .orElseThrow(() -> new IllegalArgumentException("Character not found: " + Long.valueOf(campaignFileDto.getContent())));
@@ -180,7 +187,12 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
                 case CampaignFileTypeEnum.IMAGEM:
                     campaignFile.setIdPicture(campaignFileDto.getContent());
                 case CampaignFileTypeEnum.ITEM:
-                    ;
+                    ItemModel item = itemRepository.findById(Long.valueOf(campaignFileDto.getContent()))
+                            .orElseThrow(() -> new IllegalArgumentException("Item not found: " + Long.valueOf(campaignFileDto.getContent())));
+                    if (!item.getCampaign().getOwner().equals(user)) {
+                        throw new IllegalArgumentException("You don't have permission to this Item");
+                    }
+                    campaignFile.setItem(item);
                 case CampaignFileTypeEnum.PERSONAGEM:
                     CharacterModel character = characterRepository.findById(Long.valueOf(campaignFileDto.getContent()))
                             .orElseThrow(() -> new IllegalArgumentException("Character not found: " + Long.valueOf(campaignFileDto.getContent())));
