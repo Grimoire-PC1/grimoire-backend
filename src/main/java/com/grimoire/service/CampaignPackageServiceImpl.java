@@ -40,7 +40,7 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
             throw new IllegalArgumentException("You are not part of this Campaign");
         }
 
-        CampaignPackageModel parent = getParent(campaignPackageDto, user);
+        CampaignPackageModel parent = getPackage(campaignPackageDto.getIdParentPackage(), user);
 
         CampaignPackageModel campaignPackage = CampaignPackageModel.builder()
                 .userModel(user)
@@ -63,7 +63,7 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
             throw new IllegalArgumentException("You don't have permission to this Character");
         }
 
-        CampaignPackageModel parent = getParent(campaignPackageDto, user);
+        CampaignPackageModel parent = getPackage(campaignPackageDto.getIdParentPackage(), user);
 
         CampaignPackageModel campaignPackage = CampaignPackageModel.builder()
                 .userModel(user)
@@ -89,16 +89,9 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
     public CampaignPackageResponseDto post(Long packageId, CampaignPackagePostRequestDto campaignPackageDto, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
-        CampaignPackageModel campaignPackage = campaignPackageRepository.findById(packageId)
-                .orElseThrow(() -> new IllegalArgumentException("Campaign Package not found: " + packageId));
+        CampaignPackageModel campaignPackage = getPackage(packageId, user);
 
-        if (! (campaignPackage.getCampaign().getOwner().equals(user)
-            || campaignPackage.getUserModel().equals(user)
-        )) {
-            throw new IllegalArgumentException("You don't have permission to this Package");
-        }
-
-        CampaignPackageModel parent = getParent(campaignPackageDto, user);
+        CampaignPackageModel parent = getPackage(campaignPackageDto.getIdParentPackage(), user);
 
         campaignPackage.setName(
                 campaignPackageDto.getName() == null ? campaignPackage.getName() : campaignPackageDto.getName());
@@ -114,14 +107,7 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
     public String delete(Long packageId, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
-        CampaignPackageModel campaignPackage = campaignPackageRepository.findById(packageId)
-                .orElseThrow(() -> new IllegalArgumentException("Campaign Package not found: " + packageId));
-
-        if (! (campaignPackage.getCampaign().getOwner().equals(user)
-                || campaignPackage.getUserModel().equals(user)
-        )) {
-            throw new IllegalArgumentException("You don't have permission to this Package");
-        }
+        CampaignPackageModel campaignPackage = getPackage(packageId, user);
         campaignPackageRepository.delete(campaignPackage);
         return "Campaign Package deleted successfully!";
     }
@@ -142,49 +128,111 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
 
     @Override
     public CampaignFileResponseDto createFile(Long packageId, CampaignFileTypeEnum campaignFileTypeEnum, CampaignFileCreateRequestDto campaignFileDto, String username) {
-        return null;
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        CampaignPackageModel campaignPackage = getPackage(packageId, user);
+
+        CampaignFileModel model = CampaignFileModel.builder()
+                .campaignPackage(campaignPackage)
+                .fileType(new FileTypeModel(campaignFileTypeEnum))
+                .name(campaignFileDto.getName())
+                .build();
+
+        switch (campaignFileTypeEnum) {
+            case CampaignFileTypeEnum.TEXTO:
+                model.setText(campaignFileDto.getContent());
+            case CampaignFileTypeEnum.IMAGEM:
+                model.setIdPicture(campaignFileDto.getContent());
+            case CampaignFileTypeEnum.ITEM:
+                ;
+            case CampaignFileTypeEnum.PERSONAGEM:
+                CharacterModel character = characterRepository.findById(Long.valueOf(campaignFileDto.getContent()))
+                        .orElseThrow(() -> new IllegalArgumentException("Character not found: " + Long.valueOf(campaignFileDto.getContent())));
+                if (!character.getUser().equals(user) && !character.getCampaign().getOwner().equals(user)) {
+                    throw new IllegalArgumentException("You don't have permission to this Character");
+                };
+                model.setCharacter(character);
+        }
+
+        return campaignFileRepository.save(model).toDto();
     }
 
     @Override
-    public CampaignFileResponseDto updateFile(Long campaignFileId, CampaignFileTypeEnum campaignFileTypeEnum, CampaignFilePostRequestDto campaignFileDto, String username) {
-        return null;
+    public CampaignFileResponseDto updateFile(Long campaignFileId, CampaignFilePostRequestDto campaignFileDto, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        CampaignFileModel campaignFile = campaignFileRepository.findById(campaignFileId)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign File not found: " + campaignFileId));
+        CampaignPackageModel campaignPackage = campaignFile.getCampaignPackage();
+        if (! (campaignPackage.getCampaign().getOwner().equals(user)
+                || campaignPackage.getUserModel().equals(user)
+        )) {
+            throw new IllegalArgumentException("You don't have permission to this File");
+        }
+
+        campaignFile.setName(campaignFileDto.getName() == null ? campaignFile.getName() : campaignFileDto.getName());
+        campaignPackage = getPackage(campaignFileDto.getIdParentPackage(), user);
+        campaignFile.setCampaignPackage(campaignPackage == null ? campaignFile.getCampaignPackage() : campaignPackage);
+        if (campaignFileDto.getContent() != null) {
+            switch (CampaignFileTypeEnum.fromId(campaignFile.getFileType().getId())) {
+                case CampaignFileTypeEnum.TEXTO:
+                    campaignFile.setText(campaignFileDto.getContent());
+                case CampaignFileTypeEnum.IMAGEM:
+                    campaignFile.setIdPicture(campaignFileDto.getContent());
+                case CampaignFileTypeEnum.ITEM:
+                    ;
+                case CampaignFileTypeEnum.PERSONAGEM:
+                    CharacterModel character = characterRepository.findById(Long.valueOf(campaignFileDto.getContent()))
+                            .orElseThrow(() -> new IllegalArgumentException("Character not found: " + Long.valueOf(campaignFileDto.getContent())));
+                    if (!character.getUser().equals(user) && !character.getCampaign().getOwner().equals(user)) {
+                        throw new IllegalArgumentException("You don't have permission to this Character");
+                    };
+                    campaignFile.setCharacter(character);
+            }
+        }
+
+        return campaignFileRepository.save(campaignFile).toDto();
     }
 
     @Override
     public String deleteFile(Long campaignFileId, String username) {
-        return null;
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        CampaignFileModel campaignFile = campaignFileRepository.findById(campaignFileId)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign File not found: " + campaignFileId));
+        CampaignPackageModel campaignPackage = campaignFile.getCampaignPackage();
+        if (! (campaignPackage.getCampaign().getOwner().equals(user)
+                || campaignPackage.getUserModel().equals(user)
+        )) {
+            throw new IllegalArgumentException("You don't have permission to this File");
+        }
+
+        campaignFileRepository.delete(campaignFile);
+        return "File deleted successfully!";
     }
 
     @Override
     public Collection<CampaignFileResponseDto> getFile(Long campaignId, Long parentPackageId, String username) {
-        return null;
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        Collection<CampaignFileModel> campaignFiles = campaignFileRepository.findAllFiltered(campaignId, parentPackageId, user.getId());
+
+        return campaignFiles.stream().map(CampaignFileModel::toDto).toList();
     }
 
-    private CampaignPackageModel getParent(CampaignPackageCreateRequestDto campaignPackageDto, UserModel user) {
-        CampaignPackageModel parent = null;
-        if (campaignPackageDto.getIdParentPackage() != null) {
-            parent = campaignPackageRepository.findById(campaignPackageDto.getIdParentPackage())
-                    .orElseThrow(() -> new IllegalArgumentException("Campaign Package not found: " + campaignPackageDto.getIdParentPackage()));
-            if (!(  parent.getUserModel().equals(user)
-                    || parent.getCampaign().getOwner().equals(user)
+    private CampaignPackageModel getPackage(Long packageId, UserModel user) {
+        CampaignPackageModel packageModel = null;
+        if (packageId != null) {
+            packageModel = campaignPackageRepository.findById(packageId)
+                    .orElseThrow(() -> new IllegalArgumentException("Campaign Package not found: " + packageId));
+            if (!(  packageModel.getUserModel().equals(user)
+                    || packageModel.getCampaign().getOwner().equals(user)
             )) {
-                throw new IllegalArgumentException("You don't have permission to the Package: " + parent.getId());
+                throw new IllegalArgumentException("You don't have permission to the Package: " + packageModel.getId());
             }
         }
-        return parent;
+        return packageModel;
     }
 
-    private CampaignPackageModel getParent(CampaignPackagePostRequestDto campaignPackageDto, UserModel user) {
-        CampaignPackageModel parent = null;
-        if (campaignPackageDto.getIdParentPackage() != null) {
-            parent = campaignPackageRepository.findById(campaignPackageDto.getIdParentPackage())
-                    .orElseThrow(() -> new IllegalArgumentException("Campaign Package not found: " + campaignPackageDto.getIdParentPackage()));
-            if (!(  parent.getUserModel().equals(user)
-                    || parent.getCampaign().getOwner().equals(user)
-            )) {
-                throw new IllegalArgumentException("You don't have permission to the Package: " + parent.getId());
-            }
-        }
-        return parent;
-    }
+
 }

@@ -92,11 +92,10 @@ public class CampaignPackageControllerImpl implements CampaignPackageController 
     @PutMapping("/file/update")
     public ResponseEntity<CampaignFileResponseDto> updateFile(
             @RequestParam(name = "id_arquivo", required = true) Long campaignFileId,
-            @RequestParam(name = "novo_tipo_arquivo", required = false) CampaignFileTypeEnum campaignFileTypeEnum,
             @Validated @RequestBody CampaignFilePostRequestDto campaignFileDto,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                campaignPackageService.updateFile(campaignFileId, campaignFileTypeEnum, campaignFileDto, authentication.getName()));
+                campaignPackageService.updateFile(campaignFileId, campaignFileDto, authentication.getName()));
     }
 
     @Override

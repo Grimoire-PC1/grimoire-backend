@@ -105,12 +105,6 @@ public interface CampaignPackageController {
                     required = true
             )
             Long campaignFileId,
-            @Parameter(
-                    name = "novo_tipo_arquivo",
-                    description = "Tipo de Arquivo.",
-                    required = false
-            )
-            CampaignFileTypeEnum campaignFileTypeEnum,
             @Validated @RequestBody CampaignFilePostRequestDto campaignFileDto,
             Authentication authentication);
 

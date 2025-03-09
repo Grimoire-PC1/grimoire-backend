@@ -20,11 +20,20 @@ public enum CampaignFileTypeEnum {
         this.description = description;
     }
 
+    public static CampaignFileTypeEnum fromId(Long id) {
+        for (CampaignFileTypeEnum type : values()) {
+            if (type.getId().equals(id)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Invalid CampaignFileType ID: " + id);
+    }
+
     public static String getTypeByCode(Long code) {
         if (code == null) {
             return null;
         }
-        for (com.grimoire.dto.session.SessionTypeEnum type : com.grimoire.dto.session.SessionTypeEnum.values()) {
+        for (CampaignFileTypeEnum type : CampaignFileTypeEnum.values()) {
             if (Objects.equals(type.getId(), code)) {
                 return type.getDescription().toUpperCase();
             }

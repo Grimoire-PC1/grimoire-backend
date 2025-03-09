@@ -17,7 +17,7 @@ public interface CampaignPackageService {
 
     CampaignFileResponseDto createFile(Long packageId, CampaignFileTypeEnum campaignFileTypeEnum, CampaignFileCreateRequestDto campaignFileDto, String name);
 
-    CampaignFileResponseDto updateFile(Long campaignFileId, CampaignFileTypeEnum campaignFileTypeEnum, CampaignFilePostRequestDto campaignFileDto, String name);
+    CampaignFileResponseDto updateFile(Long campaignFileId, CampaignFilePostRequestDto campaignFileDto, String name);
 
     String deleteFile(Long campaignFileId, String name);
 

@@ -12,9 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CampaignFilePostRequestDto {
-    @JsonProperty("nome")
+    @JsonProperty("novo_id_pacote_pai")
+    private Long idParentPackage;
+
+    @JsonProperty("novo_nome")
     private String name;
 
-    @JsonProperty("conteudo")
+    @JsonProperty("novo_conteudo")
     private String content;
 }
