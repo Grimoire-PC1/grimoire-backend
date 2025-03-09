@@ -1,5 +1,7 @@
 package com.grimoire.model.grimoire;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.grimoire.dto.item.ItemResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,17 +28,32 @@ public class ItemModel {
     private String description;
 
     @Column(name = "QTD_DADOS")
-    private String diceQuantity;
+    private Integer diceQuantity;
 
     @Column(name = "TIPO_DADO")
-    private String diceType;
+    private Integer diceType;
 
     @Column(name = "BONUS_DADO")
-    private String diceBonus;
+    private Integer diceBonus;
 
     @Column(name = "ROLAR_DADO")
     private String rollDice;
 
     @Column(name = "QUANTIDADE")
-    private String itemQuantity;
+    private Integer itemQuantity;
+
+    public ItemResponseDto toDto() {
+        return ItemResponseDto.builder()
+                .id(this.id)
+                .idCampaign(this.campaign.getId())
+                .idCampaignMaster(this.campaign.getOwner().getId())
+                .name(this.name)
+                .description(this.description)
+                .diceQuantity(this.diceQuantity)
+                .diceType(this.diceType)
+                .diceBonus(this.diceBonus)
+                .rollDice(this.rollDice)
+                .itemQuantity(this.itemQuantity)
+                .build();
+    }
 }
