@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-@Tag(name = "Sessões", description = "Serviço de Sessões de Campanha")
+@Tag(name = "Sessão", description = "Serviço de Sessões de Campanha")
 public interface SessionController {
     @Operation(description = "Registrar Sessão", summary = "Registrar nova Sessão de Campanha de RPG no Grimoire")
     ResponseEntity<SessionResponseDto> create(

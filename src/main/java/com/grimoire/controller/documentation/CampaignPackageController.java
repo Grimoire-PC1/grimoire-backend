@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
-@Tag(name = "Pacotes", description = "Serviço de Pacotes de Campanha")
+@Tag(name = "Pacote", description = "Serviço de Pacotes de Campanha")
 public interface CampaignPackageController {
     @Operation(description = "Registrar Pacote", summary = "Registrar novo Pacote de Campanha de RPG no Grimoire")
     ResponseEntity<CampaignPackageResponseDto> create(

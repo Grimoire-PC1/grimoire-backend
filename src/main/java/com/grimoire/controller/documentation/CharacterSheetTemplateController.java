@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Collection;
 
 @Tag(name = "Template de Ficha de Personagem", description = "Serviço de Template Ficha de Personagem de Sistema")
-public interface CharacterSheetController {
+public interface CharacterSheetTemplateController {
 
     @Operation(description = "Registrar Aba de Ficha", summary = "Registrar nova Aba de Ficha de Personagem de Sistema de RPG no Grimoire")
     ResponseEntity<CharacterSheetTabResponseDto> createTab(

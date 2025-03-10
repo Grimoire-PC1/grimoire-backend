@@ -1,7 +1,7 @@
 package com.grimoire.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.grimoire.controller.documentation.CharacterSheetController;
+import com.grimoire.controller.documentation.CharacterSheetTemplateController;
 import com.grimoire.dto.characterSheet.*;
 import com.grimoire.service.service.CharacterSheetService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/character-sheet")
+@RequestMapping("/character-sheet-template")
 @Validated
 @CrossOrigin
 @Slf4j
-public class CharacterSheetControllerImpl implements CharacterSheetController {
+public class CharacterSheetTemplateControllerImpl implements CharacterSheetTemplateController {
     CharacterSheetService characterSheetService;
 
     @Autowired
-    public CharacterSheetControllerImpl(CharacterSheetService characterSheetService) {
+    public CharacterSheetTemplateControllerImpl(CharacterSheetService characterSheetService) {
         this.characterSheetService = characterSheetService;
     }
 
