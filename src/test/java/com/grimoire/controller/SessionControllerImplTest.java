@@ -197,7 +197,6 @@ public class SessionControllerImplTest {
                 () -> assertEquals(sessionModel.getTitle(), result.getTitle()),
                 () -> assertEquals(sessionModel.getDescription(), result.getDescription()),
                 () -> assertEquals(sessionModel.getDate(), result.getDate())
-
         );
 
     }
