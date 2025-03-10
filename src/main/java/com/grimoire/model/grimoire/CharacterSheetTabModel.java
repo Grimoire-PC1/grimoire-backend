@@ -1,6 +1,6 @@
 package com.grimoire.model.grimoire;
 
-import com.grimoire.dto.characterSheet.CharacterSheetTabResponseDto;
+import com.grimoire.dto.characterSheetTemplate.CharacterSheetTabResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 

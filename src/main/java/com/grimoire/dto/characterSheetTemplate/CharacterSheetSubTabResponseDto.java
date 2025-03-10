@@ -1,4 +1,4 @@
-package com.grimoire.dto.characterSheet;
+package com.grimoire.dto.characterSheetTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,4 +1,4 @@
-package com.grimoire.dto.characterSheet;
+package com.grimoire.dto.characterSheetTemplate;
 
 import lombok.Getter;
 

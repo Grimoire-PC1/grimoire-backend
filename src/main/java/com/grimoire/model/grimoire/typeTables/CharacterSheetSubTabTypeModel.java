@@ -1,6 +1,6 @@
 package com.grimoire.model.grimoire.typeTables;
 
-import com.grimoire.dto.characterSheet.CharacterSheetSubTabTypeEnum;
+import com.grimoire.dto.characterSheetTemplate.CharacterSheetSubTabTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

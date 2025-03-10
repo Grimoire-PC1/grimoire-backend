@@ -1,10 +1,10 @@
 package com.grimoire.service;
 
-import com.grimoire.dto.characterSheet.*;
+import com.grimoire.dto.characterSheetTemplate.*;
 import com.grimoire.model.grimoire.*;
 import com.grimoire.model.grimoire.typeTables.CharacterSheetSubTabTypeModel;
 import com.grimoire.repository.*;
-import com.grimoire.service.service.CharacterSheetService;
+import com.grimoire.service.service.CharacterSheetTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-public class CharacterSheetServiceImpl implements CharacterSheetService {
+public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplateService {
     private final CharacterSheetTabRepository characterSheetTabRepository;
     private final CharacterSheetSubTabRepository characterSheetSubTabRepository;
     private final EngineRepository engineRepository;
@@ -21,7 +21,7 @@ public class CharacterSheetServiceImpl implements CharacterSheetService {
     private final ParticipantRepository participantRepository;
 
     @Autowired
-    public CharacterSheetServiceImpl(CharacterSheetTabRepository characterSheetTabRepository, CharacterSheetSubTabRepository characterSheetSubTabRepository, EngineRepository engineRepository, UserRepository userRepository, CampaignRepository campaignRepository, ParticipantRepository participantRepository) {
+    public CharacterSheetTemplateServiceImpl(CharacterSheetTabRepository characterSheetTabRepository, CharacterSheetSubTabRepository characterSheetSubTabRepository, EngineRepository engineRepository, UserRepository userRepository, CampaignRepository campaignRepository, ParticipantRepository participantRepository) {
         this.characterSheetTabRepository = characterSheetTabRepository;
         this.characterSheetSubTabRepository = characterSheetSubTabRepository;
         this.engineRepository = engineRepository;

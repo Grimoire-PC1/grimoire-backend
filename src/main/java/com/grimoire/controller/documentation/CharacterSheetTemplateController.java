@@ -1,7 +1,7 @@
 package com.grimoire.controller.documentation;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.grimoire.dto.characterSheet.*;
+import com.grimoire.dto.characterSheetTemplate.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -95,7 +95,7 @@ public interface CharacterSheetTemplateController {
             @Validated @RequestBody CharacterSheetSubTabPostRequestDto characterSheetSubTabDto,
             Authentication authentication) throws JsonProcessingException;
 
-    @Operation(description = "Remover Aba de Ficha", summary = "Remover Aba de Ficha de RPG no Grimoire.")
+    @Operation(description = "Remover Sub Aba de Ficha", summary = "Remover Sub Aba de Ficha de RPG no Grimoire.")
     ResponseEntity<String> deleteSubTab(
             @Parameter(
                     name = "id_sub_aba_ficha",

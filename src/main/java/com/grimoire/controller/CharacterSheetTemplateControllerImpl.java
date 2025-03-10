@@ -2,8 +2,8 @@ package com.grimoire.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.grimoire.controller.documentation.CharacterSheetTemplateController;
-import com.grimoire.dto.characterSheet.*;
-import com.grimoire.service.service.CharacterSheetService;
+import com.grimoire.dto.characterSheetTemplate.*;
+import com.grimoire.service.service.CharacterSheetTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +20,11 @@ import java.util.Collection;
 @CrossOrigin
 @Slf4j
 public class CharacterSheetTemplateControllerImpl implements CharacterSheetTemplateController {
-    CharacterSheetService characterSheetService;
+    CharacterSheetTemplateService characterSheetTemplateService;
 
     @Autowired
-    public CharacterSheetTemplateControllerImpl(CharacterSheetService characterSheetService) {
-        this.characterSheetService = characterSheetService;
+    public CharacterSheetTemplateControllerImpl(CharacterSheetTemplateService characterSheetTemplateService) {
+        this.characterSheetTemplateService = characterSheetTemplateService;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @Validated @RequestBody CharacterSheetTabCreateRequestDto characterSheetTabDto,
             Authentication authentication) throws JsonProcessingException {
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                characterSheetService.createTab(engineId, characterSheetTabDto, authentication.getName()));
+                characterSheetTemplateService.createTab(engineId, characterSheetTabDto, authentication.getName()));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @Validated @RequestBody CharacterSheetTabPostRequestDto characterSheetTabDto,
             Authentication authentication) throws JsonProcessingException {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.editTab(characterSheetTabId, characterSheetTabDto, authentication.getName()));
+                characterSheetTemplateService.editTab(characterSheetTabId, characterSheetTabDto, authentication.getName()));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @RequestParam(name = "id_aba_ficha") Long characterSheetTabId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.deleteTab(characterSheetTabId, authentication.getName()));
+                characterSheetTemplateService.deleteTab(characterSheetTabId, authentication.getName()));
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @RequestParam(name = "id_sistema") Long engineId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.getTab(engineId, authentication.getName()));
+                characterSheetTemplateService.getTab(engineId, authentication.getName()));
     }
 
     @Override
@@ -71,18 +71,18 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @RequestParam(name = "id_campanha") Long campaignId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.getTabByCampaign(campaignId, authentication.getName()));
+                characterSheetTemplateService.getTabByCampaign(campaignId, authentication.getName()));
     }
 
     @Override
     @PostMapping("/register/sub-tab")
     public ResponseEntity<CharacterSheetSubTabResponseDto> createSubTab(
             @RequestParam(name = "id_aba_ficha") Long characterSheetTabId,
-            @RequestParam(name = "id_sub_aba_ficha") CharacterSheetSubTabTypeEnum characterSheetSubTabTypeEnum,
+            @RequestParam(name = "tipo_sub_aba") CharacterSheetSubTabTypeEnum characterSheetSubTabTypeEnum,
             @Validated @RequestBody CharacterSheetSubTabCreateRequestDto characterSheetSubTabDto,
             Authentication authentication) throws JsonProcessingException {
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                characterSheetService.createSubTab(characterSheetTabId, characterSheetSubTabTypeEnum, characterSheetSubTabDto, authentication.getName()));
+                characterSheetTemplateService.createSubTab(characterSheetTabId, characterSheetSubTabTypeEnum, characterSheetSubTabDto, authentication.getName()));
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @Validated @RequestBody CharacterSheetSubTabPostRequestDto characterSheetSubTabDto,
             Authentication authentication) throws JsonProcessingException {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.editSubTab(characterSheetSubTabId, characterSheetSubTabDto, authentication.getName()));
+                characterSheetTemplateService.editSubTab(characterSheetSubTabId, characterSheetSubTabDto, authentication.getName()));
     }
 
     @Override
@@ -101,7 +101,7 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @RequestParam(name = "id_sub_aba_ficha") Long characterSheetSubTabId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.deleteSubTab(characterSheetSubTabId, authentication.getName()));
+                characterSheetTemplateService.deleteSubTab(characterSheetSubTabId, authentication.getName()));
     }
 
     @Override
@@ -111,7 +111,7 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @RequestParam(name = "id_aba_ficha", required = false) Long characterSheetTabId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.getSubTab(engineId, characterSheetTabId, authentication.getName()));
+                characterSheetTemplateService.getSubTab(engineId, characterSheetTabId, authentication.getName()));
     }
 
     @Override
@@ -121,6 +121,6 @@ public class CharacterSheetTemplateControllerImpl implements CharacterSheetTempl
             @RequestParam(name = "id_aba_ficha", required = false) Long characterSheetTabId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
-                characterSheetService.getSubTabByCampaign(campaignId, characterSheetTabId, authentication.getName()));
+                characterSheetTemplateService.getSubTabByCampaign(campaignId, characterSheetTabId, authentication.getName()));
     }
 }

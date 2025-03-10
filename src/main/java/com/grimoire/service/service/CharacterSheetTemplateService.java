@@ -1,10 +1,10 @@
 package com.grimoire.service.service;
 
-import com.grimoire.dto.characterSheet.*;
+import com.grimoire.dto.characterSheetTemplate.*;
 
 import java.util.Collection;
 
-public interface CharacterSheetService {
+public interface CharacterSheetTemplateService {
     CharacterSheetTabResponseDto createTab(Long engineId, CharacterSheetTabCreateRequestDto characterSheetTabDto, String name);
 
     CharacterSheetTabResponseDto editTab(Long characterSheetTabId, CharacterSheetTabPostRequestDto characterSheetTabDto, String name);

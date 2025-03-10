@@ -1,4 +1,4 @@
-package com.grimoire.dto.characterSheet;
+package com.grimoire.dto.characterSheetTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CharacterSheetSubTabPostRequestDto {
-    @JsonProperty("novo_nome")
+public class CharacterSheetTabCreateRequestDto {
+    @JsonProperty("nome")
     private String name;
 }
