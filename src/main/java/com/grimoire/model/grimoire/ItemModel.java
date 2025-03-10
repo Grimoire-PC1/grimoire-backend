@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Entity
 @Data
-@Table(name = "ARQUIVOS")
+@Table(name = "ITENS")
 @EqualsAndHashCode
 public class ItemModel {
     @Id

@@ -81,9 +81,9 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
     public Collection<CharacterSheetTabResponseDto> getTab(Long engineId, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
-        Collection<CharacterSheetTabModel> rules = characterSheetTabRepository.findAllFiltered(engineId, user.getId());
+        Collection<CharacterSheetTabModel> models = characterSheetTabRepository.findAllFiltered(engineId, user.getId());
 
-        return rules.stream().map(CharacterSheetTabModel::toDto).toList();
+        return models.stream().map(CharacterSheetTabModel::toDto).toList();
     }
 
     @Override
@@ -96,10 +96,10 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
             throw new IllegalArgumentException("You are not part of this Campaign");
         }
 
-        Collection<CharacterSheetTabModel> rules = characterSheetTabRepository.
+        Collection<CharacterSheetTabModel> models = characterSheetTabRepository.
                 findAllFiltered(campaignModel.getEngine().getId(), user.getId());
 
-        return rules.stream().map(CharacterSheetTabModel::toDto).toList();
+        return models.stream().map(CharacterSheetTabModel::toDto).toList();
     }
 
     @Override
@@ -159,9 +159,9 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
             Long engineId, Long characterSheetTabId, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
-        Collection<CharacterSheetSubTabModel> rules = characterSheetSubTabRepository.findAllFiltered(engineId, characterSheetTabId, user.getId());
+        Collection<CharacterSheetSubTabModel> models = characterSheetSubTabRepository.findAllFiltered(engineId, characterSheetTabId, user.getId());
 
-        return rules.stream().map(CharacterSheetSubTabModel::toDto).toList();
+        return models.stream().map(CharacterSheetSubTabModel::toDto).toList();
     }
 
     @Override
@@ -174,9 +174,9 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
             throw new IllegalArgumentException("You are not part of this Campaign");
         }
 
-        Collection<CharacterSheetSubTabModel> rules = characterSheetSubTabRepository.findAllFiltered(
+        Collection<CharacterSheetSubTabModel> models = characterSheetSubTabRepository.findAllFiltered(
                 campaignModel.getEngine().getId(), characterSheetTabId, user.getId());
 
-        return rules.stream().map(CharacterSheetSubTabModel::toDto).toList();
+        return models.stream().map(CharacterSheetSubTabModel::toDto).toList();
     }
 }

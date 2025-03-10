@@ -34,6 +34,7 @@ public class CharacterSheetContentResponseDto {
     @JsonProperty("tipo_sub_aba_ficha")
     private String type;
 
+    @Schema(example = "[conteudo]")
     @JsonProperty("conteudo")
     private List<String> content;
 }
