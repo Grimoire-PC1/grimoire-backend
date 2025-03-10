@@ -17,5 +17,5 @@ public class CharacterCreateRequestDto {
 
     @JsonProperty("id_foto")
     @NotNull
-    private Long idPicture;
+    private String idPicture;
 }

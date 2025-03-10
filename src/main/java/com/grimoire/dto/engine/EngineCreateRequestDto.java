@@ -22,5 +22,5 @@ public class EngineCreateRequestDto {
     private String description;
 
     @JsonProperty("id_foto")
-    private Long pictureId;
+    private String pictureId;
 }

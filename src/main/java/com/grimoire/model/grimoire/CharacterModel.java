@@ -27,8 +27,8 @@ public class CharacterModel {
     @Column(name = "NOME")
     private String name;
 
-    @Column(name = "ID_FOTO")
-    private Long idPicture;
+    @Column(name = "ID_IMAGEM")
+    private String idPicture;
 
     public CharacterResponseDto toDto() {
         return CharacterResponseDto.builder()

@@ -17,5 +17,5 @@ public class CharacterPostRequestDto {
     private String name;
 
     @JsonProperty("id_nova_foto")
-    private Long idPicture;
+    private String idPicture;
 }

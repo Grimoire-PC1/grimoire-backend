@@ -25,5 +25,5 @@ public class CampaignCreateRequestDto {
 
     @JsonProperty("id_foto")
     @NotNull
-    private Long idPicture;
+    private String idPicture;
 }

@@ -34,5 +34,5 @@ public class CharacterResponseDto {
 
     @Schema(example = "214")
     @JsonProperty("id_foto")
-    private Long idPicture;
+    private String idPicture;
 }

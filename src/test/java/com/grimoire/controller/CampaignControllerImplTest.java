@@ -106,7 +106,7 @@ public class CampaignControllerImplTest {
         CampaignCreateRequestDto requestDto = CampaignCreateRequestDto.builder()
                 .title("Campanha")
                 .description("descricao")
-                .idPicture(1L)
+                .idPicture("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 

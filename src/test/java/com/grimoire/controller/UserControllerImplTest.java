@@ -93,7 +93,7 @@ class UserControllerImplTest {
                 .password("password")
                 .name("name")
                 .email("email")
-                .pictureID(1L)
+                .pictureID("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -132,7 +132,7 @@ class UserControllerImplTest {
                 .username("testuser")
                 .email("email")
                 .name("name")
-                .pictureID(1L)
+                .pictureID("1")
                 .build();
         UserResponseDto responseDto = user.toDto();
         String responseBody = new ObjectMapper().writeValueAsString(responseDto);
