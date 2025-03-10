@@ -20,4 +20,8 @@ public interface CharacterSheetService {
     String deleteSubTab(Long characterSheetSubTabId, String name);
 
     Collection<CharacterSheetSubTabResponseDto> getSubTab(Long engineId, Long characterSheetTabId, String name);
+
+    Collection<CharacterSheetTabResponseDto> getTabByCampaign(Long campaignId, String name);
+
+    Collection<CharacterSheetSubTabResponseDto> getSubTabByCampaign(Long campaignId, Long characterSheetTabId, String name);
 }

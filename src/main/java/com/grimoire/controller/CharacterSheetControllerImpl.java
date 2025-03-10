@@ -66,6 +66,15 @@ public class CharacterSheetControllerImpl implements CharacterSheetController {
     }
 
     @Override
+    @GetMapping("/get/tab/campaign")
+    public ResponseEntity<Collection<CharacterSheetTabResponseDto>> getTabByCampaign(
+            @RequestParam(name = "id_campanha") Long campaignId,
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                characterSheetService.getTabByCampaign(campaignId, authentication.getName()));
+    }
+
+    @Override
     @PostMapping("/register/sub-tab")
     public ResponseEntity<CharacterSheetSubTabResponseDto> createSubTab(
             @RequestParam(name = "id_aba_ficha") Long characterSheetTabId,
@@ -103,5 +112,15 @@ public class CharacterSheetControllerImpl implements CharacterSheetController {
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
                 characterSheetService.getSubTab(engineId, characterSheetTabId, authentication.getName()));
+    }
+
+    @Override
+    @GetMapping("/get/sub-tab/campaign")
+    public ResponseEntity<Collection<CharacterSheetSubTabResponseDto>> getSubTabByCampaign(
+            @RequestParam(name = "id_campanha") Long campaignId,
+            @RequestParam(name = "id_aba_ficha", required = false) Long characterSheetTabId,
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                characterSheetService.getSubTabByCampaign(campaignId, characterSheetTabId, authentication.getName()));
     }
 }

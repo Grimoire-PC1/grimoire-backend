@@ -31,4 +31,8 @@ public class CharacterSheetSubTabResponseDto {
     @Schema(example = "Nome")
     @JsonProperty("nome")
     private String name;
+
+    @Schema(example = "TEXTO")
+    @JsonProperty("tipo_sub_aba_ficha")
+    private String type;
 }

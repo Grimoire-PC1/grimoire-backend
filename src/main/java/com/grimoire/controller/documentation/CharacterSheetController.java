@@ -57,6 +57,16 @@ public interface CharacterSheetController {
             Long engineId,
             Authentication authentication);
 
+    @Operation(description = "Pegar Abas de Fichas por Campanha", summary = "Pegar informações de Abas de Fichas de RPG no Grimoire.")
+    ResponseEntity<Collection<CharacterSheetTabResponseDto>> getTabByCampaign(
+            @Parameter(
+                    name = "id_campanha",
+                    description = "ID da Campanha de RPG.",
+                    required = true
+            )
+            Long campaignId,
+            Authentication authentication);
+
     @Operation(description = "Registrar Sub Aba de Ficha", summary = "Registrar nova Sub Aba de Ficha de Personagem de Sistema de RPG no Grimoire")
     ResponseEntity<CharacterSheetSubTabResponseDto> createSubTab(
             @Parameter(
@@ -103,6 +113,22 @@ public interface CharacterSheetController {
                     required = true
             )
             Long engineId,
+            @Parameter(
+                    name = "id_aba_ficha",
+                    description = "ID da Aba de Ficha de RPG.",
+                    required = false
+            )
+            Long characterSheetTabId,
+            Authentication authentication);
+
+    @Operation(description = "Pegar Sub Abas de Fichas por Campanha", summary = "Pegar informações de Sub Abas de Fichas de RPG no Grimoire.")
+    ResponseEntity<Collection<CharacterSheetSubTabResponseDto>> getSubTabByCampaign(
+            @Parameter(
+                    name = "id_campanha",
+                    description = "ID da Campanha de RPG.",
+                    required = true
+            )
+            Long campaignId,
             @Parameter(
                     name = "id_aba_ficha",
                     description = "ID da Aba de Ficha de RPG.",
