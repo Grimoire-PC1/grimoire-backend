@@ -35,7 +35,7 @@ public interface CharacterSheetContentController {
     @Operation(description = "Atualizar Conteúdo de Ficha", summary = "Atualizar Conteúdo de Ficha de RPG no Grimoire")
     ResponseEntity<CharacterSheetContentResponseDto> update(
             @Parameter(
-                    name = "id_ficha_Content",
+                    name = "id_conteudo_ficha",
                     description = "ID da Conteúdo de Ficha de RPG.",
                     required = true
             )
@@ -46,7 +46,7 @@ public interface CharacterSheetContentController {
     @Operation(description = "Remover Conteúdo de Ficha", summary = "Remover Conteúdo de Ficha de RPG no Grimoire.")
     ResponseEntity<String> delete(
             @Parameter(
-                    name = "id_ficha_Content",
+                    name = "id_conteudo_ficha",
                     description = "ID da Conteúdo de Ficha de RPG.",
                     required = true
             )
