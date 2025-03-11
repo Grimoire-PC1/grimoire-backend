@@ -53,7 +53,7 @@ public interface CharacterSheetContentController {
             Long characterSheetContentId,
             Authentication authentication);
 
-    @Operation(description = "Pegar Conteúdo de Fichas", summary = "Pegar Contentrmações de Fichas de RPG no Grimoire.")
+    @Operation(description = "Pegar Conteúdo de Fichas", summary = "Pegar Conteúdo de Fichas de RPG no Grimoire.")
     ResponseEntity<Collection<CharacterSheetContentResponseDto>> get(
             @Parameter(
                     name = "id_personagem",
