@@ -51,7 +51,8 @@ public interface EngineRuleController {
             Long ruleId,
             @Parameter(
                     name = "id_sistema",
-                    description = "ID do Sistema de RPG."
+                    description = "ID do Sistema de RPG.",
+                    required = true
             )
             Long systemId,
             Authentication authentication);

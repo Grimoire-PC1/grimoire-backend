@@ -1,6 +1,7 @@
 package com.grimoire.service;
 
 import com.grimoire.dto.characterSheetTemplate.*;
+import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.model.grimoire.*;
 import com.grimoire.model.grimoire.typeTables.CharacterSheetSubTabTypeModel;
 import com.grimoire.repository.*;
@@ -81,7 +82,15 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
     public Collection<CharacterSheetTabResponseDto> getTab(Long engineId, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
-        Collection<CharacterSheetTabModel> models = characterSheetTabRepository.findAllFiltered(engineId, user.getId());
+        EngineModel engine = engineRepository.findById(engineId)
+                .orElseThrow(() -> new IllegalArgumentException("System not found: " + engineId));
+        if (!( engine.getOwner().equals(user) ||
+                EngineTypeEnum.fromId(engine.getEngineType().getId()).equals(EngineTypeEnum.PUBLICO)
+        )) {
+            throw new AccessDeniedException("You don't have permission to this System");
+        }
+
+        Collection<CharacterSheetTabModel> models = characterSheetTabRepository.findAllFiltered(engineId);
 
         return models.stream().map(CharacterSheetTabModel::toDto).toList();
     }
@@ -97,7 +106,7 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
         }
 
         Collection<CharacterSheetTabModel> models = characterSheetTabRepository.
-                findAllFiltered(campaignModel.getEngine().getId(), user.getId());
+                findAllFiltered(campaignModel.getEngine().getId());
 
         return models.stream().map(CharacterSheetTabModel::toDto).toList();
     }
@@ -159,7 +168,15 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
             Long engineId, Long characterSheetTabId, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
-        Collection<CharacterSheetSubTabModel> models = characterSheetSubTabRepository.findAllFiltered(engineId, characterSheetTabId, user.getId());
+        EngineModel engine = engineRepository.findById(engineId)
+                .orElseThrow(() -> new IllegalArgumentException("System not found: " + engineId));
+        if (!( engine.getOwner().equals(user) ||
+                EngineTypeEnum.fromId(engine.getEngineType().getId()).equals(EngineTypeEnum.PUBLICO)
+        )) {
+            throw new AccessDeniedException("You don't have permission to this System");
+        }
+        Collection<CharacterSheetSubTabModel> models = characterSheetSubTabRepository.findAllFiltered(
+                engineId, characterSheetTabId);
 
         return models.stream().map(CharacterSheetSubTabModel::toDto).toList();
     }
@@ -175,7 +192,7 @@ public class CharacterSheetTemplateServiceImpl implements CharacterSheetTemplate
         }
 
         Collection<CharacterSheetSubTabModel> models = characterSheetSubTabRepository.findAllFiltered(
-                campaignModel.getEngine().getId(), characterSheetTabId, user.getId());
+                campaignModel.getEngine().getId(), characterSheetTabId);
 
         return models.stream().map(CharacterSheetSubTabModel::toDto).toList();
     }

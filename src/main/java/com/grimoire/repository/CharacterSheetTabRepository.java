@@ -15,10 +15,8 @@ public interface CharacterSheetTabRepository extends JpaRepository<CharacterShee
             FROM templates_aba_ficha taf
             JOIN SISTEMAS s ON taf.ID_SISTEMA = s.ID
             WHERE taf.id_sistema = :engineId
-            AND s.ID_CRIADOR = :userId
             """,
             nativeQuery = true)
     Collection<CharacterSheetTabModel> findAllFiltered(
-            @Param("engineId") Long engineId,
-            @Param("userId") Long userId);
+            @Param("engineId") Long engineId);
 }

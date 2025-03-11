@@ -16,12 +16,10 @@ public interface CharacterSheetSubTabRepository extends JpaRepository<CharacterS
             JOIN templates_aba_ficha taf ON staf.id_aba_ficha = taf.id
             JOIN SISTEMAS s ON taf.ID_SISTEMA = s.ID
             WHERE taf.id_sistema = :engineId
-            AND s.ID_CRIADOR = :userId
             AND (:characterSheetTabId IS NULL OR staf.id_aba_ficha = :characterSheetTabId)
             """,
             nativeQuery = true)
     Collection<CharacterSheetSubTabModel> findAllFiltered(
             @Param("engineId") Long engineId,
-            @Param("characterSheetTabId") Long characterSheetTabId,
-            @Param("userId") Long userId);
+            @Param("characterSheetTabId") Long characterSheetTabId);
 }

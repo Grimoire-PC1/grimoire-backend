@@ -1,5 +1,6 @@
 package com.grimoire.service;
 
+import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
 import com.grimoire.dto.engineRule.RulePostRequestDto;
@@ -86,7 +87,14 @@ public class EngineRuleServiceImpl implements EngineRuleService {
     public Collection<RuleResponseDto> getRules(Long idRule, Long idEngine, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
-        Collection<EngineRuleModel> rules = engineRuleRepository.findAllFiltered(idRule, idEngine, user.getId());
+        EngineModel engine = engineRepository.findById(idEngine)
+                .orElseThrow(() -> new IllegalArgumentException("System not found: " + idEngine));
+        if (!( engine.getOwner().equals(user) ||
+                EngineTypeEnum.fromId(engine.getEngineType().getId()).equals(EngineTypeEnum.PUBLICO)
+        )) {
+            throw new AccessDeniedException("You don't have permission to this System");
+        }
+        Collection<EngineRuleModel> rules = engineRuleRepository.findAllFiltered(idRule, idEngine);
 
         return rules.stream().map(EngineRuleModel::toDto).toList();
     }

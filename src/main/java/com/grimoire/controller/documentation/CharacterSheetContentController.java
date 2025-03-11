@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-@Tag(name = "Conteúdo de Ficha de Personagem", description = "Serviço de Conteúdo Ficha de Personagem de Campanha")
+@Tag(name = "Personagem: Conteúdo de Ficha", description = "Serviço de Conteúdo Ficha de Personagem de Campanha")
 public interface CharacterSheetContentController {
 
     @Operation(description = "Registrar Conteúdo de Ficha", summary = "Registrar nova Conteúdo de Ficha de Personagem de Campanha de RPG no Grimoire")
