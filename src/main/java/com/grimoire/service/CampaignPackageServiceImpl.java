@@ -143,8 +143,10 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
         switch (campaignFileTypeEnum) {
             case CampaignFileTypeEnum.TEXTO:
                 model.setText(campaignFileDto.getContent());
+                break;
             case CampaignFileTypeEnum.IMAGEM:
                 model.setIdPicture(campaignFileDto.getContent());
+                break;
             case CampaignFileTypeEnum.ITEM:
                 ItemModel item = itemRepository.findById(Long.valueOf(campaignFileDto.getContent()))
                         .orElseThrow(() -> new IllegalArgumentException("Item not found: " + Long.valueOf(campaignFileDto.getContent())));
@@ -152,6 +154,7 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
                     throw new IllegalArgumentException("You don't have permission to this Item");
                 }
                 model.setItem(item);
+                break;
             case CampaignFileTypeEnum.PERSONAGEM:
                 CharacterModel character = characterRepository.findById(Long.valueOf(campaignFileDto.getContent()))
                         .orElseThrow(() -> new IllegalArgumentException("Character not found: " + Long.valueOf(campaignFileDto.getContent())));
@@ -159,6 +162,7 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
                     throw new IllegalArgumentException("You don't have permission to this Character");
                 };
                 model.setCharacter(character);
+                break;
         }
 
         return campaignFileRepository.save(model).toDto();
@@ -184,8 +188,10 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
             switch (CampaignFileTypeEnum.fromId(campaignFile.getFileType().getId())) {
                 case CampaignFileTypeEnum.TEXTO:
                     campaignFile.setText(campaignFileDto.getContent());
+                    break;
                 case CampaignFileTypeEnum.IMAGEM:
                     campaignFile.setIdPicture(campaignFileDto.getContent());
+                    break;
                 case CampaignFileTypeEnum.ITEM:
                     ItemModel item = itemRepository.findById(Long.valueOf(campaignFileDto.getContent()))
                             .orElseThrow(() -> new IllegalArgumentException("Item not found: " + Long.valueOf(campaignFileDto.getContent())));
@@ -193,6 +199,7 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
                         throw new IllegalArgumentException("You don't have permission to this Item");
                     }
                     campaignFile.setItem(item);
+                    break;
                 case CampaignFileTypeEnum.PERSONAGEM:
                     CharacterModel character = characterRepository.findById(Long.valueOf(campaignFileDto.getContent()))
                             .orElseThrow(() -> new IllegalArgumentException("Character not found: " + Long.valueOf(campaignFileDto.getContent())));
@@ -200,6 +207,7 @@ public class CampaignPackageServiceImpl implements CampaignPackageService {
                         throw new IllegalArgumentException("You don't have permission to this Character");
                     };
                     campaignFile.setCharacter(character);
+                    break;
             }
         }
 

@@ -58,12 +58,15 @@ public class CharacterSheetContentServiceImpl implements CharacterSheetContentSe
             switch (CharacterSheetSubTabTypeEnum.fromId(subTab.getSubTabTypeModel().getId())) {
                 case CharacterSheetSubTabTypeEnum.TEXTO:
                     model.setText(characterSheetDto.getContent().getFirst());
+                    break;
                 case CharacterSheetSubTabTypeEnum.INTEIRO:
                     model.setNumber(Integer.valueOf(characterSheetDto.getContent().getFirst()));
+                    break;
                 case CharacterSheetSubTabTypeEnum.DADO:
                     model.setDiceQuantity(Integer.valueOf(characterSheetDto.getContent().get(0)));
                     model.setDiceType(Integer.valueOf(characterSheetDto.getContent().get(1)));
                     model.setDiceBonus(Integer.valueOf(characterSheetDto.getContent().get(2)));
+                    break;
             }
         }
 
@@ -84,12 +87,15 @@ public class CharacterSheetContentServiceImpl implements CharacterSheetContentSe
             switch (CharacterSheetSubTabTypeEnum.fromId(model.getSubTabModel().getSubTabTypeModel().getId())) {
                 case CharacterSheetSubTabTypeEnum.TEXTO:
                     model.setText(characterSheetDto.getContent().getFirst());
+                    break;
                 case CharacterSheetSubTabTypeEnum.INTEIRO:
                     model.setNumber(Integer.valueOf(characterSheetDto.getContent().getFirst()));
+                    break;
                 case CharacterSheetSubTabTypeEnum.DADO:
                     model.setDiceQuantity(Integer.valueOf(characterSheetDto.getContent().get(0)));
                     model.setDiceType(Integer.valueOf(characterSheetDto.getContent().get(1)));
                     model.setDiceBonus(Integer.valueOf(characterSheetDto.getContent().get(2)));
+                    break;
             }
         }
 

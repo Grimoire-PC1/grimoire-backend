@@ -54,14 +54,17 @@ public class CharacterSheetContentModel {
         switch (CharacterSheetSubTabTypeEnum.fromId(this.subTabModel.getSubTabTypeModel().getId())) {
             case CharacterSheetSubTabTypeEnum.TEXTO:
                 dto.setContent(List.of(this.text));
+                break;
             case CharacterSheetSubTabTypeEnum.INTEIRO:
                 dto.setContent(List.of(String.valueOf(this.number)));
+                break;
             case CharacterSheetSubTabTypeEnum.DADO:
                 dto.setContent(List.of(
                         String.valueOf(this.diceQuantity),
                         String.valueOf(this.diceType),
                         String.valueOf(this.diceBonus)
                 ));
+                break;
         }
         return dto;
     }
