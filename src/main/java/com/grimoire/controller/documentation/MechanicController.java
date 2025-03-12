@@ -54,7 +54,7 @@ public interface MechanicController {
             @Parameter(
                     name = "id_sistema",
                     description = "ID do Sistema de RPG.",
-                    required = false
+                    required = true
             )
             Long engineId,
             Authentication authentication);

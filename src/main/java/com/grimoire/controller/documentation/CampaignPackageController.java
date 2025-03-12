@@ -83,7 +83,7 @@ public interface CampaignPackageController {
     @Operation(description = "Registrar Arquivo", summary = "Registrar novo Arquivo de Campanha de RPG no Grimoire")
     ResponseEntity<CampaignFileResponseDto> createFile(
             @Parameter(
-                    name = "id_pacote",
+                    name = "id_pacote_pai",
                     description = "ID do Pacote de RPG.",
                     required = true
             )

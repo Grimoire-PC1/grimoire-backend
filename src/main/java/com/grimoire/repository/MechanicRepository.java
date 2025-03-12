@@ -16,11 +16,9 @@ public interface MechanicRepository extends JpaRepository<MechanicModel, Long> {
             SELECT m.*
             FROM MECANICAS m
             JOIN SISTEMAS s ON s.ID = m.ID_SISTEMA
-            WHERE (:engineId IS NULL OR m.ID_SISTEMA = :engineId)
-            AND s.ID_CRIADOR = :userId
+            WHERE (m.ID_SISTEMA = :engineId)
             """,
             nativeQuery = true)
     List<MechanicModel> findAllFiltered(
-            @Param("userId") Long userId,
             @Param("engineId") Long engineId);
 }

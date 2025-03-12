@@ -2,6 +2,7 @@ package com.grimoire.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.dto.mechanic.MechanicCreateRequestDto;
 import com.grimoire.dto.mechanic.MechanicPostRequestDto;
 import com.grimoire.dto.mechanic.MechanicResponseDto;
@@ -87,8 +88,15 @@ public class MechanicServiceImpl implements MechanicService {
     public Collection<MechanicResponseDto> get(Long engineId, String username) {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        EngineModel engine = engineRepository.findById(engineId)
+                .orElseThrow(() -> new IllegalArgumentException("System not found: " + engineId));
+        if (!( engine.getOwner().equals(user) ||
+                EngineTypeEnum.fromId(engine.getEngineType().getId()).equals(EngineTypeEnum.PUBLICO)
+        )) {
+            throw new AccessDeniedException("You don't have permission to this System");
+        }
 
-        List<MechanicModel> mechanicModels = mechanicRepository.findAllFiltered(user.getId(), engineId);
+        List<MechanicModel> mechanicModels = mechanicRepository.findAllFiltered(engineId);
         return mechanicModels.stream().map(MechanicModel::toDto).toList();
     }
 }

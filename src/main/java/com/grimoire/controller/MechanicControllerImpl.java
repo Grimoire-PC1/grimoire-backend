@@ -57,7 +57,7 @@ public class MechanicControllerImpl implements MechanicController {
 
     @GetMapping("/get")
     public ResponseEntity<Collection<MechanicResponseDto>> get(
-            @RequestParam(name = "id_sistema", required = false) Long engineId,
+            @RequestParam(name = "id_sistema") Long engineId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
                 mechanicService.get(engineId, authentication.getName()));

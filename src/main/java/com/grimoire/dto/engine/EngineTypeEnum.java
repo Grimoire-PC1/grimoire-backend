@@ -1,5 +1,6 @@
 package com.grimoire.dto.engine;
 
+import com.grimoire.dto.characterSheetTemplate.CharacterSheetSubTabTypeEnum;
 import lombok.Getter;
 
 import java.security.InvalidParameterException;
@@ -18,15 +19,12 @@ public enum EngineTypeEnum {
         this.description = description;
     }
 
-    public static String getEngineTypeByCode(Long code) {
-        if (code == null) {
-            return null;
-        }
-        for (EngineTypeEnum type : EngineTypeEnum.values()) {
-            if (Objects.equals(type.getId(), code)) {
-                return type.getDescription().toUpperCase();
+    public static EngineTypeEnum fromId(Long id) {
+        for (EngineTypeEnum type : values()) {
+            if (type.getId().equals(id)) {
+                return type;
             }
         }
-        throw new InvalidParameterException("Tipo de Sistema Inválido: " + code);
+        throw new IllegalArgumentException("Invalid Engine Type Enum ID: " + id);
     }
 }

@@ -52,7 +52,7 @@ public class EngineRuleControllerImpl implements EngineRuleController {
     @GetMapping("/get")
     public ResponseEntity<Collection<RuleResponseDto>> getUserRules(
             @RequestParam(name = "id_regra", required = false) Long ruleId,
-            @RequestParam(name = "id_sistema", required = false) Long systemId,
+            @RequestParam(name = "id_sistema") Long systemId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.getRules(ruleId, systemId, authentication.getName()));
     }

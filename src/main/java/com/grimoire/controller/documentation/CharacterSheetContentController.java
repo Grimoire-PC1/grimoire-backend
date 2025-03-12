@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-@Tag(name = "Conteúdo de Ficha de Personagem", description = "Serviço de Conteúdo Ficha de Personagem de Campanha")
+@Tag(name = "Personagem: Conteúdo de Ficha", description = "Serviço de Conteúdo Ficha de Personagem de Campanha")
 public interface CharacterSheetContentController {
 
     @Operation(description = "Registrar Conteúdo de Ficha", summary = "Registrar nova Conteúdo de Ficha de Personagem de Campanha de RPG no Grimoire")
@@ -35,7 +35,7 @@ public interface CharacterSheetContentController {
     @Operation(description = "Atualizar Conteúdo de Ficha", summary = "Atualizar Conteúdo de Ficha de RPG no Grimoire")
     ResponseEntity<CharacterSheetContentResponseDto> update(
             @Parameter(
-                    name = "id_ficha_Content",
+                    name = "id_conteudo_ficha",
                     description = "ID da Conteúdo de Ficha de RPG.",
                     required = true
             )
@@ -46,14 +46,14 @@ public interface CharacterSheetContentController {
     @Operation(description = "Remover Conteúdo de Ficha", summary = "Remover Conteúdo de Ficha de RPG no Grimoire.")
     ResponseEntity<String> delete(
             @Parameter(
-                    name = "id_ficha_Content",
+                    name = "id_conteudo_ficha",
                     description = "ID da Conteúdo de Ficha de RPG.",
                     required = true
             )
             Long characterSheetContentId,
             Authentication authentication);
 
-    @Operation(description = "Pegar Conteúdo de Fichas", summary = "Pegar Contentrmações de Fichas de RPG no Grimoire.")
+    @Operation(description = "Pegar Conteúdo de Fichas", summary = "Pegar Conteúdo de Fichas de RPG no Grimoire.")
     ResponseEntity<Collection<CharacterSheetContentResponseDto>> get(
             @Parameter(
                     name = "id_personagem",
