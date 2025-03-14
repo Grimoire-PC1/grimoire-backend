@@ -60,7 +60,9 @@ public class ParticipantServiceImpl implements ParticipantService {
         ParticipantModel model = participantRepository.findById(new ParticipantModelId(user, campaignModel))
                 .orElseThrow(() -> new IllegalArgumentException("Participant not found"));
 
-        participantRepository.delete(model);
+        participantRepository.removeParticipantData(
+                model.getModelId().getUserModel().getId(),
+                model.getModelId().getCampaignModel().getId());
         return "Participant deleted successfully!";
     }
 
