@@ -16,4 +16,6 @@ public interface CharacterService {
     Collection<CharacterResponseDto> getByUser(String name);
 
     Collection<CharacterResponseDto> getByCampaign(Long campaignId, String name);
+
+    Collection<CharacterResponseDto> getOthersByCampaign(Long campaignId, String name);
 }

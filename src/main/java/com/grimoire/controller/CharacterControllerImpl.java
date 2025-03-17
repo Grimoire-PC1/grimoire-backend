@@ -67,4 +67,12 @@ public class CharacterControllerImpl implements CharacterController {
         return ResponseEntity.status(HttpStatus.OK).body(
                 characterService.getByCampaign(campaignId, authentication.getName()));
     }
+
+    @GetMapping("/get/campaign/others")
+    public ResponseEntity<Collection<CharacterResponseDto>> getOthersByCampaign(
+            @RequestParam(name = "id_campanha") Long campaignId,
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                characterService.getOthersByCampaign(campaignId, authentication.getName()));
+    }
 }

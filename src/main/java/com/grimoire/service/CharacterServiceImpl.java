@@ -113,4 +113,21 @@ public class CharacterServiceImpl implements CharacterService {
 
         return characters.stream().map(CharacterModel::toDto).toList();
     }
+
+    @Override
+    public Collection<CharacterResponseDto> getOthersByCampaign(Long campaignId, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+
+        CampaignModel campaignModel = campaignRepository.findById(campaignId)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignId));
+
+        if (!campaignModel.getOwner().equals(user) && !participantRepository.exists(user.getId(), campaignModel.getId())) {
+            throw new IllegalArgumentException("You are not part of this Campaign");
+        }
+
+        Collection<CharacterModel> characters = characterRepository.findOthersFiltered(user.getId(), campaignId);
+
+        return characters.stream().map(CharacterModel::toDto).toList();
+    }
 }
