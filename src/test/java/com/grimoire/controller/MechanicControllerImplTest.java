@@ -210,10 +210,13 @@ public class MechanicControllerImplTest {
         //Arrange
         Mockito.when(userRepository.findByUsername(Mockito.any(String.class)))
                 .thenReturn(Optional.of(userModel));
-        Mockito.when(mechanicRepository.findAllFiltered(null, 1L))
+        Mockito.when(engineRepository.findById(Mockito.any(Long.class)))
+                .thenReturn(Optional.of(engineModel));
+        Mockito.when(mechanicRepository.findAllFiltered(Mockito.eq(1L)))
                 .thenReturn(List.of(mechanicModel));
         //Act
         String responseJsonString = mockMvc.perform(get("/mechanic/get")
+                        .param("id_sistema", String.valueOf(1L))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -223,7 +226,8 @@ public class MechanicControllerImplTest {
 
         //Assert
         assertAll(
-                () -> assertNotNull(result)
+                () -> assertNotNull(result),
+                () -> assertFalse(result.isEmpty())
         );
     }
 
