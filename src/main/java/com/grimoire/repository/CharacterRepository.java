@@ -22,4 +22,15 @@ public interface CharacterRepository extends JpaRepository<CharacterModel, Long>
     Collection<CharacterModel> findAllFiltered(
             @Param("idUser") Long idUser,
             @Param("idCampaign") Long idCampaign);
+
+    @Query(value = """
+            SELECT p.*
+            FROM PERSONAGENS p
+            WHERE p.ID_USUARIO != :idUser
+            AND p.ID_CAMPANHA = :idCampaign
+            """,
+            nativeQuery = true)
+    Collection<CharacterModel> findOthersFiltered(
+            @Param("idUser") Long idUser,
+            @Param("idCampaign") Long idCampaign);
 }

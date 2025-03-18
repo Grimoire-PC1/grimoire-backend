@@ -60,4 +60,14 @@ public interface CharacterController {
             )
             Long campaignId,
             Authentication authentication);
+
+    @Operation(description = "Pegar Personagens da Campanha", summary = "Pegar informações de Personagens de outros usuários no Grimoire.")
+    ResponseEntity<Collection<CharacterResponseDto>> getOthersByCampaign(
+            @Parameter(
+                    name = "id_campanha",
+                    description = "ID da Campanha de RPG.",
+                    required = true
+            )
+            Long campaignId,
+            Authentication authentication);
 }

@@ -151,7 +151,7 @@ public class ParticipantControllerImplTest {
             .thenReturn(Optional.of(campaignModel));
         Mockito.when(participantRepository.findById(Mockito.any(ParticipantModelId.class)))
                 .thenReturn(Optional.of(pModel));
-        Mockito.doNothing().when(participantRepository).delete(Mockito.any(ParticipantModel.class));
+        Mockito.doNothing().when(participantRepository).removeParticipantData(Mockito.any(Long.class), Mockito.any(Long.class));
         // Act:
         mockMvc.perform(delete("/participant/delete")
                         .contentType(MediaType.APPLICATION_JSON)
