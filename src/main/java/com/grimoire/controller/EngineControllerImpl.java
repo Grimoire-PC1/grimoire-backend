@@ -5,7 +5,7 @@ import com.grimoire.dto.engine.EngineCreateRequestDto;
 import com.grimoire.dto.engine.EnginePostRequestDto;
 import com.grimoire.dto.engine.EngineResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
-import com.grimoire.service.service.EngineService;
+import com.grimoire.service.interfaces.EngineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

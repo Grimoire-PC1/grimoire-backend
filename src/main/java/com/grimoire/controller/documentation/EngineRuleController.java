@@ -3,6 +3,7 @@ package com.grimoire.controller.documentation;
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
 import com.grimoire.dto.engineRule.RulePostRequestDto;
+import com.grimoire.dto.mechanic.MechanicResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -55,5 +56,15 @@ public interface EngineRuleController {
                     required = true
             )
             Long systemId,
+            Authentication authentication);
+
+    @Operation(description = "Pegar Regras por Campanha", summary = "Pegar informações de Regras de RPG no Grimoire.")
+    ResponseEntity<Collection<RuleResponseDto>> getByCampaign(
+            @Parameter(
+                    name = "id_campanha",
+                    description = "ID da Campanha de RPG.",
+                    required = true
+            )
+            Long campaignId,
             Authentication authentication);
 }

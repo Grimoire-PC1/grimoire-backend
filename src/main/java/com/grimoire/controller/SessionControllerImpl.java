@@ -5,7 +5,7 @@ import com.grimoire.dto.session.SessionCreateRequestDto;
 import com.grimoire.dto.session.SessionPostRequestDto;
 import com.grimoire.dto.session.SessionResponseDto;
 import com.grimoire.dto.session.SessionTypeEnum;
-import com.grimoire.service.service.SessionService;
+import com.grimoire.service.interfaces.SessionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

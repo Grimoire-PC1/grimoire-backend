@@ -2,7 +2,7 @@ package com.grimoire.controller;
 
 import com.grimoire.controller.documentation.CampaignPackageController;
 import com.grimoire.dto.campaignPackage.*;
-import com.grimoire.service.service.CampaignPackageService;
+import com.grimoire.service.interfaces.CampaignPackageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -7,10 +7,8 @@ import com.grimoire.dto.mechanic.MechanicCreateRequestDto;
 import com.grimoire.dto.mechanic.MechanicPostRequestDto;
 import com.grimoire.dto.mechanic.MechanicResponseDto;
 import com.grimoire.model.grimoire.*;
-import com.grimoire.repository.EngineRepository;
-import com.grimoire.repository.MechanicRepository;
-import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.MechanicService;
+import com.grimoire.repository.*;
+import com.grimoire.service.interfaces.MechanicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -23,13 +21,17 @@ public class MechanicServiceImpl implements MechanicService {
     private final MechanicRepository mechanicRepository;
     private final EngineRepository engineRepository;
     private final UserRepository userRepository;
+    private final CampaignRepository campaignRepository;
+    private final ParticipantRepository participantRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    public MechanicServiceImpl(MechanicRepository mechanicRepository, EngineRepository engineRepository, UserRepository userRepository) {
+    public MechanicServiceImpl(MechanicRepository mechanicRepository, EngineRepository engineRepository, UserRepository userRepository, CampaignRepository campaignRepository, ParticipantRepository participantRepository) {
         this.mechanicRepository = mechanicRepository;
         this.engineRepository = engineRepository;
         this.userRepository = userRepository;
+        this.campaignRepository = campaignRepository;
+        this.participantRepository = participantRepository;
     }
 
     @Override
@@ -98,5 +100,21 @@ public class MechanicServiceImpl implements MechanicService {
 
         List<MechanicModel> mechanicModels = mechanicRepository.findAllFiltered(engineId);
         return mechanicModels.stream().map(MechanicModel::toDto).toList();
+    }
+
+    @Override
+    public Collection<MechanicResponseDto> getByCampaign(Long campaignId, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        CampaignModel campaignModel = campaignRepository.findById(campaignId)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignId));
+        if (!campaignModel.getOwner().equals(user) && !participantRepository.exists(user.getId(), campaignModel.getId())) {
+            throw new IllegalArgumentException("You are not part of this Campaign");
+        }
+
+        Collection<MechanicModel> models = mechanicRepository.
+                findByCampaign(campaignModel.getEngine().getId());
+
+        return models.stream().map(MechanicModel::toDto).toList();
     }
 }

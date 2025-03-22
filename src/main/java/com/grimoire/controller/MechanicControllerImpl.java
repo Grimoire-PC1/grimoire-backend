@@ -2,10 +2,11 @@ package com.grimoire.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.grimoire.controller.documentation.MechanicController;
+import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.mechanic.MechanicCreateRequestDto;
 import com.grimoire.dto.mechanic.MechanicPostRequestDto;
 import com.grimoire.dto.mechanic.MechanicResponseDto;
-import com.grimoire.service.service.MechanicService;
+import com.grimoire.service.interfaces.MechanicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,5 +62,14 @@ public class MechanicControllerImpl implements MechanicController {
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(
                 mechanicService.get(engineId, authentication.getName()));
+    }
+
+    @Override
+    @GetMapping("/get/campaign")
+    public ResponseEntity<Collection<MechanicResponseDto>> getByCampaign(
+            @RequestParam(name = "id_campanha") Long campaignId,
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                mechanicService.getByCampaign(campaignId, authentication.getName()));
     }
 }

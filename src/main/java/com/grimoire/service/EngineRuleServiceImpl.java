@@ -1,16 +1,13 @@
 package com.grimoire.service;
 
+import com.grimoire.dto.characterSheetTemplate.CharacterSheetTabResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
 import com.grimoire.dto.engineRule.RulePostRequestDto;
-import com.grimoire.model.grimoire.EngineModel;
-import com.grimoire.model.grimoire.UserModel;
-import com.grimoire.model.grimoire.EngineRuleModel;
-import com.grimoire.repository.EngineRepository;
-import com.grimoire.repository.EngineRuleRepository;
-import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.EngineRuleService;
+import com.grimoire.model.grimoire.*;
+import com.grimoire.repository.*;
+import com.grimoire.service.interfaces.EngineRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -20,16 +17,19 @@ import java.util.Collection;
 
 @Service
 public class EngineRuleServiceImpl implements EngineRuleService {
-
     private final EngineRuleRepository engineRuleRepository;
     private final EngineRepository engineRepository;
     private final UserRepository userRepository;
+    private final CampaignRepository campaignRepository;
+    private final ParticipantRepository participantRepository;
 
     @Autowired
-    public EngineRuleServiceImpl(EngineRuleRepository engineRuleRepository, EngineRepository engineRepository, UserRepository userRepository) {
+    public EngineRuleServiceImpl(EngineRuleRepository engineRuleRepository, EngineRepository engineRepository, UserRepository userRepository, CampaignRepository campaignRepository, ParticipantRepository participantRepository) {
         this.engineRuleRepository = engineRuleRepository;
         this.engineRepository = engineRepository;
         this.userRepository = userRepository;
+        this.campaignRepository = campaignRepository;
+        this.participantRepository = participantRepository;
     }
 
     @Override
@@ -97,5 +97,21 @@ public class EngineRuleServiceImpl implements EngineRuleService {
         Collection<EngineRuleModel> rules = engineRuleRepository.findAllFiltered(idRule, idEngine);
 
         return rules.stream().map(EngineRuleModel::toDto).toList();
+    }
+
+    @Override
+    public Collection<RuleResponseDto> getByCampaign(Long campaignId, String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Authorization error"));
+        CampaignModel campaignModel = campaignRepository.findById(campaignId)
+                .orElseThrow(() -> new IllegalArgumentException("Campaign not found: " + campaignId));
+        if (!campaignModel.getOwner().equals(user) && !participantRepository.exists(user.getId(), campaignModel.getId())) {
+            throw new IllegalArgumentException("You are not part of this Campaign");
+        }
+
+        Collection<EngineRuleModel> models = engineRuleRepository.
+                findByCampaign(campaignModel.getEngine().getId());
+
+        return models.stream().map(EngineRuleModel::toDto).toList();
     }
 }

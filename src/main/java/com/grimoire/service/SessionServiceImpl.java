@@ -12,7 +12,7 @@ import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.ParticipantRepository;
 import com.grimoire.repository.SessionRepository;
 import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.SessionService;
+import com.grimoire.service.interfaces.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

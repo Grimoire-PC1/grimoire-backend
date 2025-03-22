@@ -7,7 +7,7 @@ import com.grimoire.model.grimoire.CampaignModel;
 import com.grimoire.model.grimoire.ItemModel;
 import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.repository.*;
-import com.grimoire.service.service.ItemService;
+import com.grimoire.service.interfaces.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

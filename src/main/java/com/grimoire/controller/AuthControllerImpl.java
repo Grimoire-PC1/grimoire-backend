@@ -1,7 +1,7 @@
 package com.grimoire.controller;
 
 import com.grimoire.controller.documentation.AuthController;
-import com.grimoire.service.service.AuthService;
+import com.grimoire.service.interfaces.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

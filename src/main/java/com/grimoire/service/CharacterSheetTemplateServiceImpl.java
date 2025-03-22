@@ -5,7 +5,7 @@ import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.model.grimoire.*;
 import com.grimoire.model.grimoire.typeTables.CharacterSheetSubTabTypeModel;
 import com.grimoire.repository.*;
-import com.grimoire.service.service.CharacterSheetTemplateService;
+import com.grimoire.service.interfaces.CharacterSheetTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;

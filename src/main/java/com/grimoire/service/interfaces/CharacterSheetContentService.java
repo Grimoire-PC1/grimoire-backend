@@ -1,4 +1,4 @@
-package com.grimoire.repository;
+package com.grimoire.service.interfaces;
 
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentCreateRequestDto;
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentPostRequestDto;

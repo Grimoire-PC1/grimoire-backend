@@ -3,7 +3,7 @@ package com.grimoire.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.grimoire.controller.documentation.CharacterSheetTemplateController;
 import com.grimoire.dto.characterSheetTemplate.*;
-import com.grimoire.service.service.CharacterSheetTemplateService;
+import com.grimoire.service.interfaces.CharacterSheetTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.grimoire.service.service;
+package com.grimoire.service.interfaces;
 
 import com.grimoire.dto.character.CharacterCreateRequestDto;
 import com.grimoire.dto.character.CharacterPostRequestDto;

@@ -4,7 +4,7 @@ import com.grimoire.controller.documentation.ItemController;
 import com.grimoire.dto.item.ItemCreateRequestDto;
 import com.grimoire.dto.item.ItemPostRequestDto;
 import com.grimoire.dto.item.ItemResponseDto;
-import com.grimoire.service.service.ItemService;
+import com.grimoire.service.interfaces.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,12 +1,12 @@
 package com.grimoire.service;
 
-import com.grimoire.dto.campaignPackage.CampaignFileTypeEnum;
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentCreateRequestDto;
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentPostRequestDto;
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentResponseDto;
 import com.grimoire.dto.characterSheetTemplate.CharacterSheetSubTabTypeEnum;
 import com.grimoire.model.grimoire.*;
 import com.grimoire.repository.*;
+import com.grimoire.service.interfaces.CharacterSheetContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;

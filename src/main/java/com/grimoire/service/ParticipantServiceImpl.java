@@ -8,7 +8,7 @@ import com.grimoire.model.grimoire.embeddedId.ParticipantModelId;
 import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.ParticipantRepository;
 import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.ParticipantService;
+import com.grimoire.service.interfaces.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;

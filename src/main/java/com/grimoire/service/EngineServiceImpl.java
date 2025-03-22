@@ -9,7 +9,7 @@ import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.model.grimoire.typeTables.EngineTypeModel;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.EngineService;
+import com.grimoire.service.interfaces.EngineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;

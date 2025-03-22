@@ -5,13 +5,12 @@ import com.grimoire.dto.character.CharacterPostRequestDto;
 import com.grimoire.dto.character.CharacterResponseDto;
 import com.grimoire.model.grimoire.CampaignModel;
 import com.grimoire.model.grimoire.CharacterModel;
-import com.grimoire.model.grimoire.EngineRuleModel;
 import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.CharacterRepository;
 import com.grimoire.repository.ParticipantRepository;
 import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.CharacterService;
+import com.grimoire.service.interfaces.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,7 @@
 package com.grimoire.controller.documentation;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.grimoire.dto.characterSheetTemplate.CharacterSheetTabResponseDto;
 import com.grimoire.dto.mechanic.MechanicCreateRequestDto;
 import com.grimoire.dto.mechanic.MechanicPostRequestDto;
 import com.grimoire.dto.mechanic.MechanicResponseDto;
@@ -57,5 +58,15 @@ public interface MechanicController {
                     required = true
             )
             Long engineId,
+            Authentication authentication);
+
+    @Operation(description = "Pegar Mecânicas por Campanha", summary = "Pegar informações de Mecânicas de RPG no Grimoire.")
+    ResponseEntity<Collection<MechanicResponseDto>> getByCampaign(
+            @Parameter(
+                    name = "id_campanha",
+                    description = "ID da Campanha de RPG.",
+                    required = true
+            )
+            Long campaignId,
             Authentication authentication);
 }

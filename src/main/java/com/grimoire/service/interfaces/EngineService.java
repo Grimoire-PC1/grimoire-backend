@@ -1,4 +1,4 @@
-package com.grimoire.service.service;
+package com.grimoire.service.interfaces;
 
 import com.grimoire.dto.engine.EngineCreateRequestDto;
 import com.grimoire.dto.engine.EnginePostRequestDto;

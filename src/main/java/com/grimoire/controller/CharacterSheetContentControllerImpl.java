@@ -5,7 +5,7 @@ import com.grimoire.controller.documentation.CharacterSheetContentController;
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentCreateRequestDto;
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentPostRequestDto;
 import com.grimoire.dto.characterSheetContent.CharacterSheetContentResponseDto;
-import com.grimoire.repository.CharacterSheetContentService;
+import com.grimoire.service.interfaces.CharacterSheetContentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

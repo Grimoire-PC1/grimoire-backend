@@ -2,7 +2,7 @@ package com.grimoire.controller;
 
 import com.grimoire.controller.documentation.ParticipantController;
 import com.grimoire.dto.participant.ParticipantResponseDto;
-import com.grimoire.service.service.ParticipantService;
+import com.grimoire.service.interfaces.ParticipantService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

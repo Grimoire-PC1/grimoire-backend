@@ -24,4 +24,15 @@ public interface EngineRuleRepository extends JpaRepository<EngineRuleModel, Lon
     Collection<EngineRuleModel> findAllFiltered(
             @Param("idRule") Long idRule,
             @Param("idSys") Long idSys);
+
+    @Query(value = """
+            SELECT rs.*
+            FROM REGRAS_SISTEMA rs
+            JOIN SISTEMAS s ON s.ID = rs.ID_SISTEMA
+            JOIN CAMPANHAS c ON c.ID_SISTEMA = s.ID
+            WHERE (c.ID = :campaignId)
+            """,
+            nativeQuery = true)
+    Collection<EngineRuleModel> findByCampaign(
+            @Param("campaignId") Long campaignId);
 }

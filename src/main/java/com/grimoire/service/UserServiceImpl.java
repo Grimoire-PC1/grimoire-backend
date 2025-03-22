@@ -5,7 +5,7 @@ import com.grimoire.dto.user.UserPostRequestDto;
 import com.grimoire.dto.user.UserResponseDto;
 import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.UserService;
+import com.grimoire.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

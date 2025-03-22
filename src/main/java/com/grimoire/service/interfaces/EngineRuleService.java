@@ -1,4 +1,4 @@
-package com.grimoire.service.service;
+package com.grimoire.service.interfaces;
 
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
@@ -12,4 +12,5 @@ public interface EngineRuleService {
     String deleteRule(Long ruleId, String username);
     Collection<RuleResponseDto> getRules(Long idRule, Long idEngine, String username);
 
+    Collection<RuleResponseDto> getByCampaign(Long campaignId, String username);
 }

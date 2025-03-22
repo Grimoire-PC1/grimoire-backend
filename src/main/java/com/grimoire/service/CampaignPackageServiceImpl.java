@@ -4,7 +4,7 @@ import com.grimoire.dto.campaignPackage.*;
 import com.grimoire.model.grimoire.*;
 import com.grimoire.model.grimoire.typeTables.FileTypeModel;
 import com.grimoire.repository.*;
-import com.grimoire.service.service.CampaignPackageService;
+import com.grimoire.service.interfaces.CampaignPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

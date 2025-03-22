@@ -1,4 +1,4 @@
-package com.grimoire.service.service;
+package com.grimoire.service.interfaces;
 
 import com.grimoire.dto.campaign.CampaignCreateRequestDto;
 import com.grimoire.dto.campaign.CampaignPostRequestDto;

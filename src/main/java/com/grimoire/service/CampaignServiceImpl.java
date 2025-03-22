@@ -9,7 +9,7 @@ import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.CampaignService;
+import com.grimoire.service.interfaces.CampaignService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
