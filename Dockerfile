@@ -7,6 +7,6 @@ RUN apk update \
  && apk del --purge deps \
  && rm /var/cache/apk/*
 
-COPY target/grimoire-0.0.1-SNAPSHOT.jar /app.jar
+COPY ./target/grimoire-0.0.1-SNAPSHOT.jar /app.jar
 
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-Dfile.encoding=UTF-8", "-Xmx256m", "-jar", "/app.jar"]
