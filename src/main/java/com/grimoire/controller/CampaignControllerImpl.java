@@ -4,8 +4,7 @@ import com.grimoire.controller.documentation.CampaignController;
 import com.grimoire.dto.campaign.CampaignCreateRequestDto;
 import com.grimoire.dto.campaign.CampaignPostRequestDto;
 import com.grimoire.dto.campaign.CampaignResponseDto;
-import com.grimoire.service.service.AuthService;
-import com.grimoire.service.service.CampaignService;
+import com.grimoire.service.interfaces.CampaignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,5 +54,11 @@ public class CampaignControllerImpl implements CampaignController {
             @RequestParam(name = "id_campanha", required = false) Long idCampaign,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(campaignService.getCampaign(idCampaign, authentication.getName()));
+    }
+
+    @GetMapping("/get-participating")
+    public ResponseEntity<Collection<CampaignResponseDto>> getUserParticipatingCampaigns(
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(campaignService.getParticipatingCampaigns(authentication.getName()));
     }
 }

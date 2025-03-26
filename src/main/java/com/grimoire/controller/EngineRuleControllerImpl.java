@@ -1,10 +1,11 @@
 package com.grimoire.controller;
 
 import com.grimoire.controller.documentation.EngineRuleController;
+import com.grimoire.dto.characterSheetTemplate.CharacterSheetTabResponseDto;
 import com.grimoire.dto.engineRule.RuleResponseDto;
 import com.grimoire.dto.engineRule.RuleCreateRequestDto;
-import com.grimoire.dto.engineRule.RuleEditRequestDto;
-import com.grimoire.service.service.EngineRuleService;
+import com.grimoire.dto.engineRule.RulePostRequestDto;
+import com.grimoire.service.interfaces.EngineRuleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,7 @@ public class EngineRuleControllerImpl implements EngineRuleController {
     @PutMapping("/update")
     public ResponseEntity<RuleResponseDto> updateRule(
             @RequestParam(name = "id_regra") Long ruleId,
-            @Validated @RequestBody RuleEditRequestDto ruleDto,
+            @Validated @RequestBody RulePostRequestDto ruleDto,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.editRule(ruleId, ruleDto, authentication.getName()));
     }
@@ -52,8 +53,17 @@ public class EngineRuleControllerImpl implements EngineRuleController {
     @GetMapping("/get")
     public ResponseEntity<Collection<RuleResponseDto>> getUserRules(
             @RequestParam(name = "id_regra", required = false) Long ruleId,
-            @RequestParam(name = "id_sistema", required = false) Long systemId,
+            @RequestParam(name = "id_sistema") Long systemId,
             Authentication authentication) {
         return ResponseEntity.status(HttpStatus.OK).body(engineRuleService.getRules(ruleId, systemId, authentication.getName()));
+    }
+
+    @Override
+    @GetMapping("/get/campaign")
+    public ResponseEntity<Collection<RuleResponseDto>> getByCampaign(
+            @RequestParam(name = "id_campanha") Long campaignId,
+            Authentication authentication) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                engineRuleService.getByCampaign(campaignId, authentication.getName()));
     }
 }

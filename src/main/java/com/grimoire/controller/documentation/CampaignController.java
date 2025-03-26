@@ -20,7 +20,7 @@ public interface CampaignController {
             @Validated @RequestBody CampaignCreateRequestDto campaignDto,
             Authentication authentication);
 
-    @Operation(description = "Atualizar campanha", summary = "Atualizar campanha no sistema. Deixe o campo em branco para mantê-lo.")
+    @Operation(description = "Atualizar campanha", summary = "Atualizar campanha no sistema. Deixe o campo vazio para mantê-lo.")
     ResponseEntity<CampaignResponseDto> updateCampaign(
             @Parameter(
                     name = "id_campanha",
@@ -48,6 +48,10 @@ public interface CampaignController {
                     description = "ID da Campanha de RPG."
             )
             Long idCampaign,
+            Authentication authentication);
+
+    @Operation(description = "Pegar campanhas que o usuário participa", summary = "Pegar informações das campanhas que o usuário participa no sistema.")
+    ResponseEntity<Collection<CampaignResponseDto>> getUserParticipatingCampaigns(
             Authentication authentication);
 }
 

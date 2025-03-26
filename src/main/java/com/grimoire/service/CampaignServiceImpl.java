@@ -9,7 +9,7 @@ import com.grimoire.model.grimoire.UserModel;
 import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
-import com.grimoire.service.service.CampaignService;
+import com.grimoire.service.interfaces.CampaignService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -50,7 +50,7 @@ public class CampaignServiceImpl implements CampaignService {
                 .title(campaignDto.getTitle())
                 .description(campaignDto.getDescription())
                 .engine(engine)
-                .pictureUrl(campaignDto.getPictureUrl())
+                .idPicture(campaignDto.getIdPicture())
                 .build();
 
         return campaignRepository.save(campaign).toDto();
@@ -66,8 +66,9 @@ public class CampaignServiceImpl implements CampaignService {
         if (!campaign.getOwner().equals(user)) {
             throw new AccessDeniedException("You don't have permission to this System");
         }
-        campaign.setTitle(campaignDto.getTitle().isBlank() ? campaign.getTitle() : campaignDto.getTitle());
-        campaign.setDescription(campaignDto.getDescription().isBlank() ? campaign.getDescription() : campaignDto.getDescription());
+        campaign.setTitle(campaignDto.getTitle() == null ? campaign.getTitle() : campaignDto.getTitle());
+        campaign.setDescription(campaignDto.getDescription() == null ? campaign.getDescription() : campaignDto.getDescription());
+        campaign.setIdPicture(campaignDto.getIdPicture() == null ? campaign.getIdPicture() : campaignDto.getIdPicture());
         if (!(campaignDto.getIdSystem() == null)) {
             EngineModel engine = engineRepository.findById(campaignDto.getIdSystem())
                     .orElseThrow(() -> new IllegalArgumentException("System not found: " + campaignDto.getIdSystem()));
@@ -76,7 +77,6 @@ public class CampaignServiceImpl implements CampaignService {
             }
             campaign.setEngine(engine);
         }
-        campaign.setPictureUrl(campaignDto.getPictureUrl().isBlank() ? campaign.getPictureUrl() : campaignDto.getPictureUrl());
 
         return campaignRepository.save(campaign).toDto();
     }
@@ -101,6 +101,15 @@ public class CampaignServiceImpl implements CampaignService {
         UserModel user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
         Collection<CampaignModel> campaigns = campaignRepository.findAllFiltered(idCampaign, user.getId());
+
+        return campaigns.stream().map(CampaignModel::toDto).toList();
+    }
+
+    @Override
+    public Collection<CampaignResponseDto> getParticipatingCampaigns(String username) {
+        UserModel user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        Collection<CampaignModel> campaigns = campaignRepository.findAllParticipating(user.getId());
 
         return campaigns.stream().map(CampaignModel::toDto).toList();
     }

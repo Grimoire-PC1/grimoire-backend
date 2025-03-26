@@ -11,16 +11,16 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RuleCreateRequestDto {
     @JsonProperty("id_sistema")
     @NotNull
     private Long idSys;
 
     @JsonProperty("titulo")
-    @NotBlank
     private String title;
 
     @JsonProperty("descricao")
-    @NotBlank
     private String description;
 }

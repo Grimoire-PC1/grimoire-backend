@@ -13,17 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CampaignCreateRequestDto {
     @JsonProperty("titulo")
-    @NotNull
     private String title;
 
     @JsonProperty("descricao")
-    @NotNull
     private String description;
 
     @JsonProperty("id_sistema")
     private Long idSystem;
 
-    @JsonProperty("foto_url")
-    @NotNull
-    private String pictureUrl;
+    @JsonProperty("id_foto")
+    private String idPicture;
 }

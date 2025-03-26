@@ -1,7 +1,7 @@
 package com.grimoire.service.auth;
 
-import com.grimoire.service.service.AuthService;
-import com.grimoire.service.service.JwtService;
+import com.grimoire.service.interfaces.AuthService;
+import com.grimoire.service.interfaces.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;

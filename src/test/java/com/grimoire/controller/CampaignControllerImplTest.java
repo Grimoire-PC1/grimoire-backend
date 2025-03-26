@@ -10,7 +10,7 @@ import com.grimoire.dto.engine.EngineTypeEnum;
 import com.grimoire.model.grimoire.CampaignModel;
 import com.grimoire.model.grimoire.EngineModel;
 import com.grimoire.model.grimoire.UserModel;
-import com.grimoire.model.joinTables.EngineTypeModel;
+import com.grimoire.model.grimoire.typeTables.EngineTypeModel;
 import com.grimoire.repository.CampaignRepository;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
@@ -106,7 +106,7 @@ public class CampaignControllerImplTest {
         CampaignCreateRequestDto requestDto = CampaignCreateRequestDto.builder()
                 .title("Campanha")
                 .description("descricao")
-                .pictureUrl("url")
+                .idPicture("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -136,9 +136,9 @@ public class CampaignControllerImplTest {
     void updateCampaignSuccessfully() throws Exception {
         //Arrange
         CampaignPostRequestDto requestDto = CampaignPostRequestDto.builder()
-                .title("")
-                .description("")
-                .pictureUrl("")
+                .title(null)
+                .description(null)
+                .idPicture(null)
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -168,7 +168,7 @@ public class CampaignControllerImplTest {
 
     @Test
     @WithMockUser(username = "testuser", roles = {""})
-    void deleteEngineSuccessfully() throws Exception {
+    void deleteCampaignSuccessfully() throws Exception {
         //Arrange
         Mockito.when(userRepository.findByUsername(Mockito.any(String.class)))
                 .thenReturn(Optional.of(userModel));
@@ -187,7 +187,7 @@ public class CampaignControllerImplTest {
 
     @Test
     @WithMockUser(username = "testuser", roles = {""})
-    void getEngineSuccessfully() throws Exception {
+    void getCampaignSuccessfully() throws Exception {
         //Arrange
         Mockito.when(userRepository.findByUsername(Mockito.any(String.class)))
                 .thenReturn(Optional.of(userModel));

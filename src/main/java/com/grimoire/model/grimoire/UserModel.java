@@ -28,15 +28,16 @@ public class UserModel {
     @Column(name = "NOME", nullable = false)
     private String name;
 
-    @Column(name = "URL_FOTO")
-    private String pictureUrl;
+    @Column(name = "ID_IMAGEM")
+    private String pictureID;
 
     public UserResponseDto toDto() {
         return UserResponseDto.builder()
+                .id(this.id)
                 .username(this.username)
                 .email(this.email)
                 .name(this.name)
-                .pictureUrl(this.pictureUrl)
+                .pictureID(this.pictureID)
                 .build();
     }
 }

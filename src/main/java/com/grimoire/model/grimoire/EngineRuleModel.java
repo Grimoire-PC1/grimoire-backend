@@ -2,9 +2,6 @@ package com.grimoire.model.grimoire;
 
 
 import com.grimoire.dto.engineRule.RuleResponseDto;
-import com.grimoire.model.grimoire.UserModel;
-import com.grimoire.model.grimoire.EngineModel;
-import com.grimoire.model.joinTables.EngineTypeModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,14 +21,15 @@ public class EngineRuleModel {
     @JoinColumn(name="ID_SISTEMA")
     private EngineModel engine;
 
-    @Column(name = "TITULO", nullable = false)
+    @Column(name = "TITULO")
     private String title;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO")
     private String description;
 
     public RuleResponseDto toDto() {
         return RuleResponseDto.builder()
+                .id(this.id)
                 .title(this.title)
                 .idSys(this.engine.getId())
                 .description(this.description)

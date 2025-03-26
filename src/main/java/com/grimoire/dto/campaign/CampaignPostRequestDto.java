@@ -16,20 +16,17 @@ import lombok.NoArgsConstructor;
 public class CampaignPostRequestDto {
     @Schema(defaultValue = "titulo")
     @JsonProperty("novo_titulo")
-    @NotNull
     private String title;
 
     @Schema(defaultValue = "descricao")
     @JsonProperty("nova_descricao")
-    @NotNull
     private String description;
 
     @Schema(defaultValue = "5")
     @JsonProperty("id_novo_sistema")
     private Long idSystem;
 
-    @Schema(defaultValue = "url")
-    @JsonProperty("nova_foto_url")
-    @NotNull
-    private String pictureUrl;
+    @Schema(defaultValue = "")
+    @JsonProperty("id_nova_foto")
+    private String idPicture;
 }

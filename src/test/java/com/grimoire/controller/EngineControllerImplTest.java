@@ -4,15 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.grimoire.dto.engine.EngineCreateRequestDto;
-import com.grimoire.dto.engine.EngineEditRequestDto;
+import com.grimoire.dto.engine.EnginePostRequestDto;
 import com.grimoire.dto.engine.EngineResponseDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
-import com.grimoire.dto.user.UserCreateRequestDto;
-import com.grimoire.dto.user.UserPostRequestDto;
-import com.grimoire.dto.user.UserResponseDto;
 import com.grimoire.model.grimoire.EngineModel;
 import com.grimoire.model.grimoire.UserModel;
-import com.grimoire.model.joinTables.EngineTypeModel;
+import com.grimoire.model.grimoire.typeTables.EngineTypeModel;
 import com.grimoire.repository.EngineRepository;
 import com.grimoire.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +22,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -98,7 +94,7 @@ class EngineControllerImplTest {
         EngineCreateRequestDto requestDto = EngineCreateRequestDto.builder()
                 .name("sistema")
                 .description("descricao")
-                .pictureUrl("url")
+                .pictureId("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -129,10 +125,10 @@ class EngineControllerImplTest {
     @WithMockUser(username = "testuser", roles = {""})
     void updateEngineSuccessfully() throws Exception {
         //Arrange
-        EngineEditRequestDto requestDto = EngineEditRequestDto.builder()
+        EnginePostRequestDto requestDto = EnginePostRequestDto.builder()
                 .name("sistema")
                 .description("descricao")
-                .pictureUrl("url")
+                .pictureId("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 

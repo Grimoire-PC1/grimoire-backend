@@ -11,6 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class RuleResponseDto {
+    @Schema(example = "42424L")
+    @JsonProperty("id")
+    private Long id;
+
     @Schema(example = "4242424242424L")
     @JsonProperty("id_sistema")
     private Long idSys;

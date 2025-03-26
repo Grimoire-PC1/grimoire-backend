@@ -93,7 +93,7 @@ class UserControllerImplTest {
                 .password("password")
                 .name("name")
                 .email("email")
-                .pictureUrl("")
+                .pictureID("1")
                 .build();
         String requestBody = new ObjectMapper().writeValueAsString(requestDto);
 
@@ -129,10 +129,11 @@ class UserControllerImplTest {
     @WithMockUser(username = "testuser", roles = {""})
     void getUserSuccessfully() throws Exception {
         UserModel user = UserModel.builder()
+                .id(1L)
                 .username("testuser")
                 .email("email")
                 .name("name")
-                .pictureUrl("url")
+                .pictureID("1")
                 .build();
         UserResponseDto responseDto = user.toDto();
         String responseBody = new ObjectMapper().writeValueAsString(responseDto);

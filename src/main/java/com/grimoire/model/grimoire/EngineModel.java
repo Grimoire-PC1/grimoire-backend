@@ -1,7 +1,7 @@
 package com.grimoire.model.grimoire;
 
 import com.grimoire.dto.engine.EngineResponseDto;
-import com.grimoire.model.joinTables.EngineTypeModel;
+import com.grimoire.model.grimoire.typeTables.EngineTypeModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,17 +21,17 @@ public class EngineModel {
     @JoinColumn(name = "ID_CRIADOR", nullable = false)
     private UserModel owner;
 
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "NOME")
     private String name;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO")
     private String description;
 
-    @Column(name = "URL_FOTO")
-    private String pictureUrl;
+    @Column(name = "ID_IMAGEM")
+    private String pictureId;
 
     @ManyToOne
-    @JoinColumn(name="ID_TIPO_SISTEMA")
+    @JoinColumn(name="ID_TIPO_SISTEMA", nullable = false)
     private EngineTypeModel engineType;
 
     public EngineResponseDto toDto() {
@@ -40,7 +40,7 @@ public class EngineModel {
                 .idUser(this.owner.getId())
                 .name(this.name)
                 .description(this.description)
-                .pictureUrl(this.pictureUrl)
+                .pictureId(this.pictureId)
                 .typeSys(this.engineType.getDescription())
                 .build();
     }

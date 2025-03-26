@@ -1,7 +1,7 @@
 package com.grimoire.controller.documentation;
 
 import com.grimoire.dto.engine.EngineResponseDto;
-import com.grimoire.dto.engine.EngineEditRequestDto;
+import com.grimoire.dto.engine.EnginePostRequestDto;
 import com.grimoire.dto.engine.EngineCreateRequestDto;
 import com.grimoire.dto.engine.EngineTypeEnum;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +27,7 @@ public interface EngineController {
             EngineCreateRequestDto engineDto,
             Authentication authentication);
 
-    @Operation(description = "Atualizar sistema", summary = "Atualizar Sistema de RPG. Deixe o campo em branco para mantê-lo.")
+    @Operation(description = "Atualizar sistema", summary = "Atualizar Sistema de RPG. Deixe o campo vazio para mantê-lo.")
     ResponseEntity<EngineResponseDto> updateEngine(
             @Parameter(
                     name = "id_sistema",
@@ -41,7 +41,7 @@ public interface EngineController {
             )
             EngineTypeEnum engineTypeEnum,
             @RequestBody
-            EngineEditRequestDto engineDto,
+            EnginePostRequestDto engineDto,
             Authentication authentication);
 
     @Operation(description = "Deletar sistema", summary = "Remover Sistema de RPG.")

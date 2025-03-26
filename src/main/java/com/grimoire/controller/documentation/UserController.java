@@ -17,7 +17,7 @@ public interface UserController {
     ResponseEntity<String> createUser(
             @RequestBody UserCreateRequestDto userDto);
 
-    @Operation(description = "Atualizar usuário", summary = "Atualizar usuário no sistema. Deixe o campo em branco para mantê-lo.")
+    @Operation(description = "Atualizar usuário", summary = "Atualizar usuário no sistema. Deixe o campo vazio para mantê-lo.")
     ResponseEntity<String> updateUser(
             @RequestBody() UserPostRequestDto userDto,
             Authentication authentication);
