@@ -151,6 +151,7 @@ com\grimoire\service\interfaces\SessionService.class
 com\grimoire\dto\characterSheetContent\CharacterSheetContentResponseDto.class
 com\grimoire\model\grimoire\CampaignPackageModel.class
 com\grimoire\dto\mechanic\MechanicPostRequestDto$MechanicPostRequestDtoBuilder.class
+com\grimoire\controller\ServerControllerImpl.class
 com\grimoire\service\EngineServiceImpl.class
 com\grimoire\dto\item\ItemCreateRequestDto.class
 com\grimoire\model\auth\UserAuthenticated.class
@@ -192,6 +193,7 @@ com\grimoire\dto\session\SessionResponseDto.class
 com\grimoire\controller\documentation\EngineRuleController.class
 com\grimoire\dto\participant\ParticipantResponseDto$ParticipantResponseDtoBuilder.class
 com\grimoire\controller\documentation\EngineController.class
+com\grimoire\controller\documentation\ServerController.class
 com\grimoire\dto\engineRule\RulePostRequestDto.class
 com\grimoire\service\interfaces\ItemService.class
 com\grimoire\dto\characterSheetContent\CharacterSheetContentCreateRequestDto.class

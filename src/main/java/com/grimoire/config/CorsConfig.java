@@ -14,10 +14,13 @@ public class CorsConfig {
     @Value("${app.frontend.url}")
     private String frontendUrl;
 
+    @Value("${app.image.manager.url}")
+    private String imageManagerUrl;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(frontendUrl));
+        configuration.setAllowedOrigins(List.of(frontendUrl, imageManagerUrl));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type","ngrok-skip-browser-warning"));
         configuration.setAllowCredentials(true);
