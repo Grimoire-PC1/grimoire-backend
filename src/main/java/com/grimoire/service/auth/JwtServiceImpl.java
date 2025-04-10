@@ -23,7 +23,7 @@ public class JwtServiceImpl implements JwtService {
 
     public String generateToken(Authentication authentication) {
         Instant now = Instant.now();
-        long expiry = 3600L;
+        long expiry = 24 * 3600L;
 
         String scopes = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
