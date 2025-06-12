@@ -38,4 +38,8 @@ build/
 *.log.*
 *.log.
 *.log
+
+### Properties ###
+*.properties
+/src/main/resources/*.properties
 /src/main/resources/private.pem
